@@ -118,10 +118,31 @@ router.get("/:id", (req, res) => {
   // get card info end return them
   Cards.findById(id, (error, card) => {
     if (error) {
-      return res.status(400).json("No user with such id")
+      return res.status(400).json("No user with such id");
     } else {
-      return res.status(200).json(card) 
+      return res.status(200).json(card);
     }
   });
+});
 
-})
+router.put("/:id", (req, res) => {
+  const cardId = req.params.id;
+  const validationResult = validateUserCard(req.body);
+  if (!validationResult.success) {
+    return res.status(400).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors
+    });
+  } else {
+    Cards.findOneAndUpdate(cardId, req.body, err => {
+      if (err) {
+        return res.status(400).json({ errors: "id not found." });
+      } else {
+        return res.status(204).json({ success: "updated" });
+      }
+    });
+  }
+});
+
+module.exports = router;
