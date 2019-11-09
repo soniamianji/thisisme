@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // define the User model schema
-const UserSchema = new mongoose.Schema({
+const CardSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -27,4 +27,4 @@ const UserSchema = new mongoose.Schema({
   photo: String
 });
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model("Card", CardSchema);

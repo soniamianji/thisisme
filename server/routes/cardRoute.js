@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const Users = require("mongoose").model("Users");
+const Cards = require("mongoose").model("Card");
 const validator = require("validator");
 
 // validate request
@@ -71,7 +71,7 @@ router.post("/", (req, res) => {
       },
       comment: req.body.comment
     };
-    const newUser = new Users(userData);
+    const newUser = new Cards(userData);
     newUser.save(err => {
       if (err) {
         console.log(err);
@@ -94,17 +94,16 @@ module.exports = router;
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
 
-  Users.findById(id, (error, userToDelete) => {
+  Cards.findById(id, (error, userToDelete) => {
     if (error) {
-      return res.status(400)
+      return res.status(400);
     } else {
       // delete user
-      Users.deleteOne(userToDelete, (error) => {
+      Cards.deleteOne(userToDelete, error => {
         if (error) {
-          return res.status(400)
-        } else res.status(200).json("Card Successfully deleted")
-      })
+          return res.status(400);
+        } else res.status(200).json("Card Successfully deleted");
+      });
     }
-  })
-
-})
+  });
+});
