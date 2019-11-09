@@ -96,7 +96,7 @@ router.delete("/:id", (req, res) => {
 
   Cards.findById(id, (error, userToDelete) => {
     if (error) {
-      return res.status(400);
+      return res.status(400).end();
     } else {
       // delete user
       Cards.deleteOne(userToDelete, error => {
@@ -107,3 +107,18 @@ router.delete("/:id", (req, res) => {
     }
   });
 });
+
+// get UserCard
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+
+  // get card info end return them
+  Cards.findById(id, (error, card) => {
+    if (error) {
+      return res.status(400).json("No user with such id")
+    } else {
+      return res.status(200).json(card) 
+    }
+  });
+
+})
