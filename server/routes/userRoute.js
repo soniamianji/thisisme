@@ -3,6 +3,7 @@ const router = new express.Router();
 const Users = require("mongoose").model("Users");
 const validator = require("validator");
 
+// validate request
 function validateUserCard(payload) {
   const errors = {};
   let isFormValid = true;
@@ -82,7 +83,28 @@ router.post("/", (req, res) => {
   }
 });
 
+// test route
 router.get("/", (req, res) => {
   res.status(200).json({ msg: "working" });
 });
 module.exports = router;
+
+// delete userCard
+
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+
+  Users.findById(id, (error, userToDelete) => {
+    if (error) {
+      return res.status(400)
+    } else {
+      // delete user
+      Users.deleteOne(userToDelete, (error) => {
+        if (error) {
+          return res.status(400)
+        } else res.status(200).json("Card Successfully deleted")
+      })
+    }
+  })
+
+})
