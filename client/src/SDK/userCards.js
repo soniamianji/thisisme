@@ -3,7 +3,7 @@ module.exports.getAllCards = async function(callback) {
   let response;
 
   try {
-    response = await sendRequest.sendRequest("GET", "/userCards");
+    response = await sendRequest.sendRequest("GET", "/cardRoute");
   } catch (errors) {
     callback(errors);
     return;
@@ -33,7 +33,7 @@ module.exports.createCard = async function(cardData, callback) {
   let response;
 
   try {
-    response = await sendRequest.sendRequest("POST", "/userCards", cardData);
+    response = await sendRequest.sendRequest("POST", "/cardRoute", cardData);
   } catch (errors) {
     callback(errors);
     return;
