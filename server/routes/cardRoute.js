@@ -36,6 +36,14 @@ function validateUserCard(payload) {
     errors.occupation = "Please provide your occupation.";
   }
 
+  if (
+    !payload ||
+    typeof payload.email !== "string" ||
+    !validator.isEmail(payload.email)
+  ) {
+    isFormValid = false;
+    errors.email = "Please provide a correct email address.";
+  }
   if (!isFormValid) {
     message = "Check the form for errors.";
   }
@@ -61,9 +69,12 @@ router.post("/", (req, res) => {
       name: req.body.name.trim(),
       lastName: req.body.lastName.trim(),
       occupation: req.body.occupation.trim(),
+      email: req.body.email.trim(),
+
       contact: {
         city: req.body.contact.city.trim(),
-        country: req.body.contact.country.trim()
+        country: req.body.contact.country.trim(),
+        phoneNumber: req.body.contact.phoneNumber.trim()
       },
       links: {
         linkedIn: req.body.linkedIn,
@@ -74,35 +85,27 @@ router.post("/", (req, res) => {
     const newUser = new Cards(userData);
     newUser.save(err => {
       if (err) {
-        console.log(err);
-        res.status(400).send(err);
+        res.status(500).json(err);
       } else {
-        res.status(200).json();
+        res.status(201).json();
       }
     });
   }
 });
 
-// test route
-router.get("/", (req, res) => {
-  res.status(200).json({ msg: "working" });
-});
-module.exports = router;
-
 // delete userCard
-
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
 
-  Cards.findById(id, (error, userToDelete) => {
+  Cards.findById(id, (error, card) => {
     if (error) {
       return res.status(400).end();
     } else {
       // delete user
-      Cards.deleteOne(userToDelete, error => {
+      Cards.deleteOne(card, error => {
         if (error) {
-          return res.status(400);
-        } else res.status(200).json("Card Successfully deleted");
+          return res.status(500).json("server error.");
+        } else res.status(204).json("Card Successfully deleted.");
       });
     }
   });

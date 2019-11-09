@@ -10,13 +10,21 @@ const CardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    index: { unique: true }
+  },
+  googleId: {
+    type: Number,
+    index: { unique: true }
+  },
   occupation: {
     type: String,
     required: true
   },
   contact: {
     city: String,
-    Country: String,
+    country: String,
     phoneNumber: Number
   },
   links: {
