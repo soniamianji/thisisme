@@ -1,17 +1,17 @@
 const sendRequest = require("./sendRequests");
-const jwtDecode = require("jwt-decode");
-
+const jwt = require("jsonwebtoken");
 const account = {
   email: "",
   name: "",
+  id: "",
   accessToken: ""
 };
 
-// //parse info localstorage
+// //parse userInfo localstorage
 const userInfo = JSON.parse(localStorage.getItem("this-is-me-user"));
 module.exports.userInfo = userInfo;
 
-module.exports.googleAuthentication = async function(authCode, callback) {
+module.exports.googleAuthentication = async function(authCode) {
   let response;
   let bodyTosend = {
     code: authCode,
@@ -25,30 +25,33 @@ module.exports.googleAuthentication = async function(authCode, callback) {
       bodyTosend
     );
   } catch (errors) {
-    callback(errors);
+    console.log(errors);
     return;
   }
-
   let errors = [];
   let body;
-
   switch (response.status) {
     case 200:
-      body = await response.body;
-
-      // account.accessToken = body.access_token;
-      // const payload = jwtDecode(body.id_token);
-      // account.email = payload.email;
-      // account.name = payload.username;
-      // account.idToken = payload;
-      // localStorage.setItem("this-is-me-user", JSON.stringify(account));
+      body = await response.json();
+      account.accessToken = body.access_token;
+      const decoded = jwt.decode(body.id_token);
+      account.email = decoded.email;
+      account.name = decoded.name;
+      account.id = decoded.id;
+      localStorage.setItem("this-is-me-user", JSON.stringify(account));
       break;
 
     case 201:
-      body = await response.body;
+      body = await response.json();
+      account.accessToken = body.access_token;
+      decoded = jwt.decode(body.id_token);
+      account.email = decoded.email;
+      account.name = decoded.name;
+      account.id = decoded.id;
+      localStorage.setItem("this-is-me-user", JSON.stringify(account));
       break;
     case 400:
-      body = await response.body;
+      body = await response.json();
 
       switch (body.error) {
         default:
@@ -62,5 +65,5 @@ module.exports.googleAuthentication = async function(authCode, callback) {
       errors = ["unknown response code"];
   }
 
-  callback(errors, account);
+  return account;
 };

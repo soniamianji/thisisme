@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import GoogleAuthorize from "react-google-authorize";
 import googleSDK from "../../SDK/googleSDK";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { googleLogin } from "../../actions/authActions";
 
-export default class Login extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   responseGoogle = response => {
-    console.log(response);
     const authCode = response.code;
-
     console.log(authCode);
-    googleSDK.googleAuthentication(authCode, (err, account) => {
-      if (err.length == 0) {
-        console.log("success");
-      } else {
-        console.log(err);
-      }
-    });
+
+    this.props.googleLogin(authCode);
+    // googleSDK.googleAuthentication(authCode, (err, account) => {
+    //   if (err.length == 0) {
+    //     console.log("success");
+    //   } else {
+    //     console.log(err);
+    //   }
+    // });
   };
 
   render() {
@@ -32,3 +39,11 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  googleLogin: PropTypes.func.isRequired
+};
+export default connect(
+  null,
+  { googleLogin }
+)(Login);

@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const code = req.body.code;
-  console.log(code);
+  console.log(req.body);
   const oauth2Client = new google.auth.OAuth2(
     "706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com",
     "AxlzAqm4JekmtgkDGBTxvpax",
