@@ -83,6 +83,7 @@ router.post("/", (req, res) => {
       comment: req.body.comment
     };
     const newUser = new Cards(userData);
+    console.log(newUser);
     newUser.save(err => {
       if (err) {
         res.status(500).json(err);

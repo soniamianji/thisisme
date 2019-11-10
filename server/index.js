@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
 const cardRoute = require("./routes/cardRoute");
 app.use("/cardRoute", cardRoute);
 
+const googleRoute = require("./routes/googleRoute");
+app.use("/googleRoute", googleRoute);
+
 const port = 5000;
 
 app.listen(port, () => console.log(`server is running on port ${port}`));

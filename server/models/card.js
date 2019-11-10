@@ -19,8 +19,7 @@ const CardSchema = new mongoose.Schema({
     index: { unique: true }
   },
   occupation: {
-    type: String,
-    required: true
+    type: String
   },
   contact: {
     city: String,
