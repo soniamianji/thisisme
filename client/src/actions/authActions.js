@@ -1,5 +1,5 @@
 import { GOOGLE_AUTH_ASYNC } from "./types";
-import googleSDK from "../SDK/googleSDK";
+import { googleAuthentication } from "../SDK/googleSDK";
 
 function googleAuthAsync(user) {
   return {
@@ -9,9 +9,9 @@ function googleAuthAsync(user) {
 }
 function googleLogin(authCode) {
   return dispatch => {
-    googleSDK
-      .googleAuthentication(authCode)
-      .then(body => dispatch(googleAuthAsync(body)));
+    googleAuthentication(authCode).then(body =>
+      dispatch(googleAuthAsync(body))
+    );
   };
 }
 

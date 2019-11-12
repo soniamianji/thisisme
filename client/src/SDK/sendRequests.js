@@ -38,7 +38,7 @@ async function sendRequest(
       headers
     };
 
-    if (bodyToSend != "") {
+    if (bodyToSend !== "") {
       requestInit.body = bodyToSend;
     }
 
