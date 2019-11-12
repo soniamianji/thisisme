@@ -35,18 +35,11 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-<<<<<<< HEAD
           <ThemeProvider theme={theme}>
             <GlobalRoute exact path="/" component={Login} />
             <GlobalRoute path="/searchresult" component={SearchResult} />
             <PrivateRoute path="/profile" component={Profile} />
           </ThemeProvider>
-=======
-          <NavBar />
-          <GlobalRoute exact path="/" component={Login} />
-          <GlobalRoute path="/searchresult" component={SearchResult} />
-          <PrivateRoute path="/profile" component={Profile} />
->>>>>>> e863ad3e8496297291eeffc98eae5ef4d5442bf2
         </div>
       </Router>
     </Provider>
