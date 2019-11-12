@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Auth from "./modules/Auth";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
+import NavBar from "./components/child/NavBar";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -34,11 +35,18 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
+<<<<<<< HEAD
           <ThemeProvider theme={theme}>
             <GlobalRoute exact path="/" component={Login} />
             <GlobalRoute path="/searchresult" component={SearchResult} />
             <PrivateRoute path="/profile" component={Profile} />
           </ThemeProvider>
+=======
+          <NavBar />
+          <GlobalRoute exact path="/" component={Login} />
+          <GlobalRoute path="/searchresult" component={SearchResult} />
+          <PrivateRoute path="/profile" component={Profile} />
+>>>>>>> e863ad3e8496297291eeffc98eae5ef4d5442bf2
         </div>
       </Router>
     </Provider>
