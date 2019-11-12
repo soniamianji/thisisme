@@ -1,12 +1,11 @@
-import React from'react';
-import UserCard from '../child/UserCard'
-import Container from '@material-ui/core/Container'
+import React from "react";
+import UserCard from "../child/UserCard";
+import Container from "@material-ui/core/Container";
 
 const Profile = () => (
-    <div>
-        <Container>
-            <UserCard />        
-        </Container>
-    </div>    
+  <Container>
+    <UserCard />
+  </Container>
+);
 
 export default Profile;
