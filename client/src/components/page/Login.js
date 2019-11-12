@@ -15,13 +15,6 @@ class Login extends Component {
     console.log(authCode);
 
     this.props.googleLogin(authCode);
-    // googleSDK.googleAuthentication(authCode, (err, account) => {
-    //   if (err.length == 0) {
-    //     console.log("success");
-    //   } else {
-    //     console.log(err);
-    //   }
-    // });
   };
 
   render() {
