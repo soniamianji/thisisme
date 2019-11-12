@@ -1,11 +1,12 @@
 import React from'react';
-import NavBar from '../child/NavBar'
 import UserCard from '../child/UserCard'
+import Container from '@material-ui/core/Container'
 
 const Profile = () => (
     <div>
-        <NavBar />
-        <UserCard />
+        <Container>
+            <UserCard />        
+        </Container>
     </div>    
 
 )
