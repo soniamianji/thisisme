@@ -53,12 +53,12 @@ class NavBar extends Component {
             <MenuIcon />
           </IconButton>
 
-          {this.state.name !== null ? (
+          {Auth.isUserAuthenticated() ? (
             <Button color="inherit">{this.state.name}</Button>
           ) : (
             ""
           )}
-          <Button onClick={this.loginLogoutHandler}>
+          <Button onClick={this.loginLogoutHandler} style={{ color: "white" }}>
             {Auth.isUserAuthenticated() ? "Logout" : "Login"}
           </Button>
         </Toolbar>
