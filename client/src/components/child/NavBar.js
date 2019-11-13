@@ -52,10 +52,11 @@ class NavBar extends Component {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          {this.state.name === "" ? (
-            ""
-          ) : (
+
+          {this.state.name !== null ? (
             <Button color="inherit">{this.state.name}</Button>
+          ) : (
+            ""
           )}
           <Button onClick={this.loginLogoutHandler}>
             {Auth.isUserAuthenticated() ? "Logout" : "Login"}

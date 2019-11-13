@@ -36,6 +36,7 @@ function App() {
       <Router>
         <div className="App">
           <ThemeProvider theme={theme}>
+            <NavBar />
             <GlobalRoute exact path="/" component={SearchResult} />
             <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />

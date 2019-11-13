@@ -14,11 +14,15 @@ class Login extends Component {
   }
 
   responseGoogle = response => {
-    const authCode = response.code;
-    console.log(authCode);
-    this.props.googleLogin(authCode);
-    this.props.history.push("/");
-    //set the state of navbar comp to name
+    if (response.code) {
+      const authCode = response.code;
+      console.log(authCode);
+      this.props.googleLogin(authCode);
+      this.props.history.push("/");
+      //set the state of navbar comp to name
+    } else {
+      console.log(response);
+    }
   };
 
   render() {
@@ -31,6 +35,7 @@ class Login extends Component {
           onSuccess={this.responseGoogle}
           responseType="code"
           onFailure={this.responseGoogle}
+          cookiePolicy={"single_host_origin"}
         />
       </div>
     );
