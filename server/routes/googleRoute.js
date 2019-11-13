@@ -37,8 +37,7 @@ router.post("/", (req, res) => {
         if (!user) {
           console.log("not found");
           const userInfo = {
-            name: userData.data.given_name,
-            lastName: userData.data.family_name,
+            name: userData.data.name,
             email: userData.data.email,
             occupation: "",
             googleId: userData.data.id,
@@ -51,7 +50,8 @@ router.post("/", (req, res) => {
               linkedIn: "",
               github: ""
             },
-            comment: ""
+            comment: "",
+            img: userData.data.picture
           };
           const newUserCard = new Card(userInfo);
           console.log(newUserCard);
@@ -66,8 +66,9 @@ router.post("/", (req, res) => {
               );
               const id_token = jwt.sign(
                 {
-                  email: userData.data.verified_email,
-                  name: userData.data.given_name,
+                  email: userData.data.email,
+                  name: userData.data.name,
+                  img: userData.data.picture,
                   id: userData.data.id
                 },
                 secretTokenKey
@@ -87,6 +88,7 @@ router.post("/", (req, res) => {
             {
               email: user.email,
               name: user.name,
+              img: user.img,
               id: user.id
             },
             secretTokenKey

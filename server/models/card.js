@@ -6,10 +6,6 @@ const CardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  lastName: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     index: { unique: true }
@@ -31,7 +27,7 @@ const CardSchema = new mongoose.Schema({
     github: String
   },
   comment: String,
-  photo: String
+  img: String
 });
 
 module.exports = mongoose.model("Card", CardSchema);

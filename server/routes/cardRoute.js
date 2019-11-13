@@ -20,15 +20,6 @@ function validateUserCard(payload) {
 
   if (
     !payload ||
-    typeof payload.lastName !== "string" ||
-    payload.lastName.trim().length === 0
-  ) {
-    isFormValid = false;
-    errors.lastName = "Please provide your last name.";
-  }
-
-  if (
-    !payload ||
     typeof payload.occupation !== "string" ||
     payload.occupation.trim().length === 0
   ) {
@@ -67,7 +58,6 @@ router.post("/", (req, res) => {
   } else {
     const userData = {
       name: req.body.name.trim(),
-      lastName: req.body.lastName.trim(),
       occupation: req.body.occupation.trim(),
       email: req.body.email.trim(),
 

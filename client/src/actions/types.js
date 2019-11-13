@@ -1,1 +1,2 @@
 export const GOOGLE_AUTH_ASYNC = "GOOGLE_AUTH_ASYNC";
+export const CLEAR_USER_STATE = "CLEAR_USER_STATE";

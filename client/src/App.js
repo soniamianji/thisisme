@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -36,8 +36,9 @@ function App() {
       <Router>
         <div className="App">
           <ThemeProvider theme={theme}>
-            <GlobalRoute exact path="/" component={Login} />
-            <GlobalRoute path="/searchresult" component={SearchResult} />
+            <NavBar />
+            <GlobalRoute exact path="/" component={SearchResult} />
+            <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />
           </ThemeProvider>
         </div>

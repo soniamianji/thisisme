@@ -6,6 +6,7 @@ const account = {
   email: "",
   name: "",
   id: "",
+  img: "",
   accessToken: ""
 };
 
@@ -33,19 +34,22 @@ const googleAuthentication = async function(authCode) {
       body = await response.json();
       account.accessToken = body.access_token;
       let decoded = jwt.decode(body.id_token);
+      console.log(decoded);
       account.email = decoded.email;
       account.name = decoded.name;
       account.id = decoded.id;
+      account.img = decoded.img;
       Auth.authenticateUser(JSON.stringify(account));
       break;
 
     case 201:
       body = await response.json();
       account.accessToken = body.access_token;
-      decoded = jwt.decode(body.id_token);
-      account.email = decoded.email;
-      account.name = decoded.name;
-      account.id = decoded.id;
+      let decodedToken = jwt.decode(body.id_token);
+      account.email = decodedToken.email;
+      account.name = decodedToken.name;
+      account.id = decodedToken.id;
+      account.img = decodedToken.img;
       Auth.authenticateUser(JSON.stringify(account));
 
       break;

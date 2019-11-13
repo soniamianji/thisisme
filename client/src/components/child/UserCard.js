@@ -7,8 +7,10 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import RoomIcon from "@material-ui/icons/Room";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-const UserCard = () => {
+const UserCard = result => {
   const useStyles = makeStyles({
     avatar: {
       width: 200,
@@ -27,6 +29,7 @@ const UserCard = () => {
   });
 
   const classes = useStyles();
+  const userInfo = result.result;
 
   return (
     <Paper>
@@ -34,21 +37,18 @@ const UserCard = () => {
         <Grid container direction="row">
           <Grid container item xs={3} direction="column">
             <Grid item>
-              <Avatar
-                className={classes.avatar}
-                src="https://via.placeholder.com/100"
-              />
+              <Avatar className={classes.avatar} src={userInfo.img} />
             </Grid>
           </Grid>
           <Grid item xs={9}>
             <Grid item direction="column">
               <Box textAlign="left">
-                <Typography variant="h1">Felix Rossel</Typography>
+                <Typography variant="h1">{userInfo.name}</Typography>
                 <Typography variant="h2">
                   UX Designer & Front End Developer
                 </Typography>
                 <Box className={classes.contactInfo} textAlign="left">
-                  <Typography variant="h3">hello@felixrossel.com</Typography>
+                  <Typography variant="h3">{userInfo.email}</Typography>
                   <Typography variant="h3">+49 151 107 68 106</Typography>
                 </Box>
                 <Box className={classes.contactInfo} textAlign="left">
@@ -80,4 +80,12 @@ const UserCard = () => {
   );
 };
 
-export default UserCard;
+UserCard.propTypes = {
+  result: PropTypes.array
+};
+
+const mapStateToProps = state => ({
+  result: state.result
+});
+
+export default connect(mapStateToProps, null)(UserCard);
