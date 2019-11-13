@@ -40,7 +40,7 @@ export default class Profile extends Component {
             </Grid>
             <Grid item>
               <FontPicker
-                apiKey="YAIzaSyDnQm6-gXjqpZmLv5yttCZKPCDpfk4jwgM"
+                apiKey="AIzaSyC3p-QXrMiMZ-8hBAdSZRiiQUmMmrPaOBI"
                 activeFontFamily={this.state.activeFontFamily}
                 onChange={nextFont =>
                   this.setState({
