@@ -1,4 +1,4 @@
-import { GOOGLE_AUTH_ASYNC } from "../actions/types";
+import { GOOGLE_AUTH_ASYNC, CLEAR_USER_STATE } from "../actions/types";
 import Auth from "../modules/Auth";
 
 const initialState = {
@@ -6,13 +6,18 @@ const initialState = {
 };
 
 //check if the data exist in the LS
-if (Auth.getToken() !== "") {
+if (Auth.isUserAuthenticated()) {
   initialState.result = Auth.getToken();
 }
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GOOGLE_AUTH_ASYNC:
+      return {
+        ...state,
+        result: action.user
+      };
+    case CLEAR_USER_STATE:
       return {
         ...state,
         result: action.user

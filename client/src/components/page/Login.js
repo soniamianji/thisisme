@@ -1,20 +1,24 @@
 import React, { Component } from "react";
 import GoogleAuthorize from "react-google-authorize";
-import googleSDK from "../../SDK/googleSDK";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { googleLogin } from "../../actions/authActions";
+import Auth from "../../modules/Auth";
+import { withRouter } from "react-router";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    if (Auth.isUserAuthenticated()) {
+      this.props.history.push("/");
+    }
   }
 
   responseGoogle = response => {
     const authCode = response.code;
     console.log(authCode);
-
     this.props.googleLogin(authCode);
+    this.props.history.push("/");
+    //set the state of navbar comp to name
   };
 
   render() {
@@ -36,7 +40,4 @@ class Login extends Component {
 Login.propTypes = {
   googleLogin: PropTypes.func.isRequired
 };
-export default connect(
-  null,
-  { googleLogin }
-)(Login);
+export default connect(null, { googleLogin })(withRouter(Login));

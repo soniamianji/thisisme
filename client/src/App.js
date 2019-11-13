@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -28,19 +28,21 @@ const GlobalRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => <Component {...props} {...rest} />} />
 );
 
-function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-        <div className="App">
-          <NavBar />
-          <GlobalRoute exact path="/" component={Login} />
-          <GlobalRoute path="/searchresult" component={SearchResult} />
-          <PrivateRoute path="/profile" component={Profile} />
-        </div>
-      </Router>
-    </Provider>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <NavBar />
+            <GlobalRoute exact path="/" component={SearchResult} />
+            <GlobalRoute path="/login" component={Login} />
+            <PrivateRoute path="/profile" component={Profile} />
+          </div>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default App;
