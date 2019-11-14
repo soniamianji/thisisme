@@ -1,8 +1,8 @@
-.cardWrapper {
+/* .cardWrapper {
   top: 76px;
   left: 76px;
   position: absolute;
-  width: 460px;
+
   -webkit-font-smoothing: antialiased;
 }
 
@@ -12,7 +12,7 @@
   height: 200px;
 } */
 
-#hotSpot {
+/* #hotSpot {
   top: 82px;
   left: 82px;
 
@@ -20,4 +20,4 @@
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
   z-index: 500;
-}
+}  */

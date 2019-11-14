@@ -23,13 +23,28 @@ const UserCard = props => {
     },
     button: {
       backgroundColor: "darkblue",
-      padding: "0.5rem"
+      padding: "0.25rem",
+      position: "absolute",
+      width: "100%",
+      bottom: 0
     },
     contactInfo: {
-      margin: "2rem 0"
+      margin: "1rem 0"
+    },
+    cardWrapper: {
+      position: "relative"
     },
     wrapper: {
-      padding: "2rem"
+      padding: "1rem",
+      display: "flex",
+      flexGrow: 1
+    },
+    paper: {
+      width: 525,
+      height: 300,
+      marginBottom: 22,
+      position: "relative",
+      position: "absolute"
     }
   });
 
@@ -37,8 +52,8 @@ const UserCard = props => {
   const userInfo = props.result;
   TweenLite.set(".cardWrapper", { perspective: 800 });
   TweenLite.set(".card", { transformStyle: "preserve-3d" });
-  TweenLite.set(".back", { rotationY: -180 });
-  TweenLite.set([".back", ".front"], { backfaceVisibility: "hidden" });
+  TweenLite.set("#back", { rotationY: -180 });
+  TweenLite.set(["#front", "#back"], { backfaceVisibility: "hidden" });
 
   var tl = new TimelineLite({ paused: true });
   const flip = () => {
@@ -51,13 +66,35 @@ const UserCard = props => {
     tl.reverse();
   };
   return (
-    <div className="cardWrapper">
+    <div className={classes.cardWrapper}>
       <div className="card">
-        <Paper className="front cardFace">
+        <Paper id="back" className={classes.paper}>
+          <Box className={classes.wrapper}>
+            <Grid container direction="row">
+              <Grid container item xs={3} direction="column">
+                <Button onClick={flipBack}>Reverse</Button>
+              </Grid>
+              <Grid item xs={9}>
+                <Grid item direction="column">
+                  <Box textAlign="left">
+                    <Typography variant="h2">
+                      "Blub blub I am awesome Hire me now Bitch!"
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+          <Grid item xs={12} className={classes.button}>
+            <ExpandMoreIcon color="secondary" />
+          </Grid>
+        </Paper>
+        <Paper className={classes.paper} id="front">
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid container item xs={3} direction="column">
                 <Button onClick={flip}>Move</Button>
+
                 <Grid item>
                   <Avatar className={classes.avatar} src={userInfo.img} />
                 </Grid>
@@ -82,36 +119,15 @@ const UserCard = props => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container spacing={4} direction="row">
+              <Grid container spacing={2} direction="row">
                 <Grid item>
-                  <img src="https://via.placeholder.com/50" />
+                  <img src="https://via.placeholder.com/25" />
                 </Grid>
                 <Grid item>
-                  <img src="https://via.placeholder.com/50" />
+                  <img src="https://via.placeholder.com/25" />
                 </Grid>
                 <Grid item>
-                  <img src="https://via.placeholder.com/50" />
-                </Grid>
-              </Grid>
-            </Grid>
-          </Box>
-          <Grid item xs={12} className={classes.button}>
-            <ExpandMoreIcon color="secondary" />
-          </Grid>
-        </Paper>
-        <Paper className="back cardFace">
-          <Box className={classes.wrapper}>
-            <Grid container direction="row">
-              <Grid container item xs={3} direction="column">
-                <Button onClick={flipBack}>Reverse</Button>
-              </Grid>
-              <Grid item xs={9}>
-                <Grid item direction="column">
-                  <Box textAlign="left">
-                    <Typography variant="h2">
-                      "Blub blub I am awesome Hire me now Bitch!"
-                    </Typography>
-                  </Box>
+                  <img src="https://via.placeholder.com/25" />
                 </Grid>
               </Grid>
             </Grid>
