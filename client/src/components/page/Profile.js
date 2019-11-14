@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import FontPicker from "font-picker-react";
 import clsx from "clsx";
+import color from "@material-ui/core/colors/amber";
 
 // styles
 const drawerWidth = 400;
@@ -54,14 +55,19 @@ const Profile = () => {
   // state
   const [state, setState] = useState({
     open: false,
-    activeFontFamily: "Open Sans"
+    activeFontFamily: "Open Sans",
+    cardColor: "#ff336f"
   });
 
   const classes = useStyles();
 
   // functions
   const drawerHandler = () => {
-    setState({ open: !state.open, activeFontFamily: state.activeFontFamily });
+    setState({
+      open: !state.open,
+      activeFontFamily: state.activeFontFamily,
+      cardColor: state.cardColor
+    });
   };
 
   return (
@@ -98,7 +104,9 @@ const Profile = () => {
                   activeFontFamily={state.activeFontFamily}
                   onChange={nextFont =>
                     setState({
-                      activeFontFamily: nextFont.family
+                      activeFontFamily: nextFont.family,
+                      open: state.open,
+                      cardColor: state.cardColor
                     })
                   }
                 />
@@ -107,7 +115,15 @@ const Profile = () => {
           </Box>
           <Box textAlign="left">
             <label>Card Color</label>
-            <ChromePicker />
+            <ChromePicker
+              onChangeComplete={color => {
+                setState({
+                  cardColor: color.hex,
+                  open: state.open,
+                  activeFontFamily: state.activeFontFamily
+                });
+              }}
+            />
           </Box>
         </Grid>
       </Drawer>
@@ -119,7 +135,7 @@ const Profile = () => {
         <Container>
           <h1>test</h1>
           <Button onClick={drawerHandler}>Toggle Drawer</Button>
-          <UserCard />
+          <UserCard cardColor={state.cardColor} />
         </Container>
       </div>
     </div>

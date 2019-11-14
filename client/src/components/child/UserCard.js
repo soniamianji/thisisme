@@ -41,6 +41,10 @@ const UserCard = props => {
     },
 
     wrapper: {
+      padding: "2rem"
+    },
+    cardColor: {
+      backgroundColor: props.cardColor,
       padding: "1rem",
       display: "flex",
       flexGrow: 1
