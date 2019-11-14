@@ -21,7 +21,7 @@ const UserCard = props => {
       height: 100
     },
     button: {
-      backgroundColor: "darkblue",
+      backgroundColor: props.cardColor,
       padding: "0.25rem",
       position: "absolute",
       width: "100%",
@@ -88,7 +88,7 @@ const UserCard = props => {
               <Grid item xs={9}>
                 <Grid item direction="column">
                   <Box textAlign="left">
-                    <Typography variant="h2">
+                    <Typography className="apply-font" variant="h2">
                       "Blub blub I am awesome Hire me now Bitch!"
                     </Typography>
                   </Box>
@@ -115,16 +115,22 @@ const UserCard = props => {
               <Grid item xs={9}>
                 <Grid item direction="column">
                   <Box textAlign="left">
-                    <Typography variant="h1">{userInfo.name}</Typography>
-                    <Typography variant="h2">
+                    <Typography className="apply-font" variant="h1">
+                      {userInfo.name}
+                    </Typography>
+                    <Typography className="apply-font" variant="h2">
                       UX Designer & Front End Developer
                     </Typography>
                     <Box className={classes.contactInfo} textAlign="left">
-                      <Typography variant="h3">{userInfo.email}</Typography>
-                      <Typography variant="h3">+49 151 107 68 106</Typography>
+                      <Typography className="apply-font" variant="h3">
+                        {userInfo.email}
+                      </Typography>
+                      <Typography className="apply-font" variant="h3">
+                        +49 151 107 68 106
+                      </Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
-                      <Typography variant="h4">
+                      <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
                         Jönköping, Sweden
                       </Typography>
