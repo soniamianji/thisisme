@@ -3,27 +3,40 @@ import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import SideBar from "../child/SideBar";
-import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { ChromePicker } from "react-color";
+import { TwitterPicker } from "react-color";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/dist/style.css";
 
 import {
+  Button,
   Drawer,
   Grid,
   Box,
   Typography,
-  FormControlLabel
+  FormControlLabel,
+  TextField,
+  Divider
 } from "@material-ui/core";
 import FontPicker from "font-picker-react";
 import clsx from "clsx";
-import color from "@material-ui/core/colors/amber";
 
 // styles
 const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
+  drawerBox: {
+    margin: "1rem 0"
+  },
   root: {
-    display: "flex"
+    display: "flex",
+    backgroundColor: "#272727"
   },
   drawer: {
     width: drawerWidth,
@@ -94,7 +107,8 @@ const Profile = () => {
               </Typography>
             </Box>
           </Grid>
-          <Box textAlign="left">
+
+          <Box className={classes.drawerBox} textAlign="left">
             <FormControlLabel
               label="Font"
               labelPlacement="top"
@@ -113,9 +127,10 @@ const Profile = () => {
               }
             />
           </Box>
-          <Box textAlign="left">
+
+          <Box className={classes.drawerBox} textAlign="left">
             <label>Card Color</label>
-            <ChromePicker
+            <TwitterPicker
               onChangeComplete={color => {
                 setState({
                   cardColor: color.hex,
@@ -123,6 +138,56 @@ const Profile = () => {
                   activeFontFamily: state.activeFontFamily
                 });
               }}
+            />
+          </Box>
+
+          <Box className={classes.drawerBox}>
+            <List
+              aria-labelledby="linkedPlatformsTitle"
+              subheader={
+                <ListSubheader component="div" id="linkedPlatformsTitle">
+                  Linked Platforms
+                </ListSubheader>
+              }
+            >
+              <ListItem>
+                <ListItemText primary="Github" />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Github" />
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <ListItemText primary="Github" />
+              </ListItem>
+              <Divider />
+            </List>
+            <TextField
+              id="addLinkTextField"
+              className={classes.textField}
+              label="Add Link"
+              margin="normal"
+            />
+            <Button>Add</Button>
+          </Box>
+          <Box className={classes.drawerBox}>
+            <TextField
+              id="addLinkTextField"
+              className={classes.textField}
+              label="Job Title"
+              margin="normal"
+            />
+            <FormControlLabel
+              control={
+                <PhoneInput
+                  defaultCountry={"us"}
+                  // value={this.state.phone}
+                  // onChange={handleOnChange}
+                />
+              }
+              label="Phone Number"
+              labelPlacement="Top"
             />
           </Box>
         </Grid>
@@ -133,7 +198,6 @@ const Profile = () => {
         })}
       >
         <Container>
-          <h1>test</h1>
           <Button onClick={drawerHandler}>Toggle Drawer</Button>
           <UserCard cardColor={state.cardColor} />
         </Container>
