@@ -31,9 +31,15 @@ const UserCard = props => {
     contactInfo: {
       margin: "1rem 0"
     },
-    cardWrapper: {
-      position: "relative"
+
+    card: {
+      width: 525,
+      height: 300,
+      position: "relative",
+      marginLeft: "auto",
+      marginRight: "auto"
     },
+
     wrapper: {
       padding: "1rem",
       display: "flex",
@@ -50,30 +56,32 @@ const UserCard = props => {
 
   const classes = useStyles();
   const userInfo = props.result;
-  TweenLite.set(".cardWrapper", { perspective: 800 });
-  TweenLite.set(".card", { transformStyle: "preserve-3d" });
-  TweenLite.set("#back", { rotationY: -180 });
-  TweenLite.set(["#front", "#back"], { backfaceVisibility: "hidden" });
-
   var tl = new TimelineLite({ paused: true });
+
   const flip = () => {
-    tl.to(".card", 1, { rotationY: -180 });
+    TweenLite.set(".cardWrapper", { perspective: 800 });
+    TweenLite.set("#card", { transformStyle: "preserve-3d" });
+    TweenLite.set("#back", { rotationX: -180 });
+    TweenLite.set(["#front", "#back"], { backfaceVisibility: "hidden" });
+
+    tl.to("#front", 0.5, { rotationX: 180 }).to(
+      "#back",
+      0.5,
+      { rotationX: 0 },
+      0
+    );
 
     tl.play();
   };
-
   const flipBack = () => {
     tl.reverse();
   };
   return (
     <div className={classes.cardWrapper}>
-      <div className="card">
+      <div id="card" className={classes.card}>
         <Paper id="back" className={classes.paper}>
           <Box className={classes.wrapper}>
             <Grid container direction="row">
-              <Grid container item xs={3} direction="column">
-                <Button onClick={flipBack}>Reverse</Button>
-              </Grid>
               <Grid item xs={9}>
                 <Grid item direction="column">
                   <Box textAlign="left">
@@ -85,7 +93,7 @@ const UserCard = props => {
               </Grid>
             </Grid>
           </Box>
-          <Grid item xs={12} className={classes.button}>
+          <Grid item xs={12} className={classes.button} onClick={flipBack}>
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
@@ -93,10 +101,12 @@ const UserCard = props => {
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid container item xs={3} direction="column">
-                <Button onClick={flip}>Move</Button>
-
                 <Grid item>
-                  <Avatar className={classes.avatar} src={userInfo.img} />
+                  <Avatar
+                    id="img"
+                    className={classes.avatar}
+                    src={userInfo.img}
+                  />
                 </Grid>
               </Grid>
               <Grid item xs={9}>
@@ -132,12 +142,11 @@ const UserCard = props => {
               </Grid>
             </Grid>
           </Box>
-          <Grid item xs={12} className={classes.button}>
+          <Grid item xs={12} className={classes.button} onClick={flip}>
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
       </div>
-      <div id="hotSpot"></div>
     </div>
   );
 };
