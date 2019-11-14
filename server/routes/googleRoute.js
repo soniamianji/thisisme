@@ -51,7 +51,12 @@ router.post("/", (req, res) => {
               github: ""
             },
             comment: "",
-            img: userData.data.picture
+            img: userData.data.picture,
+            userStyle: [
+              {
+                last_modified: Math.round(new Date().getTime() / 1000)
+              }
+            ]
           };
           const newUserCard = new Card(userInfo);
           console.log(newUserCard);
@@ -69,7 +74,8 @@ router.post("/", (req, res) => {
                   email: userData.data.email,
                   name: userData.data.name,
                   img: userData.data.picture,
-                  id: userData.data.id
+                  id: userData.data.id,
+                  userStyle: newUserCard.userStyle
                 },
                 secretTokenKey
               );
@@ -89,7 +95,8 @@ router.post("/", (req, res) => {
               email: user.email,
               name: user.name,
               img: user.img,
-              id: user.id
+              id: user.id,
+              userStyle
             },
             secretTokenKey
           );

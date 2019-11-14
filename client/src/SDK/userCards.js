@@ -1,3 +1,5 @@
+const sendRequest = require("./sendRequests");
+
 //getAll cards
 module.exports.getAllCards = async function(callback) {
   let response;

@@ -4,11 +4,11 @@ const UserStyleSchema = new mongoose.Schema({
   last_modified: Date,
   fontFamily: {
     type: String,
-    default: "helvetica"
+    default: "Open sans"
   },
   color: {
     type: String,
-    default: "blue"
+    default: "#3949ab"
   }
 });
 

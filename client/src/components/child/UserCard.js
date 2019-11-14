@@ -9,10 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import RoomIcon from "@material-ui/icons/Room";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
 import "../../style/userCard.css";
 import TweenLite from "gsap/TweenLite";
-import { TimelineLite, CSSPlugin } from "gsap/all";
+import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
 
 const UserCard = props => {
