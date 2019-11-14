@@ -2,6 +2,7 @@
   top: 76px;
   left: 76px;
   position: absolute;
+
   -webkit-font-smoothing: antialiased;
 }
 
@@ -19,4 +20,4 @@
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
   z-index: 500;
-} */
+}  */

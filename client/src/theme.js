@@ -10,22 +10,22 @@ const theme = createMuiTheme({
   },
   typography: {
     h1: {
-      fontSize: "4rem",
-      fontWeight: "200",
+      fontSize: "2rem",
+      fontWeight: "bold",
       lineHeight: 1.4
     },
     h2: {
-      fontSize: "2rem",
+      fontSize: "1rem",
       color: grey[500],
       lineHeight: 1.2
     },
     h3: {
-      fontSize: "2rem",
+      fontSize: "1rem",
       fontWeight: "200",
       lineHeight: 1.2
     },
     h4: {
-      fontSize: "1.5rem",
+      fontSize: "0.75rem",
       fontWeight: "200",
       color: grey[500]
     }
