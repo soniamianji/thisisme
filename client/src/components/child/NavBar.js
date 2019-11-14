@@ -9,6 +9,7 @@ import Auth from "../../modules/Auth";
 import { withRouter } from "react-router";
 import { clearUserState } from "../../actions/authActions";
 import React, { Component } from "react";
+import { Typography } from "@material-ui/core";
 
 class NavBar extends Component {
   constructor(props) {
@@ -47,22 +48,27 @@ class NavBar extends Component {
   };
   render() {
     return (
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-
-          {Auth.isUserAuthenticated() ? (
-            <Button color="inherit">{this.state.name}</Button>
-          ) : (
-            ""
-          )}
-          <Button onClick={this.loginLogoutHandler} style={{ color: "white" }}>
-            {Auth.isUserAuthenticated() ? "Logout" : "Login"}
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <div style={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography style={{ flexGrow: 1 }}></Typography>
+            {Auth.isUserAuthenticated() ? (
+              <Button color="inherit">{this.state.name}</Button>
+            ) : (
+              ""
+            )}
+            <Button
+              onClick={this.loginLogoutHandler}
+              style={{ color: "white" }}
+            >
+              {Auth.isUserAuthenticated() ? "Logout" : "Login"}
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
     );
   }
 }
