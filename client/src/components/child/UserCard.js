@@ -10,7 +10,7 @@ import RoomIcon from "@material-ui/icons/Room";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const UserCard = result => {
+const UserCard = props => {
   const useStyles = makeStyles({
     avatar: {
       width: 200,
@@ -29,30 +29,34 @@ const UserCard = result => {
   });
 
   const classes = useStyles();
-  const userInfo = result.result;
+  const userInfo = props.result;
 
   return (
-    <Paper>
+    <Paper className="apply-font">
       <Box className={classes.wrapper}>
         <Grid container direction="row">
-          <Grid container item xs={3} direction="column">
-            <Grid item>
-              <Avatar className={classes.avatar} src={userInfo.img} />
-            </Grid>
+          <Grid item xs={3}>
+            <Avatar className={classes.avatar} src={userInfo.img} />
           </Grid>
           <Grid item xs={9}>
-            <Grid item direction="column">
+            <Grid item>
               <Box textAlign="left">
-                <Typography variant="h1">{userInfo.name}</Typography>
-                <Typography variant="h2">
+                <Typography className="apply-font" variant="h1">
+                  {userInfo.name}
+                </Typography>
+                <Typography variant="h2" className="apply-font">
                   UX Designer & Front End Developer
                 </Typography>
                 <Box className={classes.contactInfo} textAlign="left">
-                  <Typography variant="h3">{userInfo.email}</Typography>
-                  <Typography variant="h3">+49 151 107 68 106</Typography>
+                  <Typography className="apply-font" variant="h3">
+                    {userInfo.email}
+                  </Typography>
+                  <Typography className="apply-font" variant="h3">
+                    +49 151 107 68 106
+                  </Typography>
                 </Box>
                 <Box className={classes.contactInfo} textAlign="left">
-                  <Typography variant="h4">
+                  <Typography className="apply-font" variant="h4">
                     <RoomIcon color="primary" />
                     Jönköping, Sweden
                   </Typography>
