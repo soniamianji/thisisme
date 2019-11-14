@@ -18,12 +18,12 @@ import "gsap/CSSPlugin";
 const UserCard = result => {
   const useStyles = makeStyles({
     avatar: {
-      width: 200,
-      height: 200
+      width: 100,
+      height: 100
     },
     button: {
       backgroundColor: "darkblue",
-      padding: "1rem"
+      padding: "0.5rem"
     },
     contactInfo: {
       margin: "2rem 0"
