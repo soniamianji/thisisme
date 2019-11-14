@@ -30,6 +30,9 @@ const UserCard = props => {
     },
     wrapper: {
       padding: "2rem"
+    },
+    cardColor: {
+      backgroundColor: props.cardColor
     }
   });
 
@@ -95,7 +98,7 @@ const UserCard = props => {
               </Grid>
             </Grid>
           </Box>
-          <Grid item xs={12} className={classes.button}>
+          <Grid item xs={12} className={classes.cardColor}>
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
@@ -116,7 +119,7 @@ const UserCard = props => {
               </Grid>
             </Grid>
           </Box>
-          <Grid item xs={12} className={classes.button}>
+          <Grid item xs={12} className={classes.cardColor}>
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
