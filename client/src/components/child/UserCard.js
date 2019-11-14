@@ -15,7 +15,7 @@ import TweenLite from "gsap/TweenLite";
 import { TimelineLite, CSSPlugin } from "gsap/all";
 import "gsap/CSSPlugin";
 
-const UserCard = result => {
+const UserCard = props => {
   const useStyles = makeStyles({
     avatar: {
       width: 100,
@@ -34,7 +34,7 @@ const UserCard = result => {
   });
 
   const classes = useStyles();
-  const userInfo = result.result;
+  const userInfo = props.result;
   TweenLite.set(".cardWrapper", { perspective: 800 });
   TweenLite.set(".card", { transformStyle: "preserve-3d" });
   TweenLite.set(".back", { rotationY: -180 });
