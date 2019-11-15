@@ -5,13 +5,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 const countries = [
   {
-    country: "Sweden"
+    value: "Sweden",
+    label: "SE"
   },
   {
-    country: "Germany"
+    value: "Denmark",
+    label: "DK"
   },
   {
-    country: "France"
+    value: "France",
+    label: "FR"
   }
 ];
 

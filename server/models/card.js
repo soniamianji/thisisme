@@ -1,17 +1,5 @@
 const mongoose = require("mongoose");
 
-const UserStyleSchema = new mongoose.Schema({
-  last_modified: Date,
-  fontFamily: {
-    type: String,
-    default: "Open sans"
-  },
-  color: {
-    type: String,
-    default: "#3949ab"
-  }
-});
-
 // define the User model schema
 const CardSchema = new mongoose.Schema({
   name: {
@@ -40,7 +28,17 @@ const CardSchema = new mongoose.Schema({
   },
   comment: String,
   img: String,
-  userStyle: [UserStyleSchema]
+  userStyle: {
+    last_modified: Date,
+    fontFamily: {
+      type: String,
+      default: "Open sans"
+    },
+    color: {
+      type: String,
+      default: "#3949ab"
+    }
+  }
 });
 
 module.exports = mongoose.model("Card", CardSchema);

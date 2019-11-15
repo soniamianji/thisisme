@@ -52,11 +52,9 @@ router.post("/", (req, res) => {
             },
             comment: "",
             img: userData.data.picture,
-            userStyle: [
-              {
-                last_modified: Math.round(new Date().getTime() / 1000)
-              }
-            ]
+            userStyle: {
+              last_modified: Math.round(new Date().getTime() / 1000)
+            }
           };
           const newUserCard = new Card(userInfo);
           console.log(newUserCard);
@@ -96,7 +94,7 @@ router.post("/", (req, res) => {
               name: user.name,
               img: user.img,
               id: user.id,
-              userStyle
+              userStyle: user.userStyle
             },
             secretTokenKey
           );
