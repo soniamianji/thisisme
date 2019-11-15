@@ -17,16 +17,15 @@ import "@fortawesome/fontawesome-free/js/all.js";
 class Login extends Component {
   componentDidMount() {
     if (Auth.isUserAuthenticated()) {
-      this.props.history.push("/");
+      this.props.history.push("/profile");
     }
   }
 
-  responseGoogle = response => {
+  responseGoogle = async response => {
     if (response.code) {
       const authCode = response.code;
       console.log(authCode);
       this.props.googleLogin(authCode);
-      this.props.history.push("/");
       //set the state of navbar comp to name
     } else {
       console.log(response);
