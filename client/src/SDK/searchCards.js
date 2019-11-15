@@ -19,7 +19,6 @@ module.exports.searchCards = async function(name, occupation) {
   switch (response.status) {
     case 200:
       cards = response.json();
-      console.log(cards);
       break;
 
     case 500:

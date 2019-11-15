@@ -33,11 +33,6 @@ function clearUserState() {
 }
 
 function cardSerachResultsAsync(cards) {
-  // if (cards.length !== 0) {
-  //   results.sort(function(a, b) {
-  //     return new Date(b.createdAt) - new Date(a.createdAt);
-  //   });
-  // }
   return {
     type: CARD_SEARCH_RESULTS_ASYNC,
     cards

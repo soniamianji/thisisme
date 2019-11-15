@@ -8,9 +8,9 @@ import { TwitterPicker } from "react-color";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/dist/style.css";
 
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = () => {
+const Profile = props => {
   // state
   const [state, setState] = useState({
     open: false,
@@ -199,11 +199,19 @@ const Profile = () => {
       >
         <Container>
           <Button onClick={drawerHandler}>Toggle Drawer</Button>
-          <UserCard cardColor={state.cardColor} />
+          <UserCard cardColor={state.cardColor} card={props.result} />
         </Container>
       </div>
     </div>
   );
 };
 
-export default Profile;
+UserCard.propTypes = {
+  result: PropTypes.array
+};
+
+const mapStateToProps = state => ({
+  result: state.result
+});
+
+export default connect(mapStateToProps, null)(Profile);

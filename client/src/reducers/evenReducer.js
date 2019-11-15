@@ -22,6 +22,8 @@ function rootReducer(state = initialState, action) {
     case GOOGLE_AUTH_ASYNC:
       return {
         ...state,
+        cards: [],
+        msg: {},
         result: action.user
       };
     case CLEAR_USER_STATE:

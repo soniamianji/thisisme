@@ -7,21 +7,19 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import RoomIcon from "@material-ui/icons/Room";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import "../../style/userCard.css";
 import TweenLite from "gsap/TweenLite";
 import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
 
-const UserCard = props => {
+const UserCard = (props, cardColor) => {
   const useStyles = makeStyles({
     avatar: {
       width: 100,
       height: 100
     },
     button: {
-      backgroundColor: props.cardColor,
+      backgroundColor: cardColor.cardColor,
       padding: "0.25rem",
       position: "absolute",
       width: "100%",
@@ -43,7 +41,7 @@ const UserCard = props => {
       padding: "2rem"
     },
     cardColor: {
-      backgroundColor: props.cardColor,
+      backgroundColor: cardColor.cardColor,
       padding: "1rem",
       display: "flex",
       flexGrow: 1
@@ -57,8 +55,8 @@ const UserCard = props => {
     }
   });
 
+  console.log(props.card.name);
   const classes = useStyles();
-  const userInfo = props.result;
   var tl = new TimelineLite({ paused: true });
 
   const flip = () => {
@@ -108,7 +106,7 @@ const UserCard = props => {
                   <Avatar
                     id="img"
                     className={classes.avatar}
-                    src={userInfo.img}
+                    src={props.card.img}
                   />
                 </Grid>
               </Grid>
@@ -116,14 +114,14 @@ const UserCard = props => {
                 <Grid item direction="column">
                   <Box textAlign="left">
                     <Typography className="apply-font" variant="h1">
-                      {userInfo.name}
+                      {props.card.name}
                     </Typography>
                     <Typography className="apply-font" variant="h2">
                       UX Designer & Front End Developer
                     </Typography>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h3">
-                        {userInfo.email}
+                        {props.card.email}
                       </Typography>
                       <Typography className="apply-font" variant="h3">
                         +49 151 107 68 106
@@ -160,12 +158,4 @@ const UserCard = props => {
   );
 };
 
-UserCard.propTypes = {
-  result: PropTypes.array
-};
-
-const mapStateToProps = state => ({
-  result: state.result
-});
-
-export default connect(mapStateToProps, null)(UserCard);
+export default UserCard;

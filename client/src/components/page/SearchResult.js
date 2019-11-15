@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { cardSearchResults, searchMsg } from "../../actions/authActions";
-import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import SearchForm from "../child/SearchForm";
 import UserCard from "../child/UserCard";
@@ -15,6 +14,7 @@ class SearchResult extends Component {
   }
 
   render() {
+    console.log(this.props.cards[0]);
     return (
       <div>
         <SearchForm />
@@ -25,9 +25,13 @@ class SearchResult extends Component {
           justify="left"
           align="left"
         >
-          <Grid cols="12" md={6} xs={12}>
+          <Grid container>
             {this.props.cards &&
-              this.props.cards.map(card => <UserCard info={card} />)}
+              this.props.cards.map(card => (
+                <Grid item xs={12} sm={5} key={card.index} justify="center">
+                  <UserCard card={card} />
+                </Grid>
+              ))}
           </Grid>
         </Grid>
 
