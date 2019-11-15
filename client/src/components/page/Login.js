@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import GoogleAuthorize from "react-google-authorize";
+import { GoogleLogin } from "react-google-login";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { googleLogin } from "../../actions/authActions";
 import Auth from "../../modules/Auth";
 import { withRouter } from "react-router";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -59,16 +56,20 @@ class Login extends Component {
           <StyledPaper>
             <AccountCircleIcon style={{ fontSize: 150, opacity: 0.5 }} />
             <Box style={{ paddingTop: 22 }}>
-              <GoogleAuthorize
+              <GoogleLogin
                 clientId="706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com"
                 buttonText="Continue with Google"
                 onSuccess={this.responseGoogle}
                 responseType="code"
                 onFailure={this.responseGoogle}
+                accessType="offline"
                 render={renderProps => {
                   return (
                     <StyledButton type="button" onClick={renderProps.onClick}>
-                      <i class="fab fa-google" style={{ paddingRight: 5 }}></i>{" "}
+                      <i
+                        className="fab fa-google"
+                        style={{ paddingRight: 5 }}
+                      ></i>
                       <span> | Continue with Google</span>
                     </StyledButton>
                   );

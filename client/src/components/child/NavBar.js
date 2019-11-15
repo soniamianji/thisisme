@@ -10,6 +10,7 @@ import { withRouter } from "react-router";
 import { clearUserState } from "../../actions/authActions";
 import React, { Component } from "react";
 import { Typography } from "@material-ui/core";
+import { GoogleLogout } from "react-google-login";
 
 class NavBar extends Component {
   constructor(props) {
@@ -60,12 +61,20 @@ class NavBar extends Component {
             ) : (
               ""
             )}
-            <Button
-              onClick={this.loginLogoutHandler}
-              style={{ color: "white" }}
-            >
-              {Auth.isUserAuthenticated() ? "Logout" : "Login"}
-            </Button>
+            {Auth.isUserAuthenticated() ? (
+              <GoogleLogout
+                clientId="706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com"
+                buttonText="Logout"
+                onLogoutSuccess={this.loginLogoutHandler}
+              />
+            ) : (
+              <Button
+                onClick={this.loginLogoutHandler}
+                style={{ color: "white" }}
+              >
+                {Auth.isUserAuthenticated() ? "Logout" : "Login"}
+              </Button>
+            )}
           </Toolbar>
         </AppBar>
       </div>
