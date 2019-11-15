@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
         if (!user) {
           console.log("not found");
           const userInfo = {
-            name: userData.data.name,
+            name: userData.data.name.toLowerCase(),
             email: userData.data.email,
             occupation: "",
             googleId: userData.data.id,
