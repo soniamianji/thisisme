@@ -4,7 +4,8 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { SideBar } from "../child/SideBar";
 import { makeStyles } from "@material-ui/core/styles";
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Profile = () => {
+const Profile = props => {
   const classes = useStyles();
 
   // state
