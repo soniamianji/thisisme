@@ -12,14 +12,14 @@ import TweenLite from "gsap/TweenLite";
 import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
 
-const UserCard = (props, cardColor) => {
+const UserCard = props => {
   const useStyles = makeStyles({
     avatar: {
       width: 100,
       height: 100
     },
     button: {
-      backgroundColor: cardColor.cardColor,
+      backgroundColor: props.cardColor,
       padding: "0.25rem",
       position: "absolute",
       width: "100%",
@@ -41,7 +41,7 @@ const UserCard = (props, cardColor) => {
       padding: "2rem"
     },
     cardColor: {
-      backgroundColor: cardColor.cardColor,
+      backgroundColor: props.cardColor,
       padding: "1rem",
       display: "flex",
       flexGrow: 1
@@ -55,7 +55,6 @@ const UserCard = (props, cardColor) => {
     }
   });
 
-  console.log(props.card.name);
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
 
@@ -87,7 +86,7 @@ const UserCard = (props, cardColor) => {
                 <Grid item direction="column">
                   <Box textAlign="left">
                     <Typography className="apply-font" variant="h2">
-                      "Blub blub I am awesome Hire me now Bitch!"
+                      {props.card.comment}
                     </Typography>
                   </Box>
                 </Grid>
@@ -117,20 +116,20 @@ const UserCard = (props, cardColor) => {
                       {props.card.name}
                     </Typography>
                     <Typography className="apply-font" variant="h2">
-                      UX Designer & Front End Developer
+                      {props.card.occupation}
                     </Typography>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h3">
                         {props.card.email}
                       </Typography>
                       <Typography className="apply-font" variant="h3">
-                        +49 151 107 68 106
+                        {props.card.contact.phoneNumber}
                       </Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
-                        Jönköping, Sweden
+                        {props.card.contact.city},{props.card.contact.country}
                       </Typography>
                     </Box>
                   </Box>

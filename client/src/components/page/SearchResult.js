@@ -18,21 +18,18 @@ class SearchResult extends Component {
     return (
       <div>
         <SearchForm />
+
         <Grid
           container
-          style={{ marginTop: 22 }}
           width={"80%"}
-          justify="left"
-          align="left"
+          style={{ marginTop: 22, justifyContent: "center" }}
         >
-          <Grid container>
-            {this.props.cards &&
-              this.props.cards.map(card => (
-                <Grid item xs={12} sm={5} key={card.index} justify="center">
-                  <UserCard card={card} />
-                </Grid>
-              ))}
-          </Grid>
+          {this.props.cards &&
+            this.props.cards.map((card, index) => (
+              <Grid item xs={12} sm={5} key={index}>
+                <UserCard card={card} />
+              </Grid>
+            ))}
         </Grid>
 
         <h6>{this.props.msg && this.props.msg.msg}</h6>
