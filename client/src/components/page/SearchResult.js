@@ -1,54 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { cardSearchResults, searchMsg } from "../../actions/authActions";
 import MenuItem from "@material-ui/core/MenuItem";
+import Grid from "@material-ui/core/Grid";
+import SearchForm from "../child/SearchForm";
+import UserCard from "../child/UserCard";
 
-const countries = [
-  {
-    value: "Sweden",
-    label: "SE"
-  },
-  {
-    value: "Denmark",
-    label: "DK"
-  },
-  {
-    value: "France",
-    label: "FR"
+class SearchResult extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-];
 
-const UserCard = props => {
-  const useStyles = makeStyles({
-    TextField: {}
-  });
+  render() {
+    return (
+      <div>
+        <SearchForm />
+        <Grid
+          container
+          style={{ marginTop: 22 }}
+          width={"80%"}
+          justify="left"
+          align="left"
+        >
+          <Grid cols="12" md={6} xs={12}>
+            {this.props.cards &&
+              this.props.cards.map(card => <UserCard info={card} />)}
+          </Grid>
+        </Grid>
+
+        <h6>{this.props.msg && this.props.msg.msg}</h6>
+      </div>
+    );
+  }
+}
+
+SearchResult.propTypes = {
+  cards: PropTypes.array,
+  msg: PropTypes.object
 };
 
-const SearchResult = () => (
-  <div>
-    <h1>SearchResult</h1>
-    <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }}>
-      <form>
-        <TextField
-          id="standard-basic"
-          label="Standard"
-          margin="normal"
-          fullWidth
-        />
-        <TextField
-          id="standard-select-location"
-          select
-          label="Select"
-          helperText="Please select your location"
-          margin="normal"
-        >
-          {countries.map(country => (
-            <MenuItem key={country.value}>{country.label}</MenuItem>
-          ))}
-        </TextField>
-      </form>
-    </div>
-  </div>
-);
+const mapStateToProps = state => ({
+  cards: state.cards,
+  msg: state.msg
+});
 
-export default SearchResult;
+export default connect(mapStateToProps, null)(SearchResult);

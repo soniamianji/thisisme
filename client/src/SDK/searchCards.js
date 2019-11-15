@@ -1,6 +1,6 @@
 const sendRequest = require("./sendRequests");
 
-module.exports.searchCards = async function(name, occupation, callback) {
+module.exports.searchCards = async function(name, occupation) {
   let response;
 
   try {
@@ -9,7 +9,7 @@ module.exports.searchCards = async function(name, occupation, callback) {
       "/cardSearch?name=" + name + "&occupation=" + occupation
     );
   } catch (errors) {
-    callback(errors);
+    errors = [errors];
     return;
   }
 
@@ -18,7 +18,8 @@ module.exports.searchCards = async function(name, occupation, callback) {
 
   switch (response.status) {
     case 200:
-      cards = response.body;
+      cards = response.json();
+      console.log(cards);
       break;
 
     case 500:
@@ -29,5 +30,5 @@ module.exports.searchCards = async function(name, occupation, callback) {
       errors = ["unknown status code"];
   }
 
-  callback(errors, cards);
+  return cards;
 };
