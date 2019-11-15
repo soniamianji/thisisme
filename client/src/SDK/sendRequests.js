@@ -17,6 +17,7 @@ async function sendRequest(
       case "application/json":
         bodyToSend = JSON.stringify(body);
         headers.append("Accept", "application/json");
+        console.log(bodyToSend);
         break;
 
       case "application/x-www-form-urlencoded":

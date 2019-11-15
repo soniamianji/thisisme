@@ -1,8 +1,15 @@
-import { GOOGLE_AUTH_ASYNC, CLEAR_USER_STATE } from "../actions/types";
+import {
+  GOOGLE_AUTH_ASYNC,
+  CLEAR_USER_STATE,
+  CARD_SEARCH_RESULTS_ASYNC,
+  SEARCH_MSG
+} from "../actions/types";
 import Auth from "../modules/Auth";
 
 const initialState = {
-  result: []
+  result: [],
+  cards: [],
+  msg: {}
 };
 
 //check if the data exist in the LS
@@ -22,7 +29,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         result: action.user
       };
-
+    case CARD_SEARCH_RESULTS_ASYNC:
+      return {
+        ...state,
+        msg: {},
+        cards: action.cards
+      };
+    case SEARCH_MSG:
+      return {
+        ...state,
+        cards: [],
+        msg: action.msg
+      };
     default:
       return state;
   }

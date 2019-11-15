@@ -1,5 +1,11 @@
-import { GOOGLE_AUTH_ASYNC, CLEAR_USER_STATE } from "./types";
+import {
+  GOOGLE_AUTH_ASYNC,
+  CLEAR_USER_STATE,
+  CARD_SEARCH_RESULTS_ASYNC,
+  SEARCH_MSG
+} from "./types";
 import { googleAuthentication } from "../SDK/googleSDK";
+import searchCards from "../SDK/searchCards";
 
 function googleAuthAsync(user) {
   console.log("got it");
@@ -25,4 +31,44 @@ function clearUserState() {
     user
   };
 }
-export { googleAuthAsync, googleLogin, clearUserState };
+
+function cardSerachResultsAsync(cards) {
+  // if (cards.length !== 0) {
+  //   results.sort(function(a, b) {
+  //     return new Date(b.createdAt) - new Date(a.createdAt);
+  //   });
+  // }
+  return {
+    type: CARD_SEARCH_RESULTS_ASYNC,
+    cards
+  };
+}
+
+function cardSearchResults(occupation, name) {
+  return dispatch => {
+    searchCards.searchCards(occupation, name).then(cards =>
+      cards.length === 0
+        ? dispatch(
+            searchMsg({
+              msg: "There are no cards with those search terms."
+            })
+          )
+        : dispatch(cardSerachResultsAsync(cards))
+    );
+  };
+}
+
+function searchMsg(msg) {
+  return {
+    type: SEARCH_MSG,
+    msg
+  };
+}
+export {
+  googleAuthAsync,
+  googleLogin,
+  clearUserState,
+  searchMsg,
+  cardSearchResults,
+  cardSerachResultsAsync
+};

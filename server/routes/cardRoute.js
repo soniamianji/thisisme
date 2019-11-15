@@ -47,42 +47,42 @@ function validateUserCard(payload) {
 }
 
 //create usercard
-router.post("/", (req, res) => {
-  const validationResult = validateUserCard(req.body);
-  if (!validationResult.success) {
-    return res.status(400).json({
-      success: false,
-      message: validationResult.message,
-      errors: validationResult.errors
-    });
-  } else {
-    const userData = {
-      name: req.body.name.trim(),
-      occupation: req.body.occupation.trim(),
-      email: req.body.email.trim(),
+// router.post("/", (req, res) => {
+//   const validationResult = validateUserCard(req.body);
+//   if (!validationResult.success) {
+//     return res.status(400).json({
+//       success: false,
+//       message: validationResult.message,
+//       errors: validationResult.errors
+//     });
+//   } else {
+//     const userData = {
+//       name: req.body.name.trim(),
+//       occupation: req.body.occupation.trim(),
+//       email: req.body.email.trim(),
 
-      contact: {
-        city: req.body.contact.city.trim(),
-        country: req.body.contact.country.trim(),
-        phoneNumber: req.body.contact.phoneNumber.trim()
-      },
-      links: {
-        linkedIn: req.body.linkedIn,
-        github: req.body.github
-      },
-      comment: req.body.comment
-    };
-    const newUser = new Cards(userData);
-    console.log(newUser);
-    newUser.save(err => {
-      if (err) {
-        res.status(500).json(err);
-      } else {
-        res.status(201).json();
-      }
-    });
-  }
-});
+//       contact: {
+//         city: req.body.contact.city.trim(),
+//         country: req.body.contact.country.trim(),
+//         phoneNumber: req.body.contact.phoneNumber.trim()
+//       },
+//       links: {
+//         linkedIn: req.body.linkedIn,
+//         github: req.body.github
+//       },
+//       comment: req.body.comment
+//     };
+//     const newUser = new Cards(userData);
+//     console.log(newUser);
+//     newUser.save(err => {
+//       if (err) {
+//         res.status(500).json(err);
+//       } else {
+//         res.status(201).json();
+//       }
+//     });
+//   }
+// });
 
 // delete userCard
 router.delete("/:id", (req, res) => {
@@ -116,6 +116,7 @@ router.get("/:id", (req, res) => {
   });
 });
 
+//update userCard
 router.put("/:id", (req, res) => {
   const cardId = req.params.id;
   const validationResult = validateUserCard(req.body);
