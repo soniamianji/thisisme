@@ -114,11 +114,10 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   result: PropTypes.array,
-  clearUserState: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   result: state.result
 });
 
-export default connect(mapStateToProps, { clearUserState })(withRouter(NavBar));
+export default connect(mapStateToProps)(withRouter(NavBar));
