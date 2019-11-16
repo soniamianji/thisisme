@@ -71,7 +71,7 @@ class SearchForm extends Component {
                 <TextField
                   color="secondary"
                   name="location"
-                  label="Location"
+                  label="Country"
                   id="location"
                   fullWidth
                   value={this.state.location}
