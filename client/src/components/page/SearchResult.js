@@ -18,13 +18,13 @@ class SearchResult extends Component {
     console.log(this.props.cards[0]);
     return (
       <Box>
-        <Box width="75%" style={{ marginRight: "auto", marginLeft: "auto" }}>
+        <Box width="100" style={{ marginRight: "auto", marginLeft: "auto" }}>
           <SearchForm />
         </Box>
-        <Grid container style={{ marginTop: 22, justifyContent: "center" }}>
+        <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%" }}>
           {this.props.cards &&
             this.props.cards.map((card, index) => (
-              <Grid item xs={12} sm={5} key={index}>
+              <Grid item sm={12} lg={6} key={index} style={{ marginBottom: "9px" }}>
                 <UserCard card={card} />
               </Grid>
             ))}

@@ -116,7 +116,7 @@ const UserCard = props => {
                       {props.card.name}
                     </Typography>
                     <Typography className="apply-font" variant="h2">
-                      {props.card.occupation}
+                      {props.card.occupation && props.card.occupation}
                     </Typography>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h3">
@@ -124,14 +124,14 @@ const UserCard = props => {
                       </Typography>
                       <Typography className="apply-font" variant="h3">
                         {
-                          //props.card.contact.phoneNumber
+                          // props.card.contact.phoneNumber ? props.card.contact.phoneNumber : ""
                         }
                       </Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
-                        {props.card.contact.city},{props.card.contact.country}
+                        {props.card.contact.city != undefined ? props.card.contact.phoneNumber : ""},{props.card.contact.country ? props.card.contact.country : ""}
                       </Typography>
                     </Box>
                   </Box>

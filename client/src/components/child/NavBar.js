@@ -40,7 +40,7 @@ class NavBar extends Component {
     if (Auth.isUserAuthenticated()) {
       //then log her out
       Auth.deauthenticateUser();
-      this.props.clearUserState();
+      // this.props.clearUserState();
       this.setState({ name: "" });
       this.props.history.push("/login");
     } else {
@@ -59,8 +59,8 @@ class NavBar extends Component {
             {Auth.isUserAuthenticated() ? (
               <Button color="inherit">{this.state.name}</Button>
             ) : (
-              ""
-            )}
+                ""
+              )}
             {Auth.isUserAuthenticated() ? (
               <GoogleLogout
                 clientId="706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com"
@@ -68,13 +68,13 @@ class NavBar extends Component {
                 onLogoutSuccess={this.loginLogoutHandler}
               />
             ) : (
-              <Button
-                onClick={this.loginLogoutHandler}
-                style={{ color: "white" }}
-              >
-                {Auth.isUserAuthenticated() ? "Logout" : "Login"}
-              </Button>
-            )}
+                <Button
+                  onClick={this.loginLogoutHandler}
+                  style={{ color: "white" }}
+                >
+                  {Auth.isUserAuthenticated() ? "Logout" : "Login"}
+                </Button>
+              )}
           </Toolbar>
         </AppBar>
       </div>

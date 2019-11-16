@@ -69,10 +69,21 @@ router.post("/", (req, res) => {
               );
               const id_token = jwt.sign(
                 {
+                  id: userData.data.id,
                   email: userData.data.email,
                   name: userData.data.name,
                   img: userData.data.picture,
-                  id: userData.data.id,
+                  occupation: "",
+                  contact: {
+                    city: "",
+                    country: "",
+                    phoneNumber: ""
+                  },
+                  links: {
+                    linkedIn: "",
+                    github: ""
+                  },
+                  comment: "",
                   userStyle: newUserCard.userStyle
                 },
                 secretTokenKey
@@ -94,6 +105,10 @@ router.post("/", (req, res) => {
               name: user.name,
               img: user.img,
               id: user.id,
+              occupation: user.occupation,
+              contact: user.contact,
+              links: user.links,
+              comment: user.comment,
               userStyle: user.userStyle
             },
             secretTokenKey
