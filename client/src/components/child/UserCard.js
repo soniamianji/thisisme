@@ -123,7 +123,9 @@ const UserCard = props => {
                         {props.card.email}
                       </Typography>
                       <Typography className="apply-font" variant="h3">
-                        {props.card.contact.phoneNumber}
+                        {
+                          //props.card.contact.phoneNumber
+                        }
                       </Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">

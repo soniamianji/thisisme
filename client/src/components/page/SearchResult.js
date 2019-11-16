@@ -6,6 +6,7 @@ import { cardSearchResults, searchMsg } from "../../actions/authActions";
 import Grid from "@material-ui/core/Grid";
 import SearchForm from "../child/SearchForm";
 import UserCard from "../child/UserCard";
+import Box from "@material-ui/core/Box";
 
 class SearchResult extends Component {
   constructor(props) {
@@ -16,14 +17,11 @@ class SearchResult extends Component {
   render() {
     console.log(this.props.cards[0]);
     return (
-      <div>
-        <SearchForm />
-
-        <Grid
-          container
-          width={"80%"}
-          style={{ marginTop: 22, justifyContent: "center" }}
-        >
+      <Box>
+        <Box width="75%" style={{ marginRight: "auto", marginLeft: "auto" }}>
+          <SearchForm />
+        </Box>
+        <Grid container style={{ marginTop: 22, justifyContent: "center" }}>
           {this.props.cards &&
             this.props.cards.map((card, index) => (
               <Grid item xs={12} sm={5} key={index}>
@@ -33,7 +31,7 @@ class SearchResult extends Component {
         </Grid>
 
         <h6>{this.props.msg && this.props.msg.msg}</h6>
-      </div>
+      </Box>
     );
   }
 }

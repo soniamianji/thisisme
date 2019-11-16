@@ -32,6 +32,7 @@ class SearchForm extends Component {
   }
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.location);
   };
   submitHandler = e => {
     e.preventDefault();
@@ -81,6 +82,7 @@ class SearchForm extends Component {
                   color="secondary"
                   name="location"
                   label="Location"
+                  select
                   fullWidth
                   value={this.state.location}
                   onChange={this.changeHandler}
@@ -88,7 +90,6 @@ class SearchForm extends Component {
                   helperText={
                     this.state._error === "" ? "" : this.state._errors
                   }
-                  select
                 >
                   {" "}
                   {this.state.countries.map(country => (
