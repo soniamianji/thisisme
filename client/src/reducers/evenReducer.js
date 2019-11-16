@@ -1,6 +1,5 @@
 import {
   GOOGLE_AUTH_ASYNC,
-  CLEAR_USER_STATE,
   CARD_SEARCH_RESULTS_ASYNC,
   SEARCH_MSG
 } from "../actions/types";
@@ -26,11 +25,7 @@ function rootReducer(state = initialState, action) {
         msg: {},
         result: action.user
       };
-    case CLEAR_USER_STATE:
-      return {
-        ...state,
-        result: action.user
-      };
+
     case CARD_SEARCH_RESULTS_ASYNC:
       return {
         ...state,

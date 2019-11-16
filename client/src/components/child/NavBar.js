@@ -9,7 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Auth from "../../modules/Auth";
 import { withRouter } from "react-router";
-import { clearUserState } from "../../actions/authActions";
 import React, { Component } from "react";
 import { Typography } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
@@ -31,8 +30,6 @@ class NavBar extends Component {
       anchorEl: event.currentTarget,
       open: true
     })
-
-
   };
 
   handleClose = () => {
@@ -88,7 +85,6 @@ class NavBar extends Component {
               <MenuItem ><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
               <MenuItem><Link to="/jobhunt" style={{ textDecoration: "none", color: "black" }}></Link>Find Jobs!</MenuItem>
             </Menu>
-
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (
               <Button color="inherit">{this.state.name}</Button>

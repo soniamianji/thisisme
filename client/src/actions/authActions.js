@@ -1,6 +1,6 @@
 import {
   GOOGLE_AUTH_ASYNC,
-  CLEAR_USER_STATE,
+
   CARD_SEARCH_RESULTS_ASYNC,
   SEARCH_MSG
 } from "./types";
@@ -23,14 +23,6 @@ function googleLogin(authCode) {
     );
   };
 }
-function clearUserState() {
-  console.log("clearing");
-  let user = [];
-  return {
-    type: CLEAR_USER_STATE,
-    user
-  };
-}
 
 function cardSerachResultsAsync(cards) {
   return {
@@ -44,10 +36,10 @@ function cardSearchResults(occupation, name, location) {
     searchCards.searchCards(occupation, name, location).then(cards =>
       cards.length === 0
         ? dispatch(
-            searchMsg({
-              msg: "There are no cards with those search terms."
-            })
-          )
+          searchMsg({
+            msg: "There are no cards with those search terms."
+          })
+        )
         : dispatch(cardSerachResultsAsync(cards))
     );
   };
@@ -62,7 +54,6 @@ function searchMsg(msg) {
 export {
   googleAuthAsync,
   googleLogin,
-  clearUserState,
   searchMsg,
   cardSearchResults,
   cardSerachResultsAsync
