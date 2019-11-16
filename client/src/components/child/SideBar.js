@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Drawer,
   Grid,
@@ -42,16 +42,31 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const linkPlatform = event => {
-  event.preventDefault();
-  console.log(this.refs.newLink.getValue());
-  // validate url
-  // get favicon
-  // safe link url and image url to mongo db
-};
-
 export const SideBar = props => {
   const classes = useStyles();
+  const [state, setState] = useState({ LinkToAdd: "" });
+
+  const linkPlatform = event => {
+    event.preventDefault();
+    fetch(
+      "http://besticon-demo.herokuapp.com//allicons.json?url=" +
+        state.LinkToAdd +
+        "&formats=png"
+    ).then(response => {
+      if (response.status !== 200) {
+        console.log(response);
+      } else {
+        console.log(response);
+      }
+    });
+    // validate url
+    // get favicon
+    // safe link url and image url to local state
+  };
+
+  const setLink = e => {
+    setState({ LinkToAdd: e.target.value });
+  };
 
   return (
     <Drawer
@@ -120,10 +135,12 @@ export const SideBar = props => {
           </List>
           <form onSubmit={linkPlatform}>
             <TextField
+              onChange={setLink}
               id="addLinkTextField"
               className={classes.textField}
               label="Add Link"
               margin="normal"
+              value={state.LinkToAdd}
             />
             <Button type="submit">Add</Button>
           </form>
