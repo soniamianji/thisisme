@@ -10,20 +10,6 @@ class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      countries: [
-        {
-          value: "Sweden",
-          label: "SE"
-        },
-        {
-          value: "Denmark",
-          label: "DK"
-        },
-        {
-          value: "France",
-          label: "FR"
-        }
-      ],
       name: "",
       occupation: "",
       _errors: "",
@@ -36,7 +22,11 @@ class SearchForm extends Component {
   };
   submitHandler = e => {
     e.preventDefault();
-    this.props.cardSearchResults(this.state.name, this.state.occupation);
+    this.props.cardSearchResults(
+      this.state.name,
+      this.state.occupation,
+      this.state.location
+    );
     this.setState({
       name: "",
       occupation: "",
@@ -82,20 +72,11 @@ class SearchForm extends Component {
                   color="secondary"
                   name="location"
                   label="Location"
-                  select
+                  id="location"
                   fullWidth
                   value={this.state.location}
                   onChange={this.changeHandler}
-                  error={this.state._errors !== ""}
-                  helperText={
-                    this.state._error === "" ? "" : this.state._errors
-                  }
-                >
-                  {" "}
-                  {this.state.countries.map(country => (
-                    <MenuItem key={country.value}>{country.label}</MenuItem>
-                  ))}
-                </TextField>
+                />
               </Grid>
             </Grid>
             <Button

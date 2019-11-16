@@ -39,9 +39,9 @@ function cardSerachResultsAsync(cards) {
   };
 }
 
-function cardSearchResults(occupation, name) {
+function cardSearchResults(occupation, name, location) {
   return dispatch => {
-    searchCards.searchCards(occupation, name).then(cards =>
+    searchCards.searchCards(occupation, name, location).then(cards =>
       cards.length === 0
         ? dispatch(
             searchMsg({
