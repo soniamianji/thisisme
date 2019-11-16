@@ -3,22 +3,42 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Auth from "../../modules/Auth";
 import { withRouter } from "react-router";
-import { clearUserState } from "../../actions/authActions";
 import React, { Component } from "react";
 import { Typography } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
+import { Link } from "react-router-dom";
+
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      anchorEl: null,
+      open: false
     };
   }
+
+  handleClick = (event) => {
+    this.setState({
+      anchorEl: event.currentTarget,
+      open: true
+    })
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    })
+
+  }
+
   componentDidMount() {
     if (this.props.result !== null) {
       this.setState({
@@ -40,7 +60,7 @@ class NavBar extends Component {
     if (Auth.isUserAuthenticated()) {
       //then log her out
       Auth.deauthenticateUser();
-      this.props.clearUserState();
+      // this.props.clearUserState();
       this.setState({ name: "" });
       this.props.history.push("/login");
     } else {
@@ -52,15 +72,25 @@ class NavBar extends Component {
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleClick}>
               <MenuIcon />
             </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={this.state.anchorEl}
+              open={this.state.open}
+              onClose={this.handleClose}
+            >
+              <MenuItem onClick={this.handleClose}><Link to="/profile" style={{ textDecoration: "none", color: "black" }}>Profile</Link></MenuItem>
+              <MenuItem ><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
+              <MenuItem><Link to="/jobhunt" style={{ textDecoration: "none", color: "black" }}></Link>Find Jobs!</MenuItem>
+            </Menu>
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (
               <Button color="inherit">{this.state.name}</Button>
             ) : (
-              ""
-            )}
+                ""
+              )}
             {Auth.isUserAuthenticated() ? (
               <GoogleLogout
                 clientId="706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com"
@@ -68,13 +98,13 @@ class NavBar extends Component {
                 onLogoutSuccess={this.loginLogoutHandler}
               />
             ) : (
-              <Button
-                onClick={this.loginLogoutHandler}
-                style={{ color: "white" }}
-              >
-                {Auth.isUserAuthenticated() ? "Logout" : "Login"}
-              </Button>
-            )}
+                <Button
+                  onClick={this.loginLogoutHandler}
+                  style={{ color: "white" }}
+                >
+                  {Auth.isUserAuthenticated() ? "Logout" : "Login"}
+                </Button>
+              )}
           </Toolbar>
         </AppBar>
       </div>
@@ -84,11 +114,10 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   result: PropTypes.array,
-  clearUserState: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   result: state.result
 });
 
-export default connect(mapStateToProps, { clearUserState })(withRouter(NavBar));
+export default connect(mapStateToProps)(withRouter(NavBar));

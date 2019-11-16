@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -18,10 +18,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       Auth.isUserAuthenticated() ? (
         <Component {...props} {...rest} />
       ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
     }
   />
 );

@@ -24,7 +24,13 @@ const CardSchema = new mongoose.Schema({
   },
   links: {
     linkedIn: String,
-    github: String
+    github: String,
+    facebook: String,
+    instagram: String,
+    portfolioSite: String,
+    behance: String,
+    twitter: String,
+    youtube: String
   },
   comment: String,
   img: String,

@@ -20,13 +20,18 @@ class Login extends Component {
       this.props.history.push("/profile");
     }
   }
+  componentDidUpdate(nextProps, nextState) {
+    if (this.props.history != nextProps.history) {
+
+    }
+  }
 
   responseGoogle = async response => {
     if (response.code) {
       const authCode = response.code;
       console.log(authCode);
       this.props.googleLogin(authCode);
-      //set the state of navbar comp to name
+      console.log("redirecting")
     } else {
       console.log(response);
     }
