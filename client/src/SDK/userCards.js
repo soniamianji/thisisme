@@ -27,7 +27,7 @@ module.exports.getAllCards = async function(callback) {
       errors = ["unknown status code"];
   }
 
-  callback(errors, compounds);
+  callback(errors, cards);
 };
 
 //createCards

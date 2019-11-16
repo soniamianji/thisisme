@@ -1,170 +1,267 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   Drawer,
   Grid,
   Box,
   Typography,
-  Divider,
   FormControlLabel,
   Button,
   TextField
 } from "@material-ui/core";
+
 import FontPicker from "font-picker-react";
-import { makeStyles } from "@material-ui/core/styles";
 import { TwitterPicker } from "react-color";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+import styled from "styled-components";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/dist/style.css";
+import { updateCard } from "../../SDK/userCards";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-// styles
-const drawerWidth = 400;
+const StyledDrawer = styled(Drawer)`
+  width: 400,
+  flexShrink: 0
+`;
 
-const useStyles = makeStyles(theme => ({
-  drawerBox: {
-    margin: "1rem 0"
-  },
-  root: {
-    display: "flex",
-    backgroundColor: "#272727"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    padding: "1rem"
-  }
-}));
+class SideBar extends Component {
+  constructor(props) {
+    super(props);
 
-export const SideBar = props => {
-  const classes = useStyles();
-  const [state, setState] = useState({ LinkToAdd: "" });
-
-  const linkPlatform = event => {
-    event.preventDefault();
-    fetch(
-      "http://besticon-demo.herokuapp.com//allicons.json?url=" +
-        state.LinkToAdd +
-        "&formats=png"
-    ).then(response => {
-      if (response.status !== 200) {
-        console.log(response);
-      } else {
-        console.log(response);
+    this.state = {
+      occupation: "",
+      contact: {
+        city: "",
+        country: "",
+        phoneNumber: ""
+      },
+      links: {
+        github: this.props.links.github,
+        facebook: this.props.links.facebook,
+        linkedIn: this.props.links.linkedIn,
+        youtube: this.props.links.youtube,
+        instagram: this.props.links.instagram,
+        behance: this.props.links.behance,
+        portfolioSite: this.props.links.portfolioSite
       }
+    };
+  }
+
+  saveCardChanges = () => {
+    const data = {
+      name: this.props.name,
+      email: this.props.email,
+      contact: this.state.contact,
+      occupation: this.state.occupation,
+      links: this.state.links
+    };
+    updateCard(this.props.id, data, error => {
+      console.log(error);
     });
-    // validate url
-    // get favicon
-    // safe link url and image url to local state
   };
 
-  const setLink = e => {
-    setState({ LinkToAdd: e.target.value });
-  };
+  render() {
+    return (
+      <StyledDrawer
+        open={this.props.open}
+        variant="persistent"
+        anchor="left"
+        classes={{
+          paper: "drawerPaper"
+        }}
+      >
+        <Grid container>
+          <Grid item xs={12}>
+            <Box textAlign="left">
+              <Typography variant="h1">Edit Card</Typography>
+              <Typography paragraph>
+                Change the typeface, design color, background color and add
+                Links in the sidebar. To change the content (e.g. mail address)
+                of your card by clicking directly on it and typing in the input
+                field.
+              </Typography>
+            </Box>
+          </Grid>
 
-  return (
-    <Drawer
-      open={props.open}
-      variant="persistent"
-      anchor="left"
-      className={classes.drawer}
-      classes={{
-        paper: classes.drawerPaper
-      }}
-    >
-      <Grid container>
-        <Grid item xs={12}>
-          <Box textAlign="left">
-            <Typography variant="h1">Edit Card</Typography>
-            <Typography paragraph>
-              Change the typeface, design color, background color and add Links
-              in the sidebar. To change the content (e.g. mail address) of your
-              card by clicking directly on it and typing in the input field.
-            </Typography>
+          <Box m={1} textAlign="left">
+            <label>Font</label>
+            <FontPicker
+              apiKey="AIzaSyD4-cMeFhw8_m93qT0Bd1xIY128Mj8P_Zc"
+              activeFontFamily={this.props.activeFontFamily}
+              onChange={nextFont => this.props.changeActiveFont(nextFont)}
+            />
+          </Box>
+
+          <Box m={1} textAlign="left">
+            <label>Card Color</label>
+            <Box mt={1}>
+              <TwitterPicker
+                triangle="hide"
+                width="100%"
+                onChangeComplete={color => this.props.changeCardColor(color)}
+              />
+            </Box>
+          </Box>
+          <Box m={1}>
+            <TextField
+              onChange={e => this.setState({ occupation: e.target.value })}
+              fullWidth="true"
+              label="Job Title"
+              margin="normal"
+              value={this.props.occupation}
+            />
+            <TextField
+              onChange={e =>
+                this.setState({ contact: { city: e.target.value } })
+              }
+              fullWidth="true"
+              label="City"
+              margin="normal"
+              value={this.props.city}
+            />
+            <TextField
+              onChange={e =>
+                this.setState({ contact: { country: e.target.value } })
+              }
+              fullWidth="true"
+              label="Country"
+              margin="normal"
+            />
+            <FormControlLabel
+              control={
+                <PhoneInput
+                  defaultCountry={"us"}
+                  // value={this.state.phone}
+                  // onChange={handleOnChange}
+                />
+              }
+              label="Phone Number"
+              labelPlacement="Top"
+            />
+          </Box>
+          <Box m={1}>
+            <form>
+              <h3>Links</h3>
+              <TextField
+                onChange={e =>
+                  this.setState({ links: { github: e.target.value } })
+                }
+                fullWidth="true"
+                id="githubLink"
+                label="Github"
+                margin="normal"
+                value={this.state.githubLink}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { linkedIn: e.target.value } })
+                }
+                id="linkedinLink"
+                label="LinkedIn"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { behance: e.target.value } })
+                }
+                id="behanceLink"
+                label="Behance"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { facebook: e.target.value } })
+                }
+                id="facebookLink"
+                label="Facebook"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { youtube: e.target.value } })
+                }
+                id="youtubeLink"
+                label="Youtube"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { twitter: e.target.value } })
+                }
+                id="addLinkTextField"
+                label="Twitter"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { instagram: e.target.value } })
+                }
+                id="instagramLink"
+                label="Instagram"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+              <TextField
+                fullWidth="true"
+                onChange={e =>
+                  this.setState({ links: { portfolioSite: e.target.value } })
+                }
+                id="websiteLink"
+                label="Website"
+                margin="normal"
+                value={this.state.LinkToAdd}
+              />
+            </form>
+          </Box>
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.saveCardChanges}
+            >
+              Save Changes
+            </Button>
+            <Button
+              onClick={this.props.drawerHandler}
+              variant="contained"
+              color="secondary"
+            >
+              Close
+            </Button>
           </Box>
         </Grid>
+      </StyledDrawer>
+    );
+  }
+}
 
-        <Box className={classes.drawerBox} textAlign="left">
-          <FormControlLabel
-            label="Font"
-            labelPlacement="top"
-            control={
-              <FontPicker
-                apiKey="AIzaSyDqYbs7r18hvAF5gz1FK_HGoER2BmcHjv4"
-                activeFontFamily={props.activeFontFamily}
-                onChange={nextFont => props.changeActiveFont(nextFont)}
-              />
-            }
-          />
-        </Box>
-
-        <Box className={classes.drawerBox} textAlign="left">
-          <label>Card Color</label>
-          <TwitterPicker
-            onChangeComplete={color => props.changeCardColor(color)}
-          />
-        </Box>
-
-        <Box className={classes.drawerBox}>
-          <List
-            aria-labelledby="linkedPlatformsTitle"
-            subheader={
-              <ListSubheader component="div" id="linkedPlatformsTitle">
-                Linked Platforms
-              </ListSubheader>
-            }
-          >
-            <ListItem>
-              <ListItemText primary="Github" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Github" />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="Github" />
-            </ListItem>
-            <Divider />
-          </List>
-          <form onSubmit={linkPlatform}>
-            <TextField
-              onChange={setLink}
-              id="addLinkTextField"
-              className={classes.textField}
-              label="Add Link"
-              margin="normal"
-              value={state.LinkToAdd}
-            />
-            <Button type="submit">Add</Button>
-          </form>
-        </Box>
-        <Box className={classes.drawerBox}>
-          <TextField
-            id="addLinkTextField"
-            className={classes.textField}
-            label="Job Title"
-            margin="normal"
-          />
-          <FormControlLabel
-            control={
-              <PhoneInput
-                defaultCountry={"us"}
-                // value={this.state.phone}
-                // onChange={handleOnChange}
-              />
-            }
-            label="Phone Number"
-            labelPlacement="Top"
-          />
-        </Box>
-      </Grid>
-    </Drawer>
-  );
+SideBar.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  email: PropTypes.string,
+  occupation: PropTypes.string,
+  contact: PropTypes.object,
+  links: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+  occupation: state.result.occupation,
+  id: state.result.id,
+  name: state.result.name,
+  email: state.result.email,
+  contact: state.result.contact,
+  links: state.result.links
+});
+
+export default connect(mapStateToProps, null)(SideBar);

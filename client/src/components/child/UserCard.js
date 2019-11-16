@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import RoomIcon from "@material-ui/icons/Room";
-import "../../style/userCard.css";
 import TweenLite from "gsap/TweenLite";
 import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
@@ -131,7 +130,13 @@ const UserCard = props => {
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
-                        {props.card.contact.city != undefined ? props.card.contact.phoneNumber : ""},{props.card.contact.country ? props.card.contact.country : ""}
+                        {props.card.contact.city != undefined
+                          ? props.card.contact.phoneNumber
+                          : ""}
+                        ,
+                        {props.card.contact.country
+                          ? props.card.contact.country
+                          : ""}
                       </Typography>
                     </Box>
                   </Box>
