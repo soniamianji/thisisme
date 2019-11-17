@@ -10,6 +10,7 @@ import Auth from "./modules/Auth";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 import NavBar from "./components/child/NavBar";
+import JobHunt from "./components/page/JobHunt";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -40,6 +41,8 @@ function App() {
             <GlobalRoute exact path="/" component={SearchResult} />
             <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/jobhunt" component={JobHunt} />
+
           </ThemeProvider>
         </div>
       </Router>

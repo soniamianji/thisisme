@@ -1,13 +1,15 @@
 import {
   GOOGLE_AUTH_ASYNC,
   CARD_SEARCH_RESULTS_ASYNC,
-  SEARCH_MSG
+  SEARCH_MSG,
+  JOB_SEARCH_RESULTS_ASYNC
 } from "../actions/types";
 import Auth from "../modules/Auth";
 
 const initialState = {
   result: [],
   cards: [],
+  jobs: [],
   msg: {}
 };
 
@@ -36,8 +38,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         cards: [],
+        jobs: [],
         msg: action.msg
       };
+    case JOB_SEARCH_RESULTS_ASYNC:
+      return {
+        ...state,
+        msg: {},
+        jobs: action.jobs
+      };
+
     default:
       return state;
   }

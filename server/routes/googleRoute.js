@@ -22,7 +22,6 @@ router.post("/", (req, res) => {
   oauth2Client
     .getToken(code)
     .then(res => {
-      console.log("res");
       const tokens = res.tokens;
       oauth2Client.setCredentials(tokens);
       const oauth2 = google.oauth2({ version: "v2" });
@@ -35,7 +34,6 @@ router.post("/", (req, res) => {
       Card.findOne({ googleId: googleid }, (err, user) => {
         //if user not found create new
         if (!user) {
-          console.log("not found");
           const userInfo = {
             name: userData.data.name.toLowerCase(),
             email: userData.data.email,
@@ -57,8 +55,6 @@ router.post("/", (req, res) => {
             }
           };
           const newUserCard = new Card(userInfo);
-          console.log(newUserCard);
-
           newUserCard.save(err => {
             if (err) {
               res.status(500).json(err);
@@ -96,8 +92,6 @@ router.post("/", (req, res) => {
             }
           });
         } else if (user) {
-          console.log(user.id);
-          console.log(user);
           const access_token = jwt.sign({ id: user.id }, secretTokenKey);
           const id_token = jwt.sign(
             {

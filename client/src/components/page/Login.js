@@ -15,23 +15,24 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 
 class Login extends Component {
-  componentDidMount() {
-    if (Auth.isUserAuthenticated()) {
-      this.props.history.push("/profile");
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogged: Auth.isUserAuthenticated()
     }
   }
-  componentDidUpdate(nextProps, nextState) {
-    if (this.props.history != nextProps.history) {
-
-    }
-  }
+  // componentDidMount() {
+  //   if (Auth.isUserAuthenticated()) {
+  //     this.props.history.push("/profile");
+  //   }
+  // }
 
   responseGoogle = async response => {
     if (response.code) {
       const authCode = response.code;
       console.log(authCode);
       this.props.googleLogin(authCode);
-      console.log("redirecting")
+
     } else {
       console.log(response);
     }

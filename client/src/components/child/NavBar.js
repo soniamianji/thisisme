@@ -82,8 +82,8 @@ class NavBar extends Component {
               onClose={this.handleClose}
             >
               <MenuItem onClick={this.handleClose}><Link to="/profile" style={{ textDecoration: "none", color: "black" }}>Profile</Link></MenuItem>
-              <MenuItem ><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
-              <MenuItem><Link to="/jobhunt" style={{ textDecoration: "none", color: "black" }}></Link>Find Jobs!</MenuItem>
+              <MenuItem onClick={this.handleClose}><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
+              <MenuItem onClick={this.handleClose}><Link to="/jobhunt" style={{ textDecoration: "none", color: "black" }}>Find Jobs!</Link></MenuItem>
             </Menu>
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (

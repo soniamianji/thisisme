@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { cardSearchResults, searchMsg } from "../../actions/authActions";
-import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 class SearchForm extends Component {
@@ -18,7 +17,6 @@ class SearchForm extends Component {
   }
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.location);
   };
   submitHandler = e => {
     e.preventDefault();
