@@ -91,7 +91,7 @@ const Profile = props => {
 };
 
 UserCard.propTypes = {
-  result: PropTypes.array
+  result: PropTypes.object
 };
 
 const mapStateToProps = state => ({

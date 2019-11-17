@@ -26,11 +26,11 @@ class JobHunt extends Component {
                     {this.props.jobs &&
                         this.props.jobs.map((job, index) => (
                             <Grid item sm={12} key={index} style={{ marginBottom: "9px" }}>
-                                <Grid onClick={this.goToJob(job.company_url)}>
-                                    <Grid item xs><h4>{job.title}</h4></Grid>
-                                    <Grid item xs><h6>{job.company}</h6></Grid>
-                                    <Grid item xs><p>{job.created_at}</p></Grid>
-                                    <Grid item xs> <p>{job.location}</p></Grid>
+                                <Grid container onClick={this.goToJob(job.company_url)}>
+                                    <Grid item md={6}><h4>{job.title}</h4></Grid>
+                                    <Grid item md={6}><p> Date: {job.created_at}</p></Grid>
+                                    <Grid item md={6}><h6>{job.company}</h6></Grid>
+                                    <Grid item md={6}> <p>{job.location}</p></Grid>
                                 </Grid>
 
                             </Grid>

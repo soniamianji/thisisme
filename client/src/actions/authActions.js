@@ -14,10 +14,13 @@ function googleAuthAsync(user) {
     user
   };
 }
-function googleLogin(authCode) {
+
+function googleLogin(authCode, cb) {
   return dispatch => {
-    googleAuthentication(authCode).then(body =>
+    googleAuthentication(authCode).then(body => {
+      cb();
       dispatch(googleAuthAsync(body))
+    }
     );
   };
 }

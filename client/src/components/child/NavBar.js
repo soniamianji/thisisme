@@ -113,7 +113,7 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
-  result: PropTypes.array,
+  result: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

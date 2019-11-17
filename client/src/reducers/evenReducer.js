@@ -7,7 +7,7 @@ import {
 import Auth from "../modules/Auth";
 
 const initialState = {
-  result: [],
+  result: {},
   cards: [],
   jobs: [],
   msg: {}

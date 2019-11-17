@@ -30,9 +30,10 @@ class Login extends Component {
   responseGoogle = async response => {
     if (response.code) {
       const authCode = response.code;
-      console.log(authCode);
-      this.props.googleLogin(authCode);
-
+      this.props.googleLogin(authCode, () => {
+        console.log(Auth.isUserAuthenticated());
+        this.props.history.push("/profile");
+      });
     } else {
       console.log(response);
     }
