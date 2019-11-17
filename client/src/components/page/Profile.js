@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { SideBar } from "../child/SideBar";
+import SideBar from "../child/SideBar";
 import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -69,8 +69,10 @@ const Profile = props => {
     <div className={classes.root}>
       <CssBaseline />
       <SideBar
+        drawerHandler={drawerHandler}
         open={state.open}
         activeFontFamily={state.activeFontFamily}
+        cardColor={state.cardColor}
         changeCardColor={changeCardColor}
         changeActiveFont={changeActiveFont}
       />
