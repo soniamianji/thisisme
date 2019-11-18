@@ -46,6 +46,7 @@ const Profile = props => {
     props.fetchUserCard(userId);
   }, [props.account.id]);
 
+
   const classes = useStyles();
 
   // functions
@@ -79,6 +80,7 @@ const Profile = props => {
       <CssBaseline />
       <SideBar
         card={props.usercard}
+        account={props.account.id}
         drawerHandler={drawerHandler}
         open={state.open}
         activeFontFamily={state.activeFontFamily}

@@ -8,7 +8,7 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
-
+import { fetchUserCard } from "../../actions/authActions";
 import FontPicker from "font-picker-react";
 import { TwitterPicker } from "react-color";
 import styled from "styled-components";
@@ -74,6 +74,7 @@ class SideBar extends Component {
       });
     }
   }
+
   saveCardChanges = () => {
     const data = {
       name: this.state.name,
@@ -92,9 +93,19 @@ class SideBar extends Component {
       behance: this.state.behance,
       portfolioSite: this.state.portfolioSite
     };
-    console.log(data);
-    updateCard(this.props.id, data, error => {
-      console.log(error);
+    const accountId = this.props.account;
+
+    //call action to update card 
+
+    updateCard(accountId, data, (err) => {
+      if (err.length === 0) {
+        console.log("done");
+        this.props.drawerHandler();
+        this.props.fetchUserCard(accountId);
+
+      } else {
+        console.log(err)
+      }
     });
   };
 
@@ -283,4 +294,4 @@ class SideBar extends Component {
   }
 }
 
-export default SideBar;
+export default connect(null, { fetchUserCard })(SideBar);
