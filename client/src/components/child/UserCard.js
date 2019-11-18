@@ -29,7 +29,6 @@ const UserCard = props => {
     contactInfo: {
       margin: "1rem 0"
     },
-
     card: {
       width: 525,
       height: 300,
@@ -37,7 +36,9 @@ const UserCard = props => {
       marginLeft: "auto",
       marginRight: "auto"
     },
-
+    icons: {
+      color: props.cardColor
+    },
     wrapper: {
       padding: "2rem"
     },
@@ -144,11 +145,11 @@ const UserCard = props => {
                     props.links[key] != "" ? (
                       <Grid item key={index}>
                         {key == "portfolioSite" ? (
-                          <a href={props.links[key]}>
+                          <a className={classes.icons} href={props.links[key]}>
                             <i className={"far fa-2x fa-user-circle"} />
                           </a>
                         ) : (
-                          <a href={props.links[key]}>
+                          <a className={classes.icons} href={props.links[key]}>
                             <i className={"fab fa-2x fa-" + key} />
                           </a>
                         )}

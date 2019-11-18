@@ -40,8 +40,8 @@ const Profile = props => {
   // state
   const [state, setState] = useState({
     open: false,
-    activeFontFamily: props.fontFamily,
-    cardColor: props.color
+    activeFontFamily: props.usercard.fontFamily,
+    cardColor: props.usercard.color
   });
 
   //lifecycle hook

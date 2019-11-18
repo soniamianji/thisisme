@@ -98,11 +98,10 @@ class SideBar extends Component {
         twitter: this.state.twitter,
         instagram: this.state.instagram,
         behance: this.state.behance,
-        portfolioSite: this.state.portfolioSite,
-        fontFamily: this.props.activeFontFamily,
-        color: this.props.cardColor
+        portfolioSite: this.state.portfolioSite
       },
-
+      fontFamily: this.props.activeFontFamily,
+      color: this.props.cardColor
     };
     const accountId = this.props.account;
 
