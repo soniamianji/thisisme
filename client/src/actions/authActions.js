@@ -28,6 +28,7 @@ function googleLogin(authCode, cb) {
 }
 
 function getUserCardAsync(user) {
+
   return {
     type: USER_CARD_ASYNC,
     user

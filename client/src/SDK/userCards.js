@@ -5,7 +5,7 @@ module.exports.getUserCard = async function (id) {
   let response;
 
   try {
-    response = await sendRequest.sendRequest("GET", "/cardRoute");
+    response = await sendRequest.sendRequest("GET", "/cardRoute/" + id);
   } catch (errors) {
     console.log(errors)
     return;

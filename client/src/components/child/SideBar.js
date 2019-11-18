@@ -47,13 +47,13 @@ class SideBar extends Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.usercard != {}) {
-      this.setState({
-        links: this.props.usercard.links
-      });
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.usercard != {}) {
+  //     this.setState({
+  //       links: this.props.usercard.links
+  //     });
+  //   }
+  // }
 
   saveCardChanges = () => {
     const data = {
@@ -139,8 +139,8 @@ class SideBar extends Component {
               control={
                 <PhoneInput
                   defaultCountry={"us"}
-                  // value={this.state.phone}
-                  // onChange={handleOnChange}
+                // value={this.state.phone}
+                // onChange={handleOnChange}
                 />
               }
               label="Phone Number"

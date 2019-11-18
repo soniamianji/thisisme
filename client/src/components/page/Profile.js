@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import SideBar from "../child/SideBar";
 import { makeStyles } from "@material-ui/core/styles";
+import { fetchUserCard } from "../../actions/authActions"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
@@ -32,12 +33,16 @@ const useStyles = makeStyles(theme => ({
 
 const Profile = props => {
   useEffect(() => {
-    if (this.props.usercard != {}) {
-      this.setState({
-        links: this.props.usercard.links
-      });
-    }
-  });
+    const userId = props.account.id;
+    console.log(userId);
+    props.fetchUserCard(userId);
+
+    // if (this.props.usercard != {}) {
+    //   this.setState({
+    //     links: this.props.usercard.links
+    //   });
+    // }
+  }, []);
 
   const classes = useStyles();
 
@@ -48,12 +53,12 @@ const Profile = props => {
     cardColor: "#ff336f"
   });
 
-  //component will mount fetch the usercard
-  const componentDidMount = () => {
-    const userId = props.account.id;
-    console.log(userId);
-    props.fetchUserCard(userId);
-  };
+  // //component will mount fetch the usercard
+  // const componentDidMount = () => {
+  //   const userId = props.account.id;
+  //   console.log(userId);
+  //   props.fetchUserCard(userId);
+  // };
 
   // functions
   const drawerHandler = () => {
@@ -107,7 +112,8 @@ const Profile = props => {
 
 UserCard.propTypes = {
   usercard: PropTypes.object,
-  account: PropTypes.object
+  account: PropTypes.object,
+  fetchUserCard: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -115,4 +121,4 @@ const mapStateToProps = state => ({
   account: state.account
 });
 
-export default connect(mapStateToProps, null)(Profile);
+export default connect(mapStateToProps, { fetchUserCard })(Profile);
