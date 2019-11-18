@@ -50,19 +50,25 @@ class SideBar extends Component {
     if (this.props.card != prevProps.card) {
       //set your state now!
       this.setState({
-        comment: this.props.card.comment,
-        occupation: this.props.card.occupation,
-        city: this.props.card.contact.city,
-        country: this.props.card.contact.country,
-        phoneNumber: this.props.card.contact.phoneNumber,
-        twitter: this.props.card.links.twitter,
-        github: this.props.card.links.github,
-        facebook: this.props.card.links.facebook,
-        linkedIn: this.props.card.links.linkedIn,
-        youtube: this.props.card.links.youtube,
-        instagram: this.props.card.links.instagram,
-        behance: this.props.card.links.behance,
-        portfolioSite: this.props.card.links.portfolioSite,
+        comment: this.props.card.comment ? this.props.card.comment : "",
+        occupation: this.props.card.occupation
+          ? this.props.card.occupation
+          : "",
+        city: this.props.card.city ? this.props.card.city : "",
+        country: this.props.card.country ? this.props.card.country : "",
+        phoneNumber: this.props.card.phoneNumber
+          ? this.props.card.phoneNumber
+          : "",
+        twitter: this.props.card.twitter ? this.props.card.twitter : "",
+        github: this.props.card.github ? this.props.card.github : "",
+        facebook: this.props.card.facebook ? this.props.card.facebook : "",
+        linkedIn: this.props.card.linkedIn ? this.props.card.linkedIn : "",
+        youtube: this.props.card.youtube ? this.props.card.youtube : "",
+        instagram: this.props.card.instagram ? this.props.card.instagram : "",
+        behance: this.props.card.behance ? this.props.card.behance : "",
+        portfolioSite: this.props.card.portfolioSite
+          ? this.props.card.portfolioSite
+          : "",
         name: this.props.card.name,
         email: this.props.card.email
       });
@@ -72,23 +78,19 @@ class SideBar extends Component {
     const data = {
       name: this.state.name,
       email: this.state.email,
-      contact: {
-        city: this.state.city,
-        country: this.state.country,
-        phoneNumber: this.state.phoneNumber
-      },
+      city: this.state.city,
+      country: this.state.country,
+      phoneNumber: this.state.phoneNumber,
       comment: this.state.comment,
       occupation: this.state.occupation,
-      links: {
-        github: this.state.github,
-        facebook: this.state.facebook,
-        linkedIn: this.state.linkedIn,
-        youtube: this.state.youtube,
-        twitter: this.state.twitter,
-        instagram: this.state.instagram,
-        behance: this.state.behance,
-        portfolioSite: this.state.portfolioSite
-      }
+      github: this.state.github,
+      facebook: this.state.facebook,
+      linkedIn: this.state.linkedIn,
+      youtube: this.state.youtube,
+      twitter: this.state.twitter,
+      instagram: this.state.instagram,
+      behance: this.state.behance,
+      portfolioSite: this.state.portfolioSite
     };
     console.log(data);
     updateCard(this.props.id, data, error => {

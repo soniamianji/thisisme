@@ -116,21 +116,21 @@ const UserCard = props => {
                       {props.card.name}
                     </Typography>
                     <Typography className="apply-font" variant="h2">
-                      {props.card.occupation && props.card.occupation}
+                      {props.card.occupation}
                     </Typography>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h3">
                         {props.card.email}
                       </Typography>
 
-                      <Typography
-                        className="apply-font"
-                        variant="h3"
-                      >{props.card.contact}</Typography>
+                      <Typography className="apply-font" variant="h3">
+                        {props.card.phoneNumber}
+                      </Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
+                        {props.card.city},{props.card.country}
                       </Typography>
                     </Box>
                   </Box>
