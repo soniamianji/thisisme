@@ -13,6 +13,7 @@ import React, { Component } from "react";
 import { Typography } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
 import { Link } from "react-router-dom";
+import { clearUser } from "../../actions/authActions"
 
 
 class NavBar extends Component {
@@ -60,7 +61,7 @@ class NavBar extends Component {
     if (Auth.isUserAuthenticated()) {
       //then log her out
       Auth.deauthenticateUser();
-      // this.props.clearUserState();
+      this.props.clearUser();
       this.setState({ name: "" });
       this.props.history.push("/login");
     } else {
@@ -120,4 +121,4 @@ const mapStateToProps = state => ({
   account: state.account
 });
 
-export default connect(mapStateToProps)(withRouter(NavBar));
+export default connect(mapStateToProps, { clearUser })(withRouter(NavBar));

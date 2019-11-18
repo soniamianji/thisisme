@@ -44,7 +44,8 @@ const Profile = props => {
     const userId = props.account.id;
     console.log(userId);
     props.fetchUserCard(userId)
-  }, []);
+  }, [props.account.id]);
+
 
   const classes = useStyles();
 

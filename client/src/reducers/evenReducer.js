@@ -4,7 +4,8 @@ import {
   SEARCH_MSG,
   JOB_SEARCH_RESULTS_ASYNC,
   USER_CARD_ASYNC,
-  CLEAR_SEARCH_RESULT
+  CLEAR_SEARCH_RESULT,
+  CLEAR_USER
 } from "../actions/types";
 import Auth from "../modules/Auth";
 
@@ -52,6 +53,12 @@ function rootReducer(state = initialState, action) {
         cards: [],
         jobs: []
       };
+    case CLEAR_USER:
+      return {
+        ...state,
+        account: {},
+        usercard: {}
+      }
     case SEARCH_MSG:
       return {
         ...state,

@@ -1,6 +1,7 @@
 import {
   GOOGLE_AUTH_ASYNC,
-  USER_CARD_ASYNC
+  USER_CARD_ASYNC,
+  CLEAR_USER
 } from "./types";
 import { googleAuthentication } from "../SDK/googleSDK";
 import { getUserCard } from "../SDK/userCards";
@@ -37,6 +38,12 @@ function fetchUserCard(id) {
   }
 }
 
+function clearUser() {
+  return {
+    type: CLEAR_USER
+  }
+}
+
 
 
 
@@ -45,5 +52,6 @@ export {
   googleAuthAsync,
   googleLogin,
   getUserCardAsync,
-  fetchUserCard
+  fetchUserCard,
+  clearUser
 };
