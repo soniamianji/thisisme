@@ -122,10 +122,11 @@ const UserCard = props => {
                       <Typography className="apply-font" variant="h3">
                         {props.card.email}
                       </Typography>
+
                       <Typography
                         className="apply-font"
                         variant="h3"
-                      ></Typography>
+                      >{props.card.contact}</Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">

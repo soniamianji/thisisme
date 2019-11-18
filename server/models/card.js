@@ -17,34 +17,29 @@ const CardSchema = new mongoose.Schema({
   occupation: {
     type: String
   },
-  contact: {
-    city: String,
-    country: String,
-    phoneNumber: Number
-  },
-  links: {
-    linkedIn: String,
-    github: String,
-    facebook: String,
-    instagram: String,
-    portfolioSite: String,
-    behance: String,
-    twitter: String,
-    youtube: String
-  },
+  city: String,
+  country: String,
+  phoneNumber: Number,
+  linkedIn: String,
+  github: String,
+  facebook: String,
+  instagram: String,
+  portfolioSite: String,
+  behance: String,
+  twitter: String,
+  youtube: String,
   comment: String,
   img: String,
-  userStyle: {
-    last_modified: Date,
-    fontFamily: {
-      type: String,
-      default: "Open sans"
-    },
-    color: {
-      type: String,
-      default: "#3949ab"
-    }
+  last_modified: Date,
+  fontFamily: {
+    type: String,
+    default: "Open sans"
+  },
+  color: {
+    type: String,
+    default: "#3949ab"
   }
+
 });
 
 module.exports = mongoose.model("Card", CardSchema);
