@@ -37,7 +37,6 @@ router.post("/", (req, res) => {
           const userInfo = {
             name: userData.data.name.toLowerCase(),
             email: userData.data.email,
-            occupation: "",
             googleId: userData.data.id,
             img: userData.data.picture
           };

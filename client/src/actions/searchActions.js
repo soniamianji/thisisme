@@ -37,7 +37,6 @@ function searchMsg(msg) {
 }
 
 function JobSearchResultsAsync(jobs) {
-    console.log(jobs)
     return {
         type: JOB_SEARCH_RESULTS_ASYNC,
         jobs
