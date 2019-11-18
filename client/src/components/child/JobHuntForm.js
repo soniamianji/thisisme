@@ -34,8 +34,7 @@ class JobHuntForm extends Component {
     render() {
         return (
             <div>
-                <h4>On a job hunt? </h4>
-
+                <h4 style={{ textAlign: "center" }}>On a job hunt? </h4>
                 <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }}>
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>

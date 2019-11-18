@@ -57,6 +57,7 @@ const UserCard = props => {
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
 
+
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
     TweenLite.set("#card", { transformStyle: "preserve-3d" });

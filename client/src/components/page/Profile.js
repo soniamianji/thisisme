@@ -32,15 +32,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-  useEffect(() => {
-    const userId = props.account.id;
-    console.log(userId);
-    props.fetchUserCard(userId);
-
-  }, []);
-
-  const classes = useStyles();
-
   // state
   const [state, setState] = useState({
     open: false,
@@ -48,12 +39,24 @@ const Profile = props => {
     cardColor: "#ff336f"
   });
 
+  //lifecycle hook
+  useEffect(() => {
+    const userId = props.account.id;
+    console.log(userId);
+    props.fetchUserCard(userId)
+  }, []);
+
+  const classes = useStyles();
+
+
+
   // functions
   const drawerHandler = () => {
     setState({
       open: !state.open,
       activeFontFamily: state.activeFontFamily,
-      cardColor: state.cardColor
+      cardColor: state.cardColor,
+      body: state.body
     });
   };
 
@@ -77,6 +80,7 @@ const Profile = props => {
     <div className={classes.root}>
       <CssBaseline />
       <SideBar
+        card={props.usercard}
         drawerHandler={drawerHandler}
         open={state.open}
         activeFontFamily={state.activeFontFamily}

@@ -26,7 +26,6 @@ class JobHunt extends Component {
                             <Grid item sm={12} key={index} style={{ marginBottom: "9px" }}>
                                 <Paper style={{ backgroundColor: "#fafafa" }}>
                                     <Grid container style={{ padding: "22px" }} onClick={this.goToJob(job.company_url)}>
-
                                         <Grid item md={6}><h4 >{job.title}</h4></Grid>
                                         <Grid item md={6} ><p style={{ textAlign: "right" }}> Date: {job.created_at}</p></Grid>
                                         <Grid item md={6} ><p>{job.company}- {job.type}</p></Grid>

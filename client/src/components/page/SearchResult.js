@@ -15,7 +15,6 @@ class SearchResult extends Component {
   }
 
   render() {
-    console.log(this.props.cards[0]);
     return (
       <Box>
         <Box width="100" style={{ marginRight: "auto", marginLeft: "auto" }}>

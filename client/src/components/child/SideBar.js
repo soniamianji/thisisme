@@ -47,6 +47,16 @@ class SideBar extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(this.props.card)
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.card != prevProps.card) {
+      //set your state now!
+      console.log(this.props.card)
+
+    }
+  }
   saveCardChanges = () => {
     const data = {
       name: this.props.name,
@@ -246,23 +256,6 @@ class SideBar extends Component {
   }
 }
 
-SideBar.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  email: PropTypes.string,
-  occupation: PropTypes.string,
-  contact: PropTypes.object,
-  links: PropTypes.object
-};
 
-const mapStateToProps = state => ({
-  id: state.account.id,
-  name: state.account.name,
-  email: state.account.email,
 
-  occupation: state.usercard.occupation,
-  contact: state.usercard.contact,
-  links: state.usercard.links
-});
-
-export default connect(mapStateToProps, null)(SideBar);
+export default SideBar;

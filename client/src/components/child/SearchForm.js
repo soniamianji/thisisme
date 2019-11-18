@@ -34,7 +34,7 @@ class SearchForm extends Component {
   render() {
     return (
       <div>
-        <h1>SearchResult</h1>
+        <h1 style={{ textAlign: "center" }}>SearchResult</h1>
         <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }}>
           <form onSubmit={this.submitHandler}>
             <Grid container spacing={2}>
