@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -31,6 +31,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
+  useEffect(() => {
+    if (this.props.usercard != {}) {
+      this.setState({
+        links: this.props.usercard.links
+      });
+    }
+  });
+
   const classes = useStyles();
 
   // state
@@ -41,12 +49,11 @@ const Profile = props => {
   });
 
   //component will mount fetch the usercard
-  const componentDidMount
-    = () => {
-      const userId = props.account.id
-      console.log(userId)
-      props.fetchUserCard(userId);
-    };
+  const componentDidMount = () => {
+    const userId = props.account.id;
+    console.log(userId);
+    props.fetchUserCard(userId);
+  };
 
   // functions
   const drawerHandler = () => {

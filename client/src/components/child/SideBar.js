@@ -36,15 +36,23 @@ class SideBar extends Component {
         phoneNumber: ""
       },
       links: {
-        github: this.props.links.github,
-        facebook: this.props.links.facebook,
-        linkedIn: this.props.links.linkedIn,
-        youtube: this.props.links.youtube,
-        instagram: this.props.links.instagram,
-        behance: this.props.links.behance,
-        portfolioSite: this.props.links.portfolioSite
+        github: "",
+        facebook: "",
+        linkedIn: "",
+        youtube: "",
+        instagram: "",
+        behance: "",
+        portfolioSite: ""
       }
     };
+  }
+
+  componentDidMount() {
+    if (this.props.usercard != {}) {
+      this.setState({
+        links: this.props.usercard.links
+      });
+    }
   }
 
   saveCardChanges = () => {
@@ -131,8 +139,8 @@ class SideBar extends Component {
               control={
                 <PhoneInput
                   defaultCountry={"us"}
-                // value={this.state.phone}
-                // onChange={handleOnChange}
+                  // value={this.state.phone}
+                  // onChange={handleOnChange}
                 />
               }
               label="Phone Number"
@@ -256,10 +264,11 @@ SideBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  id: state.account.id,
+  name: state.account.name,
+  email: state.account.email,
+
   occupation: state.usercard.occupation,
-  id: state.usercard.id,
-  name: state.usercard.name,
-  email: state.usercard.email,
   contact: state.usercard.contact,
   links: state.usercard.links
 });

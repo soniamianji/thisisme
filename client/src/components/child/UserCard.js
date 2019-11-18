@@ -130,13 +130,6 @@ const UserCard = props => {
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
                         <RoomIcon color="primary" />
-                        {props.card.contact.city != undefined
-                          ? props.card.contact.phoneNumber
-                          : ""}
-                        ,
-                        {props.card.contact.country
-                          ? props.card.contact.country
-                          : ""}
                       </Typography>
                     </Box>
                   </Box>
