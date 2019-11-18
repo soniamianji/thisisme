@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { cardSearchResults, searchMsg } from "../../actions/authActions";
+import { cardSearchResults, searchMsg } from "../../actions/searchActions";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 class SearchForm extends Component {
