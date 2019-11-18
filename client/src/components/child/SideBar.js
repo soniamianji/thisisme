@@ -49,6 +49,20 @@ class SideBar extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.card != prevProps.card) {
       //set your state now!
+      if (this.props.links) {
+        this.setState({
+          twitter: this.props.links.twitter ? this.props.links.twitter : "",
+          github: this.props.links.github ? this.props.links.github : "",
+          facebook: this.props.links.facebook ? this.props.links.facebook : "",
+          linkedIn: this.props.links.linkedIn ? this.props.links.linkedIn : "",
+          youtube: this.props.links.youtube ? this.props.links.youtube : "",
+          instagram: this.props.links.instagram ? this.props.links.instagram : "",
+          behance: this.props.links.behance ? this.props.links.behance : "",
+          portfolioSite: this.props.links.portfolioSite
+            ? this.props.card.portfolioSite
+            : "",
+        })
+      }
       this.setState({
         comment: this.props.card.comment ? this.props.card.comment : "",
         occupation: this.props.card.occupation
@@ -58,16 +72,6 @@ class SideBar extends Component {
         country: this.props.card.country ? this.props.card.country : "",
         phoneNumber: this.props.card.phoneNumber
           ? this.props.card.phoneNumber
-          : "",
-        twitter: this.props.card.twitter ? this.props.card.twitter : "",
-        github: this.props.card.github ? this.props.card.github : "",
-        facebook: this.props.card.facebook ? this.props.card.facebook : "",
-        linkedIn: this.props.card.linkedIn ? this.props.card.linkedIn : "",
-        youtube: this.props.card.youtube ? this.props.card.youtube : "",
-        instagram: this.props.card.instagram ? this.props.card.instagram : "",
-        behance: this.props.card.behance ? this.props.card.behance : "",
-        portfolioSite: this.props.card.portfolioSite
-          ? this.props.card.portfolioSite
           : "",
         name: this.props.card.name,
         email: this.props.card.email
@@ -84,19 +88,22 @@ class SideBar extends Component {
       phoneNumber: this.state.phoneNumber,
       comment: this.state.comment,
       occupation: this.state.occupation,
-      github: this.state.github,
-      facebook: this.state.facebook,
-      linkedIn: this.state.linkedIn,
-      youtube: this.state.youtube,
-      twitter: this.state.twitter,
-      instagram: this.state.instagram,
-      behance: this.state.behance,
-      portfolioSite: this.state.portfolioSite
+      links: {
+        github: this.state.github,
+        facebook: this.state.facebook,
+        linkedIn: this.state.linkedIn,
+        youtube: this.state.youtube,
+        twitter: this.state.twitter,
+        instagram: this.state.instagram,
+        behance: this.state.behance,
+        portfolioSite: this.state.portfolioSite
+
+      }
     };
     const accountId = this.props.account;
 
     //call action to update card 
-
+    console.log(accountId)
     updateCard(accountId, data, (err) => {
       if (err.length === 0) {
         console.log("done");

@@ -79,6 +79,7 @@ const Profile = props => {
     <div className={classes.root}>
       <CssBaseline />
       <SideBar
+        links={props.links}
         card={props.usercard}
         account={props.account.id}
         drawerHandler={drawerHandler}
@@ -95,7 +96,7 @@ const Profile = props => {
       >
         <Container>
           <Button onClick={drawerHandler}>Toggle Drawer</Button>
-          <UserCard cardColor={state.cardColor} card={props.usercard} />
+          <UserCard cardColor={state.cardColor} links={props.links} card={props.usercard} />
         </Container>
       </div>
     </div>
@@ -110,6 +111,7 @@ UserCard.propTypes = {
 
 const mapStateToProps = state => ({
   usercard: state.usercard,
+  links: state.usercard.links,
   account: state.account
 });
 
