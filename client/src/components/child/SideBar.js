@@ -220,9 +220,9 @@ class SideBar extends Component {
                 onChange={this.changeFieldValue}
                 name="linkedIn"
                 id="linkedinLink"
-                label="LinkedIn"
+                label="Linkedin"
                 margin="normal"
-                value={this.state.linkedIn}
+                value={this.state.linkedin}
               />
               <TextField
                 fullWidth="true"
