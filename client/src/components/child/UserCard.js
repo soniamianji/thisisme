@@ -20,6 +20,7 @@ const UserCard = props => {
       height: 100
     },
     button: {
+      textAlign: "center",
       backgroundColor: props.cardColor,
       padding: "0.25rem",
       position: "absolute",
@@ -36,11 +37,21 @@ const UserCard = props => {
       marginLeft: "auto",
       marginRight: "auto"
     },
+    name: {
+      textTransform: "capitalize"
+    },
+    location: {
+      display: "flex",
+      alignItems: "center"
+    },
+    locationIcon: {
+      marginRight: "2px"
+    },
     icons: {
       color: props.cardColor
     },
     wrapper: {
-      padding: "2rem"
+      padding: "1.5rem"
     },
     cardColor: {
       backgroundColor: props.cardColor,
@@ -116,7 +127,7 @@ const UserCard = props => {
                 <Grid item direction="column">
                   <Box textAlign="left">
                     <Typography className="apply-font" variant="h1">
-                      {props.card.name}
+                      <span className={classes.name}>{props.card.name}</span>
                     </Typography>
                     <Typography className="apply-font" variant="h2">
                       {props.card.occupation}
@@ -132,8 +143,13 @@ const UserCard = props => {
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
-                        <RoomIcon color="primary" />
-                        {props.card.city},{props.card.country}
+                        <span className={classes.location}>
+                          <RoomIcon
+                            className={classes.locationIcon}
+                            color="primary"
+                          />
+                          {props.card.city},{props.card.country}
+                        </span>
                       </Typography>
                     </Box>
                   </Box>
