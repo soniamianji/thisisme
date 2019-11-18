@@ -61,7 +61,7 @@ class SideBar extends Component {
             : "",
           behance: this.props.links.behance ? this.props.links.behance : "",
           portfolioSite: this.props.links.portfolioSite
-            ? this.props.card.portfolioSite
+            ? this.props.links.portfolioSite
             : ""
         });
       }
@@ -98,8 +98,11 @@ class SideBar extends Component {
         twitter: this.state.twitter,
         instagram: this.state.instagram,
         behance: this.state.behance,
-        portfolioSite: this.state.portfolioSite
-      }
+        portfolioSite: this.state.portfolioSite,
+        fontFamily: this.props.activeFontFamily,
+        color: this.props.cardColor
+      },
+
     };
     const accountId = this.props.account;
 
@@ -218,9 +221,9 @@ class SideBar extends Component {
               <TextField
                 fullWidth="true"
                 onChange={this.changeFieldValue}
-                name="linkedIn"
+                name="linkedin"
                 id="linkedinLink"
-                label="Linkedin"
+                label="LinkedIn"
                 margin="normal"
                 value={this.state.linkedin}
               />
