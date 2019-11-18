@@ -21,7 +21,7 @@ const CardSchema = new mongoose.Schema({
   country: String,
   phoneNumber: Number,
   links: {
-    linkedIn: String,
+    linkedin: String,
     github: String,
     facebook: String,
     instagram: String,
