@@ -47,14 +47,6 @@ class SideBar extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (this.props.usercard != {}) {
-  //     this.setState({
-  //       links: this.props.usercard.links
-  //     });
-  //   }
-  // }
-
   saveCardChanges = () => {
     const data = {
       name: this.props.name,

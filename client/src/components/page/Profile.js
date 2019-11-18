@@ -37,11 +37,6 @@ const Profile = props => {
     console.log(userId);
     props.fetchUserCard(userId);
 
-    // if (this.props.usercard != {}) {
-    //   this.setState({
-    //     links: this.props.usercard.links
-    //   });
-    // }
   }, []);
 
   const classes = useStyles();
@@ -52,13 +47,6 @@ const Profile = props => {
     activeFontFamily: "Open Sans",
     cardColor: "#ff336f"
   });
-
-  // //component will mount fetch the usercard
-  // const componentDidMount = () => {
-  //   const userId = props.account.id;
-  //   console.log(userId);
-  //   props.fetchUserCard(userId);
-  // };
 
   // functions
   const drawerHandler = () => {

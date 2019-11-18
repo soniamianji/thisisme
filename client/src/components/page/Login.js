@@ -52,7 +52,7 @@ class Login extends Component {
     `;
 
     return (
-      <div>
+      <div style={{ textAlign: "center" }}>
         <Box style={{ width: 400 }} mx="auto" mt="44px">
           <Box style={{ padding: 11 }}>
             <Typography variant="h5" component="h6">
@@ -71,7 +71,7 @@ class Login extends Component {
                 accessType="offline"
                 render={renderProps => {
                   return (
-                    <StyledButton type="button" onClick={renderProps.onClick}>
+                    <StyledButton type="button" style={{ color: "white", backgroundColor: "red" }} onClick={renderProps.onClick}>
                       <i
                         className="fab fa-google"
                         style={{ paddingRight: 5 }}
@@ -90,7 +90,7 @@ class Login extends Component {
             </Box>
           </StyledPaper>
         </Box>
-      </div>
+      </div >
     );
   }
 }
