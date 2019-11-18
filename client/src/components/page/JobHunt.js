@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import JobHuntForm from '../child/JobHuntForm';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 
 
 class JobHunt extends Component {
@@ -26,13 +24,16 @@ class JobHunt extends Component {
                     {this.props.jobs &&
                         this.props.jobs.map((job, index) => (
                             <Grid item sm={12} key={index} style={{ marginBottom: "9px" }}>
-                                <Grid container onClick={this.goToJob(job.company_url)}>
-                                    <Grid item md={6}><h4>{job.title}</h4></Grid>
-                                    <Grid item md={6}><p> Date: {job.created_at}</p></Grid>
-                                    <Grid item md={6}><h6>{job.company}</h6></Grid>
-                                    <Grid item md={6}> <p>{job.location}</p></Grid>
-                                </Grid>
+                                <Paper style={{ backgroundColor: "#fafafa" }}>
+                                    <Grid container style={{ padding: "22px" }} onClick={this.goToJob(job.company_url)}>
 
+                                        <Grid item md={6}><h4 >{job.title}</h4></Grid>
+                                        <Grid item md={6} ><p style={{ textAlign: "right" }}> Date: {job.created_at}</p></Grid>
+                                        <Grid item md={6} ><p>{job.company}- {job.type}</p></Grid>
+                                        <Grid item md={6} ><p style={{ textAlign: "right" }}>{job.location}</p></Grid>
+
+                                    </Grid>
+                                </Paper>
                             </Grid>
                         ))}
                 </Grid>

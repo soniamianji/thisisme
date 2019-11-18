@@ -2,27 +2,44 @@ import {
   GOOGLE_AUTH_ASYNC,
   CARD_SEARCH_RESULTS_ASYNC,
   SEARCH_MSG,
-  JOB_SEARCH_RESULTS_ASYNC
+  JOB_SEARCH_RESULTS_ASYNC,
+  USER_CARD_ASYNC
 } from "./types";
 import { googleAuthentication } from "../SDK/googleSDK";
 import searchCards from "../SDK/searchCards";
+import { getUserCard } from "../SDK/userCards";
 import { githubBaseUrl, description, location } from "../constantNames/api"
 
-function googleAuthAsync(user) {
+function googleAuthAsync(account) {
   return {
     type: GOOGLE_AUTH_ASYNC,
-    user
+    account
   };
 }
 
 function googleLogin(authCode, cb) {
   return dispatch => {
-    googleAuthentication(authCode).then(body => {
+    googleAuthentication(authCode).then(account => {
       cb();
-      dispatch(googleAuthAsync(body))
+      dispatch(googleAuthAsync(account))
     }
     );
   };
+}
+
+function getUserCardAsync(user) {
+  return {
+    type: USER_CARD_ASYNC,
+    user
+  }
+}
+
+function fetchUserCard(id) {
+  return dispatch => {
+    getUserCard(id).then(user => {
+      dispatch(getUserCardAsync(user))
+    })
+  }
 }
 
 function cardSerachResultsAsync(cards) {
@@ -90,5 +107,7 @@ export {
   cardSearchResults,
   cardSerachResultsAsync,
   JobSearchResults,
-  JobSearchResultsAsync
+  JobSearchResultsAsync,
+  getUserCardAsync,
+  fetchUserCard
 };

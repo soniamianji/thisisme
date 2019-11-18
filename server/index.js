@@ -15,10 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 //enable cors
 app.use(cors({ exposedHeaders: ["Location"] }));
 
-app.get("/", (req, res) => {
-  res.status(200).json({ msg: "hello world" });
-});
-
 const cardRoute = require("./routes/cardRoute");
 app.use("/cardRoute", cardRoute);
 

@@ -39,56 +39,64 @@ router.post("/", (req, res) => {
             email: userData.data.email,
             occupation: "",
             googleId: userData.data.id,
-            contact: {
-              city: "",
-              country: "",
-              phoneNumber: ""
-            },
-            links: {
-              linkedIn: "",
-              github: ""
-            },
-            comment: "",
+            // contact: {
+            //   city: "",
+            //   country: "",
+            //   phoneNumber: ""
+            // },
+            // links: {
+            //   linkedIn: "",
+            //   github: ""
+            // },
+            // comment: "",
             img: userData.data.picture,
-            userStyle: {
-              last_modified: Math.round(new Date().getTime() / 1000)
-            }
+            // userStyle: {
+            //   last_modified: Math.round(new Date().getTime() / 1000)
+            // }
           };
           const newUserCard = new Card(userInfo);
           newUserCard.save(err => {
             if (err) {
               res.status(500).json(err);
             } else {
-              const access_token = jwt.sign(
-                { googleId: googleid },
-                secretTokenKey
-              );
-              const id_token = jwt.sign(
-                {
-                  id: userData.data.id,
-                  email: userData.data.email,
-                  name: userData.data.name,
-                  img: userData.data.picture,
-                  occupation: "",
-                  contact: {
-                    city: "",
-                    country: "",
-                    phoneNumber: ""
-                  },
-                  links: {
-                    linkedIn: "",
-                    github: ""
-                  },
-                  comment: "",
-                  userStyle: newUserCard.userStyle
-                },
-                secretTokenKey
-              );
-              res.status(201).json({
-                message: "Auth Success. user created",
-                id_token: id_token,
-                access_token: access_token
-              });
+              Card.findOne({ email: userData.data.email }, (err, newUser) => {
+                if (err) {
+                  console.log("new user id not found")
+                } else {
+                  console.log("new user found" + newUser.id);
+                  const access_token = jwt.sign(
+                    { id: newUser.id },
+                    secretTokenKey
+                  );
+                  const id_token = jwt.sign(
+                    {
+                      id: newUser.id,
+                      email: userData.data.email,
+                      name: userData.data.name
+                      // img: userData.data.picture,
+                      // occupation: "",
+                      // contact: {
+                      //   city: "",
+                      //   country: "",
+                      //   phoneNumber: ""
+                      // },
+                      // links: {
+                      //   linkedIn: "",
+                      //   github: ""
+                      // },
+                      // comment: "",
+                      // userStyle: newUserCard.userStyle
+                    },
+                    secretTokenKey
+                  );
+                  res.status(201).json({
+                    message: "Auth Success. user created",
+                    id_token: id_token,
+                    access_token: access_token
+                  });
+                }
+              })
+
             }
           });
         } else if (user) {
@@ -97,13 +105,13 @@ router.post("/", (req, res) => {
             {
               email: user.email,
               name: user.name,
-              img: user.img,
+              // img: user.img,
               id: user.id,
-              occupation: user.occupation,
-              contact: user.contact,
-              links: user.links,
-              comment: user.comment,
-              userStyle: user.userStyle
+              // occupation: user.occupation,
+              // contact: user.contact,
+              // links: user.links,
+              // comment: user.comment,
+              // userStyle: user.userStyle
             },
             secretTokenKey
           );

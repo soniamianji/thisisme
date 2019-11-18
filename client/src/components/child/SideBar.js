@@ -131,8 +131,8 @@ class SideBar extends Component {
               control={
                 <PhoneInput
                   defaultCountry={"us"}
-                  // value={this.state.phone}
-                  // onChange={handleOnChange}
+                // value={this.state.phone}
+                // onChange={handleOnChange}
                 />
               }
               label="Phone Number"
@@ -256,12 +256,12 @@ SideBar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  occupation: state.result.occupation,
-  id: state.result.id,
-  name: state.result.name,
-  email: state.result.email,
-  contact: state.result.contact,
-  links: state.result.links
+  occupation: state.usercard.occupation,
+  id: state.usercard.id,
+  name: state.usercard.name,
+  email: state.usercard.email,
+  contact: state.usercard.contact,
+  links: state.usercard.links
 });
 
 export default connect(mapStateToProps, null)(SideBar);

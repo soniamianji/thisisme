@@ -6,13 +6,8 @@ const account = {
   email: "",
   name: "",
   id: "",
-  img: "",
   accessToken: "",
-  userStyle: "",
-  comment: "",
-  occupation: "",
-  contact: "",
-  links: ""
+
 };
 
 
@@ -44,11 +39,6 @@ const googleAuthentication = async function (authCode) {
       account.email = decoded.email;
       account.name = decoded.name;
       account.id = decoded.id;
-      account.img = decoded.img;
-      account.userStyle = decoded.userStyle;
-      account.links = decoded.links;
-      account.contact = decoded.contact;
-      account.occupation = decoded.occupation;
       Auth.authenticateUser(JSON.stringify(account));
       break;
 
@@ -59,12 +49,6 @@ const googleAuthentication = async function (authCode) {
       account.email = decodedToken.email;
       account.name = decodedToken.name;
       account.id = decodedToken.id;
-      account.img = decodedToken.img;
-      account.userStyle = decodedToken.userStyle;
-      account.links = decodedToken.links;
-      account.contact = decodedToken.contact;
-      account.occupation = decodedToken.occupation;
-
       Auth.authenticateUser(JSON.stringify(account));
 
       break;

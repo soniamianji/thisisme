@@ -40,6 +40,14 @@ const Profile = props => {
     cardColor: "#ff336f"
   });
 
+  //component will mount fetch the usercard
+  const componentDidMount
+    = () => {
+      const userId = props.account.id
+      console.log(userId)
+      props.fetchUserCard(userId);
+    };
+
   // functions
   const drawerHandler = () => {
     setState({
@@ -83,7 +91,7 @@ const Profile = props => {
       >
         <Container>
           <Button onClick={drawerHandler}>Toggle Drawer</Button>
-          <UserCard cardColor={state.cardColor} card={props.result} />
+          <UserCard cardColor={state.cardColor} card={props.usercard} />
         </Container>
       </div>
     </div>
@@ -91,11 +99,13 @@ const Profile = props => {
 };
 
 UserCard.propTypes = {
-  result: PropTypes.object
+  usercard: PropTypes.object,
+  account: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  result: state.result
+  usercard: state.usercard,
+  account: state.account
 });
 
 export default connect(mapStateToProps, null)(Profile);

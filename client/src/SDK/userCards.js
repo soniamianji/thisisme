@@ -1,22 +1,22 @@
 const sendRequest = require("./sendRequests");
 
-//getAll cards
-module.exports.getAllCards = async function(callback) {
+//get user  cards
+module.exports.getUserCard = async function (id) {
   let response;
 
   try {
     response = await sendRequest.sendRequest("GET", "/cardRoute");
   } catch (errors) {
-    callback(errors);
+    console.log(errors)
     return;
   }
 
   let errors = [];
-  let cards = [];
+  let card = [];
 
   switch (response.status) {
     case 200:
-      cards = response.body;
+      card = response.json();
       break;
 
     case 500:
@@ -27,11 +27,11 @@ module.exports.getAllCards = async function(callback) {
       errors = ["unknown status code"];
   }
 
-  callback(errors, cards);
+  return card;
 };
 
 //createCards
-module.exports.createCard = async function(cardData, callback) {
+module.exports.createCard = async function (cardData, callback) {
   let response;
 
   try {
@@ -66,7 +66,7 @@ module.exports.createCard = async function(cardData, callback) {
 };
 
 //editCards
-module.exports.updateCard = async function(id, cardData, callback) {
+module.exports.updateCard = async function (id, cardData, callback) {
   let response;
 
   try {
@@ -102,7 +102,7 @@ module.exports.updateCard = async function(id, cardData, callback) {
 };
 
 //deleteCards
-module.exports.deleteCard = async function(id, callback) {
+module.exports.deleteCard = async function (id, callback) {
   let response;
 
   try {

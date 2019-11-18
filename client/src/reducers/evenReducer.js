@@ -2,12 +2,14 @@ import {
   GOOGLE_AUTH_ASYNC,
   CARD_SEARCH_RESULTS_ASYNC,
   SEARCH_MSG,
-  JOB_SEARCH_RESULTS_ASYNC
+  JOB_SEARCH_RESULTS_ASYNC,
+  USER_CARD_ASYNC
 } from "../actions/types";
 import Auth from "../modules/Auth";
 
 const initialState = {
-  result: {},
+  account: {},
+  usercard: {},
   cards: [],
   jobs: [],
   msg: {}
@@ -15,7 +17,7 @@ const initialState = {
 
 //check if the data exist in the LS
 if (Auth.isUserAuthenticated()) {
-  initialState.result = Auth.getToken();
+  initialState.account = Auth.getToken();
 }
 
 function rootReducer(state = initialState, action) {
@@ -25,7 +27,15 @@ function rootReducer(state = initialState, action) {
         ...state,
         cards: [],
         msg: {},
-        result: action.user
+        account: action.account
+      };
+
+    case USER_CARD_ASYNC:
+      return {
+        ...state,
+        cards: [],
+        msg: {},
+        usercard: action.user
       };
 
     case CARD_SEARCH_RESULTS_ASYNC:

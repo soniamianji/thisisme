@@ -40,18 +40,18 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    if (this.props.result !== null) {
+    if (this.props.account !== null) {
       this.setState({
-        name: this.props.result.name
+        name: this.props.account.name
       });
-      console.log(this.props.result.name);
+      console.log(this.props.account.name);
     }
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (previousProps.result !== this.props.result) {
+    if (previousProps.account !== this.props.account) {
       this.setState({
-        name: this.props.result.name
+        name: this.props.account.name
       });
     }
   }
@@ -113,11 +113,11 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
-  result: PropTypes.object,
+  account: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-  result: state.result
+  account: state.account
 });
 
 export default connect(mapStateToProps)(withRouter(NavBar));
