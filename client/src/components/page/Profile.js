@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import SideBar from "../child/SideBar";
 import { makeStyles } from "@material-ui/core/styles";
-import { fetchUserCard } from "../../actions/authActions"
+import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
@@ -43,12 +43,10 @@ const Profile = props => {
   useEffect(() => {
     const userId = props.account.id;
     console.log(userId);
-    props.fetchUserCard(userId)
+    props.fetchUserCard(userId);
   }, []);
 
   const classes = useStyles();
-
-
 
   // functions
   const drawerHandler = () => {
@@ -105,7 +103,7 @@ const Profile = props => {
 UserCard.propTypes = {
   usercard: PropTypes.object,
   account: PropTypes.object,
-  fetchUserCard: PropTypes.func.isRequired,
+  fetchUserCard: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

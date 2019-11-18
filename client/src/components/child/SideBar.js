@@ -13,8 +13,6 @@ import FontPicker from "font-picker-react";
 import { TwitterPicker } from "react-color";
 import styled from "styled-components";
 
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/dist/style.css";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -30,41 +28,69 @@ class SideBar extends Component {
 
     this.state = {
       occupation: "",
-      contact: {
-        city: "",
-        country: "",
-        phoneNumber: ""
-      },
-      links: {
-        github: "",
-        facebook: "",
-        linkedIn: "",
-        youtube: "",
-        instagram: "",
-        behance: "",
-        portfolioSite: ""
-      }
+      city: "",
+      country: "",
+      phoneNumber: "",
+      github: "",
+      facebook: "",
+      linkedIn: "",
+      youtube: "",
+      instagram: "",
+      behance: "",
+      twitter: "",
+      portfolioSite: ""
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.card)
-  }
-  componentDidUpdate(prevProps, prevState) {
+  changeFieldValue = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  componentDidUpdate(prevProps) {
     if (this.props.card != prevProps.card) {
       //set your state now!
-      console.log(this.props.card)
-
+      this.setState({
+        comment: this.props.card.comment,
+        occupation: this.props.card.occupation,
+        city: this.props.card.contact.city,
+        country: this.props.card.contact.country,
+        phoneNumber: this.props.card.contact.phoneNumber,
+        twitter: this.props.card.links.twitter,
+        github: this.props.card.links.github,
+        facebook: this.props.card.links.facebook,
+        linkedIn: this.props.card.links.linkedIn,
+        youtube: this.props.card.links.youtube,
+        instagram: this.props.card.links.instagram,
+        behance: this.props.card.links.behance,
+        portfolioSite: this.props.card.links.portfolioSite,
+        name: this.props.card.name,
+        email: this.props.card.email
+      });
     }
   }
   saveCardChanges = () => {
     const data = {
-      name: this.props.name,
-      email: this.props.email,
-      contact: this.state.contact,
+      name: this.state.name,
+      email: this.state.email,
+      contact: {
+        city: this.state.city,
+        country: this.state.country,
+        phoneNumber: this.state.phoneNumber
+      },
+      comment: this.state.comment,
       occupation: this.state.occupation,
-      links: this.state.links
+      links: {
+        github: this.state.github,
+        facebook: this.state.facebook,
+        linkedIn: this.state.linkedIn,
+        youtube: this.state.youtube,
+        twitter: this.state.twitter,
+        instagram: this.state.instagram,
+        behance: this.state.behance,
+        portfolioSite: this.state.portfolioSite
+      }
     };
+    console.log(data);
     updateCard(this.props.id, data, error => {
       console.log(error);
     });
@@ -114,123 +140,122 @@ class SideBar extends Component {
           </Box>
           <Box m={1}>
             <TextField
-              onChange={e => this.setState({ occupation: e.target.value })}
+              onChange={this.changeFieldValue}
+              name="occupation"
               fullWidth="true"
               label="Job Title"
               margin="normal"
-              value={this.props.occupation}
+              value={this.state.occupation}
             />
             <TextField
-              onChange={e =>
-                this.setState({ contact: { city: e.target.value } })
-              }
+              onChange={this.changeFieldValue}
+              name="city"
               fullWidth="true"
               label="City"
               margin="normal"
-              value={this.props.city}
+              value={this.state.city}
             />
             <TextField
-              onChange={e =>
-                this.setState({ contact: { country: e.target.value } })
-              }
+              onChange={this.changeFieldValue}
+              value={this.state.country}
+              name="country"
               fullWidth="true"
               label="Country"
               margin="normal"
             />
-            <FormControlLabel
-              control={
-                <PhoneInput
-                  defaultCountry={"us"}
-                // value={this.state.phone}
-                // onChange={handleOnChange}
-                />
-              }
+            <TextField
+              onChange={this.changeFieldValue}
+              value={this.state.phoneNumber}
+              name="phoneNumber"
+              fullWidth="true"
               label="Phone Number"
-              labelPlacement="Top"
+              margin="normal"
+            />
+
+            <TextField
+              fullWidth="true"
+              multiline={true}
+              rows={3}
+              name="comment"
+              value={this.state.comment}
+              onChange={this.changeFieldValue}
+              label="Description"
             />
           </Box>
           <Box m={1}>
             <form>
               <h3>Links</h3>
               <TextField
-                onChange={e =>
-                  this.setState({ links: { github: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="github"
                 fullWidth="true"
                 id="githubLink"
                 label="Github"
                 margin="normal"
-                value={this.state.githubLink}
+                value={this.state.github}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { linkedIn: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="linkedin"
                 id="linkedinLink"
                 label="LinkedIn"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.linkedIn}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { behance: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="behance"
                 id="behanceLink"
                 label="Behance"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.behance}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { facebook: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="facebook"
                 id="facebookLink"
                 label="Facebook"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.facebook}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { youtube: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
                 id="youtubeLink"
                 label="Youtube"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                name="youtube"
+                value={this.state.youtube}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { twitter: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="twitter"
                 id="addLinkTextField"
                 label="Twitter"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.twitter}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { instagram: e.target.value } })
-                }
+                onChange={this.changeFieldValue}
+                name="instagram"
                 id="instagramLink"
                 label="Instagram"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.instagram}
               />
               <TextField
                 fullWidth="true"
-                onChange={e =>
-                  this.setState({ links: { portfolioSite: e.target.value } })
-                }
+                name="portfolioSite"
+                onChange={this.changeFieldValue}
                 id="websiteLink"
                 label="Website"
                 margin="normal"
-                value={this.state.LinkToAdd}
+                value={this.state.portfolioSite}
               />
             </form>
           </Box>
@@ -255,7 +280,5 @@ class SideBar extends Component {
     );
   }
 }
-
-
 
 export default SideBar;

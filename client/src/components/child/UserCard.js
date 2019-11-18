@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
@@ -57,7 +57,6 @@ const UserCard = props => {
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
 
-
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
     TweenLite.set("#card", { transformStyle: "preserve-3d" });
@@ -76,6 +75,7 @@ const UserCard = props => {
   const flipBack = () => {
     tl.reverse();
   };
+
   return (
     <div className={classes.cardWrapper}>
       <div id="card" className={classes.card}>
@@ -122,11 +122,10 @@ const UserCard = props => {
                       <Typography className="apply-font" variant="h3">
                         {props.card.email}
                       </Typography>
-                      <Typography className="apply-font" variant="h3">
-                        {
-                          // props.card.contact.phoneNumber ? props.card.contact.phoneNumber : ""
-                        }
-                      </Typography>
+                      <Typography
+                        className="apply-font"
+                        variant="h3"
+                      ></Typography>
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
