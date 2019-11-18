@@ -4,12 +4,17 @@ import JobHuntForm from '../child/JobHuntForm';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
+import { clearSearchResult } from "../../actions/searchActions"
 
 
 class JobHunt extends Component {
     constructor(props) {
         super(props);
 
+    }
+
+    componentWillUnmount() {
+        this.props.clearSearchResult()
     }
 
     goToJob = (url) => {
@@ -50,7 +55,7 @@ const mapStateToProps = state => ({
     jobs: state.jobs,
     msg: state.msg
 });
-export default connect(mapStateToProps, null)(JobHunt);
+export default connect(mapStateToProps, { clearSearchResult })(JobHunt);
 
 
 

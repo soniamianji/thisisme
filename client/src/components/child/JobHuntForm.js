@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { JobSearchResults, searchMsg } from "../../actions/authActions";
+import { JobSearchResults, searchMsg } from "../../actions/searchActions";
 
 
 class JobHuntForm extends Component {
@@ -18,7 +18,6 @@ class JobHuntForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault();
-
         this.props.JobSearchResults(this.state.description, this.state.location);
         this.setState({
             description: '',

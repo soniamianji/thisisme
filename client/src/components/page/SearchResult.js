@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { cardSearchResults, searchMsg } from "../../actions/authActions";
 import Grid from "@material-ui/core/Grid";
 import SearchForm from "../child/SearchForm";
 import UserCard from "../child/UserCard";
 import Box from "@material-ui/core/Box";
+import { clearSearchResult } from "../../actions/searchActions"
 
 class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentWillUnmount() {
+    this.props.clearSearchResult();
   }
 
   render() {
@@ -45,4 +48,4 @@ const mapStateToProps = state => ({
   msg: state.msg
 });
 
-export default connect(mapStateToProps, null)(SearchResult);
+export default connect(mapStateToProps, { clearSearchResult })(SearchResult);

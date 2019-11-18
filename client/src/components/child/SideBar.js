@@ -47,9 +47,7 @@ class SideBar extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props.card)
-  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.card != prevProps.card) {
       //set your state now!

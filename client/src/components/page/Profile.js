@@ -104,8 +104,7 @@ const Profile = props => {
 
 UserCard.propTypes = {
   usercard: PropTypes.object,
-  account: PropTypes.object,
-  fetchUserCard: PropTypes.func.isRequired,
+  account: PropTypes.object
 };
 
 const mapStateToProps = state => ({
