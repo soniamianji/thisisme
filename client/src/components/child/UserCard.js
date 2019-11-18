@@ -10,6 +10,8 @@ import RoomIcon from "@material-ui/icons/Room";
 import TweenLite from "gsap/TweenLite";
 import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
 
 const UserCard = props => {
   const useStyles = makeStyles({
@@ -56,7 +58,7 @@ const UserCard = props => {
 
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
-
+  console.log(props.links);
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
     TweenLite.set("#card", { transformStyle: "preserve-3d" });
@@ -137,15 +139,22 @@ const UserCard = props => {
                 </Grid>
               </Grid>
               <Grid container spacing={2} direction="row">
-                <Grid item>
-                  <img src="https://via.placeholder.com/25" />
-                </Grid>
-                <Grid item>
-                  <img src="https://via.placeholder.com/25" />
-                </Grid>
-                <Grid item>
-                  <img src="https://via.placeholder.com/25" />
-                </Grid>
+                {props.links &&
+                  Object.keys(props.links).map((key, index) =>
+                    props.links[key] != "" ? (
+                      <Grid item key={index}>
+                        {key == "portfolioSite" ? (
+                          <a href={props.links[key]}>
+                            <i className={"far fa-2x fa-user-circle"} />
+                          </a>
+                        ) : (
+                          <a href={props.links[key]}>
+                            <i className={"fab fa-2x fa-" + key} />
+                          </a>
+                        )}
+                      </Grid>
+                    ) : null
+                  )}
               </Grid>
             </Grid>
           </Box>

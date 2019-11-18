@@ -56,12 +56,14 @@ class SideBar extends Component {
           facebook: this.props.links.facebook ? this.props.links.facebook : "",
           linkedIn: this.props.links.linkedIn ? this.props.links.linkedIn : "",
           youtube: this.props.links.youtube ? this.props.links.youtube : "",
-          instagram: this.props.links.instagram ? this.props.links.instagram : "",
+          instagram: this.props.links.instagram
+            ? this.props.links.instagram
+            : "",
           behance: this.props.links.behance ? this.props.links.behance : "",
           portfolioSite: this.props.links.portfolioSite
             ? this.props.card.portfolioSite
-            : "",
-        })
+            : ""
+        });
       }
       this.setState({
         comment: this.props.card.comment ? this.props.card.comment : "",
@@ -97,21 +99,19 @@ class SideBar extends Component {
         instagram: this.state.instagram,
         behance: this.state.behance,
         portfolioSite: this.state.portfolioSite
-
       }
     };
     const accountId = this.props.account;
 
-    //call action to update card 
-    console.log(accountId)
-    updateCard(accountId, data, (err) => {
+    //call action to update card
+    console.log(accountId);
+    updateCard(accountId, data, err => {
       if (err.length === 0) {
         console.log("done");
         this.props.drawerHandler();
         this.props.fetchUserCard(accountId);
-
       } else {
-        console.log(err)
+        console.log(err);
       }
     });
   };
@@ -165,6 +165,7 @@ class SideBar extends Component {
               fullWidth="true"
               label="Job Title"
               margin="normal"
+              required
               value={this.state.occupation}
             />
             <TextField
@@ -217,7 +218,7 @@ class SideBar extends Component {
               <TextField
                 fullWidth="true"
                 onChange={this.changeFieldValue}
-                name="linkedin"
+                name="linkedIn"
                 id="linkedinLink"
                 label="LinkedIn"
                 margin="normal"
