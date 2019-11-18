@@ -7,20 +7,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Grid, Box } from "@material-ui/core";
 import clsx from "clsx";
 
 const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: "#272727",
+    height: "100vh",
+    display: "flex",
+    alignItems: "center"
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: -drawerWidth
+    })
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -45,7 +50,6 @@ const Profile = props => {
     console.log(userId);
     props.fetchUserCard(userId);
   }, [props.account.id]);
-
 
   const classes = useStyles();
 
@@ -95,8 +99,14 @@ const Profile = props => {
         })}
       >
         <Container>
-          <Button onClick={drawerHandler}>Toggle Drawer</Button>
-          <UserCard cardColor={state.cardColor} links={props.links} card={props.usercard} />
+          <Box display="flex" flexDirection="row-reverse">
+            <Button onClick={drawerHandler}>Edit Card</Button>
+          </Box>
+          <UserCard
+            cardColor={state.cardColor}
+            links={props.links}
+            card={props.usercard}
+          />
         </Container>
       </div>
     </div>
