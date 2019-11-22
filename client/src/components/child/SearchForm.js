@@ -3,12 +3,13 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { cardSearchResults, searchMsg } from "../../actions/searchActions";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
+import { TimelineLite } from "gsap/all";
+import "gsap/CSSPlugin";
 
 
 const styles = theme => ({
@@ -32,10 +33,6 @@ const styles = theme => ({
       color: "white",
       backgroundColro: "transparent"
     },
-    // "& input:-internal-autofill-selected": {
-    //   color: "white !important",
-    //   backgroundColro: "black !important"
-    // },
   }
 })
 
@@ -53,11 +50,18 @@ class SearchForm extends Component {
   };
   submitHandler = e => {
     e.preventDefault();
+
+
+
+    var tl = new TimelineLite({ paused: true });
+    tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
+
+
     this.props.cardSearchResults(
       this.state.searchWords
     );
     this.setState({
-      name: "",
+      searchWords: ""
 
     });
   };
@@ -65,9 +69,9 @@ class SearchForm extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <h1 style={{ textAlign: "center", color: "white" }}>SearchResult</h1>
-        <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }} >
+      <div style={{ marginTop: "10%" }} id="formAnimation">
+        <h1 style={{ textAlign: "center", color: "white" }}>Find peeps!</h1>
+        <div style={{ width: "50%", marginRight: "auto", marginLeft: "auto" }} >
           <form onSubmit={this.submitHandler} >
             <Grid container spacing={2} >
               <Grid item xs={12}>

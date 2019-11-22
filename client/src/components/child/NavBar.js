@@ -14,6 +14,7 @@ import { Typography } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
 import { Link } from "react-router-dom";
 import { clearUser } from "../../actions/authActions"
+import styled from "styled-components";
 
 
 class NavBar extends Component {
@@ -45,7 +46,6 @@ class NavBar extends Component {
       this.setState({
         name: this.props.account.name
       });
-      console.log(this.props.account.name);
     }
   }
 
@@ -69,9 +69,14 @@ class NavBar extends Component {
     }
   };
   render() {
+    const StyledButton = styled(Button)`
+    color: white;
+    text-transform: none;
+    padding: 11px;
+  `;
     return (
       <div style={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" style={{ backgroundColor: "#272727" }} elevation="0" >
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleClick}>
               <MenuIcon />
@@ -88,7 +93,7 @@ class NavBar extends Component {
             </Menu>
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (
-              <Button color="inherit">{this.state.name}</Button>
+              <Button color="inherit" ><Link to="/profile" style={{ textDecoration: "none", color: "white" }}>{this.state.name}</Link></Button>
             ) : (
                 ""
               )}
@@ -97,6 +102,17 @@ class NavBar extends Component {
                 clientId="706070333351-ivp0aq5jte2mc2gkre5pkllfikanq8nv.apps.googleusercontent.com"
                 buttonText="Logout"
                 onLogoutSuccess={this.loginLogoutHandler}
+                render={renderProps => {
+                  return (
+                    <StyledButton type="button" style={{ color: "white" }} onClick={renderProps.onClick}>
+                      <i
+                        className="fab fa-google"
+                        style={{ paddingRight: 5 }}
+                      ></i>
+                      <span> | Logout</span>
+                    </StyledButton>
+                  );
+                }}
               />
             ) : (
                 <Button

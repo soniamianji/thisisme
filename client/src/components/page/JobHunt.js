@@ -5,11 +5,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import { clearSearchResult } from "../../actions/searchActions"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 class JobHunt extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isLoading: false
+        }
 
     }
 
@@ -17,6 +21,22 @@ class JobHunt extends Component {
         this.props.clearSearchResult()
     }
 
+    loading = (bool) => {
+        if (bool) {
+            this.setState({
+                isLoading: true
+            })
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.jobs !== prevProps.jobs) {
+            this.setState({
+                isLoading: false
+            })
+        }
+
+    }
     goToJob = (url) => {
         console.log(url)
     }
@@ -24,8 +44,8 @@ class JobHunt extends Component {
     render() {
         return (
             <div>
-                <JobHuntForm />
-                <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
+                <JobHuntForm loading={this.loading} />
+                {this.state.isLoading ? (<div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress color="orange" size={80} /></div>) : (<Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
                     {this.props.jobs &&
                         this.props.jobs.map((job, index) => (
                             <Grid item sm={12} key={index} style={{ marginBottom: "9px" }}>
@@ -41,6 +61,7 @@ class JobHunt extends Component {
                             </Grid>
                         ))}
                 </Grid>
+                )}
 
             </div>
         )

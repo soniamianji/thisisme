@@ -1,11 +1,44 @@
 import React, { Component } from 'react'
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { JobSearchResults, searchMsg } from "../../actions/searchActions";
+import { withStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
+import { TimelineLite } from "gsap/all";
+import "gsap/CSSPlugin";
 
+const styles = theme => ({
+    root: {
+        "& label.Mui-focused": {
+            color: "white"
+        },
+        "& label": {
+            color: "white"
+        },
+        "& input:-internal-autofill-selected": {
+            color: "white",
+            backgroundColor: "black"
+        },
+
+        "& .MuiInput-underline:after": {
+            borderBottomColor: "white"
+        },
+        "& .MuiInput-underline:before": {
+            borderBottomColor: "white"
+        },
+        "& .MuiInput-underline:hover": {
+            borderBottomColor: "orange"
+        },
+        "& .MuiInput-input": {
+            color: "white",
+            backgroundColro: "transparent"
+        },
+    }
+})
 
 class JobHuntForm extends Component {
     constructor(props) {
@@ -18,10 +51,16 @@ class JobHuntForm extends Component {
 
     submitHandler = (e) => {
         e.preventDefault();
+        let isLoading = true;
+        this.props.loading(isLoading);
+        var tl = new TimelineLite({ paused: true });
+        tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
+
         this.props.JobSearchResults(this.state.description, this.state.location);
         this.setState({
             description: '',
             location: ''
+
         })
     }
 
@@ -32,12 +71,11 @@ class JobHuntForm extends Component {
 
     render() {
         return (
-            <div>
-                <h4 style={{ textAlign: "center" }}>On a job hunt? </h4>
-                <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }}>
+            <div style={{ marginTop: "10%" }} id="formAnimation">
+                <h2 style={{ textAlign: "center", color: "white" }}>On a job hunt? Check out Github jobs!</h2>
+                <div style={{ width: "50%", marginRight: "auto", marginLeft: "auto" }}>
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
-
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     name="description"
@@ -45,7 +83,7 @@ class JobHuntForm extends Component {
                                     fullWidth
                                     value={this.state.description}
                                     onChange={this.changeHandler}
-
+                                    classes={this.props.classes}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -57,19 +95,20 @@ class JobHuntForm extends Component {
                                     fullWidth
                                     value={this.state.location}
                                     onChange={this.changeHandler}
+                                    classes={this.props.classes}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment>
+                                                <IconButton type="submit">
+                                                    <SearchIcon style={{ color: "white" }} fontSize="large" />
+                                                </IconButton>
+                                            </InputAdornment>
+                                        )
+                                    }}
                                 />
                             </Grid>
                         </Grid>
-                        <Button
-                            style={{ marginTop: 22 }}
-                            type="submit"
-                            fullWidth
-                            size="large"
-                            variant="contained"
-                            color="secondary"
-                        >
-                            Search
-                    </Button>
+
                         <Grid container justify="flex-end" />{" "}
                     </form>
                 </div>
@@ -81,6 +120,8 @@ class JobHuntForm extends Component {
 
 JobHuntForm.propTypes = {
     JobSearchResults: PropTypes.func.isRequired,
-    searchMsg: PropTypes.func.isRequired
+    searchMsg: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
+
 };
-export default connect(null, { searchMsg, JobSearchResults })(JobHuntForm);
+export default connect(null, { searchMsg, JobSearchResults })(withStyles(styles)(JobHuntForm));

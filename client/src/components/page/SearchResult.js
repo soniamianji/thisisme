@@ -17,6 +17,7 @@ class SearchResult extends Component {
     this.props.clearSearchResult();
   }
 
+
   render() {
     return (
       <Box>
