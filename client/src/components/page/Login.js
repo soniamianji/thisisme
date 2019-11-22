@@ -90,7 +90,7 @@ class Login extends Component {
             </Box>
           </StyledPaper>
         </Box>
-      </div >
+      </div>
     );
   }
 }

@@ -41,8 +41,6 @@ const styles = theme => ({
             color: "white !important",
             backgroundColor: "transparent !important"
         },
-
-
     },
     divWidth: {
         [theme.breakpoints.down('sm')]: {
@@ -58,7 +56,6 @@ const styles = theme => ({
             margin: "0 auto"
         },
     }
-
 })
 
 class JobHuntForm extends Component {
@@ -69,30 +66,24 @@ class JobHuntForm extends Component {
             location: ""
         }
     }
-
     submitHandler = (e) => {
         e.preventDefault();
         let isLoading = true;
         this.props.loading(isLoading);
         var tl = new TimelineLite({ paused: true });
         tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
-
         this.props.JobSearchResults(this.state.description, this.state.location);
         this.setState({
             description: '',
             location: ''
-
         })
     }
 
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value });
-
     }
-
     render() {
         const { classes } = this.props;
-
         return (
             <div style={{ marginTop: "10%" }} id="formAnimation">
                 <h1 style={{ textAlign: "center", color: "white" }}>Find Jobs!</h1>
@@ -131,11 +122,9 @@ class JobHuntForm extends Component {
                                 />
                             </Grid>
                         </Grid>
-
                         <Grid container justify="flex-end" />{" "}
                     </form>
                 </div>
-
             </div>
         )
     }

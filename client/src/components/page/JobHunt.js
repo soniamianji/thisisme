@@ -11,7 +11,6 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
     root: {
-
         [theme.breakpoints.down('sm')]: {
             width: "100%",
             margin: "0 auto"
@@ -33,7 +32,6 @@ class JobHunt extends Component {
         this.state = {
             isLoading: false
         }
-
     }
 
     componentWillUnmount() {
@@ -61,7 +59,6 @@ class JobHunt extends Component {
 
     render() {
         const { classes } = this.props;
-
         return (
             <div >
                 <JobHuntForm loading={this.loading} />
@@ -78,12 +75,10 @@ class JobHunt extends Component {
                                             <Grid item md={6} ><p style={{ textAlign: "right" }}>{job.location}</p></Grid>
                                         </Grid>
                                     </Paper></Box>
-
                             </Grid>
                         ))}
                 </Grid>
                 )}
-
             </div>
         )
     }

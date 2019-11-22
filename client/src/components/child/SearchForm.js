@@ -56,7 +56,6 @@ class SearchForm extends Component {
     this.state = {
       searchWords: "",
       _errors: "",
-
     };
   }
   changeHandler = e => {
@@ -64,24 +63,17 @@ class SearchForm extends Component {
   };
   submitHandler = e => {
     e.preventDefault();
-
-
-
     var tl = new TimelineLite({ paused: true });
-    tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
-
-
+    tl.to("#formAnimation", 0.5, { marginTop: 0 }).play();
     this.props.cardSearchResults(
       this.state.searchWords
     );
     this.setState({
       searchWords: ""
-
     });
   };
   render() {
     const { classes } = this.props;
-
     return (
       <div style={{ marginTop: "10%" }} id="formAnimation">
         <h1 style={{ textAlign: "center", color: "white" }}>Find peeps!</h1>
@@ -108,10 +100,8 @@ class SearchForm extends Component {
                   }}
                 >
                 </TextField>
-
               </Grid>
             </Grid>
-
             <Grid container justify="flex-end" />{" "}
           </form>
         </div>

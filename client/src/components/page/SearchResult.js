@@ -17,7 +17,6 @@ class SearchResult extends Component {
     this.props.clearSearchResult();
   }
 
-
   render() {
     return (
       <Box>
@@ -33,7 +32,6 @@ class SearchResult extends Component {
               </Grid>
             ))}
         </Grid>
-
         <h3 style={{ textAlign: "center", color: "white" }}>{this.props.msg && this.props.msg.msg}</h3>
       </Box>
     );
