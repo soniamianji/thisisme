@@ -24,10 +24,10 @@ class SearchResult extends Component {
         <Box width="100" style={{ marginRight: "auto", marginLeft: "auto" }}>
           <SearchForm />
         </Box>
-        <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%" }}>
+        <Grid container style={{ margin: "22px auto", width: "75%" }}>
           {this.props.cards &&
             this.props.cards.map((card, index) => (
-              <Grid item sm={12} lg={6} key={index} style={{ marginBottom: "9px" }}>
+              <Grid item sm={12} lg={6} key={index} style={{ margin: "22px auto" }}>
                 <UserCard card={card} links={card.links}
                 />
               </Grid>

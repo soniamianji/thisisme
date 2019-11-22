@@ -19,10 +19,10 @@ const styles = theme => ({
         "& label": {
             color: "white"
         },
-        "& input:-internal-autofill-selected": {
-            color: "white",
-            backgroundColor: "black"
-        },
+        // "& input:-internal-autofill-selected": {
+        //     color: "blue !important",
+        //     backgroundColor: "red !important"
+        // },
 
         "& .MuiInput-underline:after": {
             borderBottomColor: "white"
@@ -33,11 +33,32 @@ const styles = theme => ({
         "& .MuiInput-underline:hover": {
             borderBottomColor: "orange"
         },
-        "& .MuiInput-input": {
-            color: "white",
-            backgroundColro: "transparent"
+        "& input.MuiInputBase-input.MuiInput-input": {
+            color: "white !important",
+            backgroundColor: "transparent !important"
+        },
+        "& input.MuiInputBase-input.MuiInput-input:-webkit-autofill": {
+            color: "white !important",
+            backgroundColor: "transparent !important"
+        },
+
+
+    },
+    divWidth: {
+        [theme.breakpoints.down('sm')]: {
+            width: "80%",
+            margin: "0 auto"
+        },
+        [theme.breakpoints.up('md')]: {
+            width: "60%",
+            margin: "0 auto"
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: "50%",
+            margin: "0 auto"
         },
     }
+
 })
 
 class JobHuntForm extends Component {
@@ -70,10 +91,12 @@ class JobHuntForm extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <div style={{ marginTop: "10%" }} id="formAnimation">
-                <h2 style={{ textAlign: "center", color: "white" }}>On a job hunt? Check out Github jobs!</h2>
-                <div style={{ width: "50%", marginRight: "auto", marginLeft: "auto" }}>
+                <h1 style={{ textAlign: "center", color: "white" }}>Find Jobs!</h1>
+                <div className={classes.divWidth} style={{ margin: "0 auto" }}>
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -90,7 +113,7 @@ class JobHuntForm extends Component {
                                 <TextField
                                     color="secondary"
                                     name="location"
-                                    label="location"
+                                    label="Location"
                                     id="location"
                                     fullWidth
                                     value={this.state.location}
