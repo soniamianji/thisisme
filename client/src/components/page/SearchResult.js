@@ -27,12 +27,13 @@ class SearchResult extends Component {
           {this.props.cards &&
             this.props.cards.map((card, index) => (
               <Grid item sm={12} lg={6} key={index} style={{ marginBottom: "9px" }}>
-                <UserCard card={card} />
+                <UserCard card={card} links={card.links}
+                />
               </Grid>
             ))}
         </Grid>
 
-        <h6>{this.props.msg && this.props.msg.msg}</h6>
+        <h3 style={{ textAlign: "center", color: "white" }}>{this.props.msg && this.props.msg.msg}</h3>
       </Box>
     );
   }

@@ -90,7 +90,7 @@ router.put("/:id", (req, res) => {
       errors: validationResult.errors
     });
   } else {
-    Cards.findOneAndUpdate(cardId, req.body, err => {
+    Cards.findOneAndUpdate({ _id: cardId }, req.body, err => {
       if (err) {
         return res.status(400).json({ errors: "id not found." });
       } else {

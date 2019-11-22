@@ -35,14 +35,13 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
+        <div className="App" >
           <ThemeProvider theme={theme}>
             <NavBar />
             <GlobalRoute exact path="/" component={SearchResult} />
             <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/jobhunt" component={JobHunt} />
-
           </ThemeProvider>
         </div>
       </Router>
