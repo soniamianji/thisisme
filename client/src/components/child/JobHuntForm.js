@@ -37,10 +37,11 @@ const styles = theme => ({
             color: "white !important",
             backgroundColor: "transparent !important"
         },
-        "& input.MuiInputBase-input.MuiInput-input:-webkit-autofill": {
+        "& input.MuiInputBase-input.MuiInput-input:-webkitAutofill": {
             color: "white !important",
-            backgroundColor: "transparent !important"
+            backgroundColor: "blue !important"
         },
+
     },
     divWidth: {
         [theme.breakpoints.down('sm')]: {
