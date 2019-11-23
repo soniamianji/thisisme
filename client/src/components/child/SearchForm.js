@@ -26,9 +26,6 @@ const styles = theme => ({
     "& .MuiInput-underline:before": {
       borderBottomColor: "white"
     },
-    "& .MuiInput-underline:hover": {
-      borderBottomColor: "orange"
-    },
     "& .MuiInput-input": {
       color: "white",
       backgroundColro: "transparent"
@@ -55,7 +52,6 @@ class SearchForm extends Component {
     super(props);
     this.state = {
       searchWords: "",
-      _errors: "",
     };
   }
   changeHandler = e => {
@@ -83,6 +79,7 @@ class SearchForm extends Component {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
+                  autoComplete="off"
                   autoFocus
                   name="searchWords"
                   label="Seacrh by Name Title or Location"

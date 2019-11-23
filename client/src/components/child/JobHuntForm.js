@@ -19,10 +19,6 @@ const styles = theme => ({
         "& label": {
             color: "white"
         },
-        // "& input:-internal-autofill-selected": {
-        //     color: "blue !important",
-        //     backgroundColor: "red !important"
-        // },
 
         "& .MuiInput-underline:after": {
             borderBottomColor: "white"
@@ -30,16 +26,9 @@ const styles = theme => ({
         "& .MuiInput-underline:before": {
             borderBottomColor: "white"
         },
-        "& .MuiInput-underline:hover": {
-            borderBottomColor: "orange"
-        },
-        "& input.MuiInputBase-input.MuiInput-input": {
-            color: "white !important",
-            backgroundColor: "transparent !important"
-        },
-        "& input.MuiInputBase-input.MuiInput-input:-webkitAutofill": {
-            color: "white !important",
-            backgroundColor: "blue !important"
+        "& .MuiInput-input": {
+            color: "white",
+            backgroundColro: "transparent"
         },
 
     },
@@ -99,6 +88,7 @@ class JobHuntForm extends Component {
                                     value={this.state.description}
                                     onChange={this.changeHandler}
                                     classes={this.props.classes}
+                                    autoComplete="off"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -108,6 +98,7 @@ class JobHuntForm extends Component {
                                     label="Location"
                                     id="location"
                                     fullWidth
+                                    autoComplete="off"
                                     value={this.state.location}
                                     onChange={this.changeHandler}
                                     classes={this.props.classes}
