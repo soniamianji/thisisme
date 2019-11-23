@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import UserCardMobile from "../child/UserCardMobile";
 import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,18 +11,22 @@ import { connect } from "react-redux";
 import { Button, Grid, Box } from "@material-ui/core";
 import clsx from "clsx";
 import CardJobs from "../child/CardJobs";
-import { JobSearchResults, searchMsg, clearSearchResult } from "../../actions/searchActions";
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import {
+  JobSearchResults,
+  searchMsg,
+  clearSearchResult
+} from "../../actions/searchActions";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Media from "react-media";
 
 const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: "#272727",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center"
+    // backgroundColor: "#272727",
+    // height: "100vh",
+    // display: "flex",
+    // alignItems: "center"
   },
   content: {
     flexGrow: 1,
@@ -55,7 +60,9 @@ const Profile = props => {
     if (props.usercard.occupation != undefined) {
       props.JobSearchResults(props.usercard.occupation, props.usercard.country);
     }
-    return () => { props.clearSearchResult() }
+    return () => {
+      props.clearSearchResult();
+    };
   }, [props.account.id, props.usercard.occupation, props.usercard.country]);
 
   const classes = useStyles();
@@ -109,18 +116,47 @@ const Profile = props => {
           <Box display="flex" flexDirection="row-reverse">
             <Button onClick={drawerHandler}>Edit Card</Button>
           </Box>
-          <UserCard
-            cardColor={state.cardColor}
-            links={props.links}
-            card={props.usercard}
-          />
-          <Box style={{ marginTop: "44px" }}>
-            {props.jobs != "" ? (props.jobs.map((job, index) => (<div key={index}><CardJobs jobs={job} /></div>))) : <div style={{ textAlign: "center" }}><CircularProgress style={{ color: "white" }} size={40} /></div>}
-          </Box>
+          <Media
+            queries={{
+              small: "(max-width: 600px)",
+              medium: "(min-width: 600px)"
+            }}
+          >
+            {matches => (
+              <div>
+                {matches.small && (
+                  <UserCardMobile
+                    cardColor={state.cardColor}
+                    links={props.links}
+                    card={props.usercard}
+                  />
+                )}
+                {matches.medium && (
+                  <UserCard
+                    cardColor={state.cardColor}
+                    links={props.links}
+                    card={props.usercard}
+                  />
+                )}
+              </div>
+            )}
+          </Media>
 
+          <Box style={{ marginTop: "44px" }}>
+            {props.jobs != "" ? (
+              props.jobs.map((job, index) => (
+                <div key={index}>
+                  <CardJobs jobs={job} />
+                </div>
+              ))
+            ) : (
+              <div style={{ textAlign: "center" }}>
+                <CircularProgress style={{ color: "white" }} size={40} />
+              </div>
+            )}
+          </Box>
         </Container>
       </div>
-
     </div>
   );
 };
@@ -139,4 +175,9 @@ const mapStateToProps = state => ({
   msg: state.msg
 });
 
-export default connect(mapStateToProps, { fetchUserCard, JobSearchResults, searchMsg, clearSearchResult })(Profile);
+export default connect(mapStateToProps, {
+  fetchUserCard,
+  JobSearchResults,
+  searchMsg,
+  clearSearchResult
+})(Profile);
