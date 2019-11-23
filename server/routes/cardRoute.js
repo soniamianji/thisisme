@@ -3,6 +3,18 @@ const router = new express.Router();
 const Cards = require("mongoose").model("Card");
 const validator = require("validator");
 
+
+//validate the url
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+  return !!pattern.test(str);
+}
+
 // validate request
 function validateUserCard(payload) {
   const errors = {};
@@ -20,21 +32,28 @@ function validateUserCard(payload) {
 
   if (
     !payload ||
-    typeof payload.occupation !== "string" ||
-    payload.occupation.trim().length === 0
+    typeof payload.occupation !== "string"
   ) {
     isFormValid = false;
-    errors.occupation = "Please provide your occupation.";
+    errors.occupation = "Please provide a valid occupation.";
   }
 
   if (
     !payload ||
-    typeof payload.email !== "string" ||
-    !validator.isEmail(payload.email)
+    typeof payload.city !== "string"
   ) {
     isFormValid = false;
-    errors.email = "Please provide a correct email address.";
+    errors.city = "Please enter a valid city.";
   }
+
+  if (
+    !payload ||
+    typeof payload.country !== "string"
+  ) {
+    isFormValid = false;
+    errors.country = "Please enter a valid country.";
+  }
+
   if (!isFormValid) {
     message = "Check the form for errors.";
   }

@@ -19,7 +19,7 @@ const drawerWidth = 400;
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: "#272727",
-    height: "100vh",
+    // height: "100vh",
     display: "flex",
     alignItems: "center"
   },

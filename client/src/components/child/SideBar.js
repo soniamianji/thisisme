@@ -5,6 +5,7 @@ import {
   Box,
   Typography,
   FormControlLabel,
+  Input,
   Button,
   TextField
 } from "@material-ui/core";
@@ -37,7 +38,8 @@ class SideBar extends Component {
       instagram: "",
       behance: "",
       twitter: "",
-      portfolioSite: ""
+      portfolioSite: "",
+      _errors: ""
     };
   }
 
@@ -80,41 +82,47 @@ class SideBar extends Component {
     }
   }
 
-  saveCardChanges = () => {
-    const data = {
-      name: this.state.name,
-      email: this.state.email,
-      city: this.state.city,
-      country: this.state.country,
-      phoneNumber: this.state.phoneNumber,
-      comment: this.state.comment,
-      occupation: this.state.occupation,
-      links: {
-        github: this.state.github,
-        facebook: this.state.facebook,
-        linkedin: this.state.linkedin,
-        youtube: this.state.youtube,
-        twitter: this.state.twitter,
-        instagram: this.state.instagram,
-        behance: this.state.behance,
-        portfolioSite: this.state.portfolioSite
-      },
-      fontFamily: this.props.activeFontFamily,
-      color: this.props.cardColor
-    };
-    const accountId = this.props.account;
+  saveCardChanges = (e) => {
+    e.preventDefault();
+    // if (!this.state.linkedin) {
+    //   this.setState({ _errors: "This field does not have a valid url." });
+    // } else {
+    //   const data = {
+    //     name: this.state.name,
+    //     email: this.state.email,
+    //     city: this.state.city,
+    //     country: this.state.country,
+    //     phoneNumber: this.state.phoneNumber,
+    //     comment: this.state.comment,
+    //     occupation: this.state.occupation,
+    //     links: {
+    //       github: this.state.github,
+    //       facebook: this.state.facebook,
+    //       linkedin: this.state.linkedin,
+    //       youtube: this.state.youtube,
+    //       twitter: this.state.twitter,
+    //       instagram: this.state.instagram,
+    //       behance: this.state.behance,
+    //       portfolioSite: this.state.portfolioSite
+    //     },
+    //     fontFamily: this.props.activeFontFamily,
+    //     color: this.props.cardColor
+    //   };
+    //   const accountId = this.props.account;
 
-    //call action to update card
-    console.log(accountId);
-    updateCard(accountId, data, err => {
-      if (err.length === 0) {
-        console.log("done");
-        this.props.drawerHandler();
-        this.props.fetchUserCard(accountId);
-      } else {
-        console.log(err);
-      }
-    });
+    //   //call action to update card
+    //   console.log(accountId);
+    //   updateCard(accountId, data, err => {
+    //     if (err.length === 0) {
+    //       console.log("done");
+    //       this.props.drawerHandler();
+    //       this.props.fetchUserCard(accountId);
+    //     } else {
+    //       console.log(err);
+    //     }
+    //   });
+
+    // }
   };
 
   render() {
@@ -139,73 +147,75 @@ class SideBar extends Component {
               </Typography>
             </Box>
           </Grid>
+          <form onSubmit={this.saveCardChanges}>
+            <Box m={1} textAlign="left">
 
-          <Box m={1} textAlign="left">
-            <label>Font</label>
-            <FontPicker
-              apiKey="AIzaSyD4-cMeFhw8_m93qT0Bd1xIY128Mj8P_Zc"
-              activeFontFamily={this.props.activeFontFamily}
-              onChange={nextFont => this.props.changeActiveFont(nextFont)}
-            />
-          </Box>
-
-          <Box m={1} textAlign="left">
-            <label>Card Color</label>
-            <Box mt={1}>
-              <TwitterPicker
-                triangle="hide"
-                width="100%"
-                onChangeComplete={color => this.props.changeCardColor(color)}
+              <label>Font</label>
+              <FontPicker
+                apiKey="AIzaSyD4-cMeFhw8_m93qT0Bd1xIY128Mj8P_Zc"
+                activeFontFamily={this.props.activeFontFamily}
+                onChange={nextFont => this.props.changeActiveFont(nextFont)}
               />
             </Box>
-          </Box>
-          <Box m={1}>
-            <TextField
-              onChange={this.changeFieldValue}
-              name="occupation"
-              fullWidth="true"
-              label="Job Title"
-              margin="normal"
-              required
-              value={this.state.occupation}
-            />
-            <TextField
-              onChange={this.changeFieldValue}
-              name="city"
-              fullWidth="true"
-              label="City"
-              margin="normal"
-              value={this.state.city}
-            />
-            <TextField
-              onChange={this.changeFieldValue}
-              value={this.state.country}
-              name="country"
-              fullWidth="true"
-              label="Country"
-              margin="normal"
-            />
-            <TextField
-              onChange={this.changeFieldValue}
-              value={this.state.phoneNumber}
-              name="phoneNumber"
-              fullWidth="true"
-              label="Phone Number"
-              margin="normal"
-            />
 
-            <TextField
-              fullWidth="true"
-              multiline={true}
-              rows={3}
-              name="comment"
-              value={this.state.comment}
-              onChange={this.changeFieldValue}
-              label="Description"
-            />
-          </Box>
-          <Box m={1}>
-            <form>
+            <Box m={1} textAlign="left">
+              <label>Card Color</label>
+              <Box mt={1}>
+                <TwitterPicker
+                  triangle="hide"
+                  width="100%"
+                  onChangeComplete={color => this.props.changeCardColor(color)}
+                />
+              </Box>
+            </Box>
+            <Box m={1}>
+              <TextField
+                onChange={this.changeFieldValue}
+                name="occupation"
+                fullWidth="true"
+                label="Job Title"
+                margin="normal"
+                required
+                value={this.state.occupation}
+
+              />
+              <TextField
+                onChange={this.changeFieldValue}
+                name="city"
+                fullWidth="true"
+                label="City"
+                margin="normal"
+                value={this.state.city}
+              />
+              <TextField
+                onChange={this.changeFieldValue}
+                value={this.state.country}
+                name="country"
+                fullWidth="true"
+                label="Country"
+                margin="normal"
+              />
+              <TextField
+                onChange={this.changeFieldValue}
+                value={this.state.phoneNumber}
+                name="phoneNumber"
+                fullWidth="true"
+                label="Phone Number"
+                margin="normal"
+              />
+
+              <TextField
+                fullWidth="true"
+                multiline={true}
+                rows={3}
+                name="comment"
+                value={this.state.comment}
+                onChange={this.changeFieldValue}
+                label="Description"
+              />
+            </Box>
+            <Box m={1}>
+
               <h3>Links</h3>
               <TextField
                 onChange={this.changeFieldValue}
@@ -215,6 +225,12 @@ class SideBar extends Component {
                 label="Github"
                 margin="normal"
                 value={this.state.github}
+                placeholder="https://github.com/"
+                inputProps={{
+                  pattern: "https://github.com.*"
+                }}
+              // error={this.state._errors !== ""}
+              // helperText={this.state._errors === "" ? "" : this.state._errors}
               />
               <TextField
                 fullWidth="true"
@@ -224,6 +240,10 @@ class SideBar extends Component {
                 label="LinkedIn"
                 margin="normal"
                 value={this.state.linkedin}
+                placeholder="https://linkedin.com/"
+                inputProps={{
+                  pattern: "https://linkedin.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -233,6 +253,10 @@ class SideBar extends Component {
                 label="Behance"
                 margin="normal"
                 value={this.state.behance}
+                placeholder="https://behance.com/"
+                inputProps={{
+                  pattern: "https://behance.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -242,6 +266,10 @@ class SideBar extends Component {
                 label="Facebook"
                 margin="normal"
                 value={this.state.facebook}
+                placeholder="https://facebook.com/"
+                inputProps={{
+                  pattern: "https://facebook.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -251,6 +279,10 @@ class SideBar extends Component {
                 margin="normal"
                 name="youtube"
                 value={this.state.youtube}
+                placeholder="https://youtube.com/"
+                inputProps={{
+                  pattern: "https://youtube.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -260,6 +292,10 @@ class SideBar extends Component {
                 label="Twitter"
                 margin="normal"
                 value={this.state.twitter}
+                placeholder="https://twitter.com/"
+                inputProps={{
+                  pattern: "https://twitter.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -269,6 +305,10 @@ class SideBar extends Component {
                 label="Instagram"
                 margin="normal"
                 value={this.state.instagram}
+                placeholder="https://instagram.com/"
+                inputProps={{
+                  pattern: "https://instagram.com.*"
+                }}
               />
               <TextField
                 fullWidth="true"
@@ -278,27 +318,28 @@ class SideBar extends Component {
                 label="Website"
                 margin="normal"
                 value={this.state.portfolioSite}
+                placeholder="https://example.com/"
+                inputProps={{
+                  pattern: "https://.*"
+                }}
               />
-            </form>
-          </Box>
-          <Grid item alignContent="space-between">
-            <Box>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.saveCardChanges}
-              >
-                Save Changes
-              </Button>
-              <Button
-                onClick={this.props.drawerHandler}
-                variant="contained"
-                color="secondary"
-              >
-                Close
-              </Button>
+
             </Box>
-          </Grid>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Save Changes
+              </Button>
+            <Button
+              onClick={this.props.drawerHandler}
+              variant="contained"
+              color="secondary"
+            >
+              Close
+              </Button>
+          </form>
         </Grid>
       </StyledDrawer>
     );
