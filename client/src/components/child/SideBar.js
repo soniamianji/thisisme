@@ -84,45 +84,45 @@ class SideBar extends Component {
 
   saveCardChanges = (e) => {
     e.preventDefault();
-    // if (!this.state.linkedin) {
-    //   this.setState({ _errors: "This field does not have a valid url." });
-    // } else {
-    //   const data = {
-    //     name: this.state.name,
-    //     email: this.state.email,
-    //     city: this.state.city,
-    //     country: this.state.country,
-    //     phoneNumber: this.state.phoneNumber,
-    //     comment: this.state.comment,
-    //     occupation: this.state.occupation,
-    //     links: {
-    //       github: this.state.github,
-    //       facebook: this.state.facebook,
-    //       linkedin: this.state.linkedin,
-    //       youtube: this.state.youtube,
-    //       twitter: this.state.twitter,
-    //       instagram: this.state.instagram,
-    //       behance: this.state.behance,
-    //       portfolioSite: this.state.portfolioSite
-    //     },
-    //     fontFamily: this.props.activeFontFamily,
-    //     color: this.props.cardColor
-    //   };
-    //   const accountId = this.props.account;
+    if (!this.state.linkedin) {
+      this.setState({ _errors: "This field does not have a valid url." });
+    } else {
+      const data = {
+        name: this.state.name,
+        email: this.state.email,
+        city: this.state.city,
+        country: this.state.country,
+        phoneNumber: this.state.phoneNumber,
+        comment: this.state.comment,
+        occupation: this.state.occupation,
+        links: {
+          github: this.state.github,
+          facebook: this.state.facebook,
+          linkedin: this.state.linkedin,
+          youtube: this.state.youtube,
+          twitter: this.state.twitter,
+          instagram: this.state.instagram,
+          behance: this.state.behance,
+          portfolioSite: this.state.portfolioSite
+        },
+        fontFamily: this.props.activeFontFamily,
+        color: this.props.cardColor
+      };
+      const accountId = this.props.account;
 
-    //   //call action to update card
-    //   console.log(accountId);
-    //   updateCard(accountId, data, err => {
-    //     if (err.length === 0) {
-    //       console.log("done");
-    //       this.props.drawerHandler();
-    //       this.props.fetchUserCard(accountId);
-    //     } else {
-    //       console.log(err);
-    //     }
-    //   });
+      //call action to update card
+      console.log(accountId);
+      updateCard(accountId, data, err => {
+        if (err.length === 0) {
+          console.log("done");
+          this.props.drawerHandler();
+          this.props.fetchUserCard(accountId);
+        } else {
+          console.log(err);
+        }
+      });
 
-    // }
+    }
   };
 
   render() {
