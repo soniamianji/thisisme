@@ -11,6 +11,7 @@ import { Button, Grid, Box } from "@material-ui/core";
 import clsx from "clsx";
 import CardJobs from "../child/CardJobs";
 import { JobSearchResults, searchMsg, clearSearchResult } from "../../actions/searchActions";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const drawerWidth = 400;
@@ -50,13 +51,12 @@ const Profile = props => {
   //lifecycle hook
   useEffect(() => {
     const userId = props.account.id;
-    console.log(userId);
     props.fetchUserCard(userId);
-    console.log(props.usercard.occupation)
-    console.log(props.usercard.country)
-    props.JobSearchResults(props.usercard.occupation, props.usercard.country);
+    if (props.usercard.occupation != undefined) {
+      props.JobSearchResults(props.usercard.occupation, props.usercard.country);
+    }
     return () => { props.clearSearchResult() }
-  }, [props.account.id, props.usercard.occupation]);
+  }, [props.account.id, props.usercard.occupation, props.usercard.country]);
 
   const classes = useStyles();
 
@@ -115,7 +115,7 @@ const Profile = props => {
             card={props.usercard}
           />
           <Box style={{ marginTop: "44px" }}>
-            {props.jobs != "" ? (props.jobs.map((job, index) => (<div key={index}><CardJobs jobs={job} /></div>))) : ("")}
+            {props.jobs != "" ? (props.jobs.map((job, index) => (<div key={index}><CardJobs jobs={job} /></div>))) : <div style={{ textAlign: "center" }}><CircularProgress style={{ color: "white" }} size={40} /></div>}
           </Box>
 
         </Container>
@@ -135,7 +135,8 @@ const mapStateToProps = state => ({
   usercard: state.usercard,
   links: state.usercard.links,
   account: state.account,
-  jobs: state.jobs
+  jobs: state.jobs,
+  msg: state.msg
 });
 
 export default connect(mapStateToProps, { fetchUserCard, JobSearchResults, searchMsg, clearSearchResult })(Profile);
