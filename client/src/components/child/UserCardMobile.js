@@ -13,11 +13,13 @@ import "gsap/CSSPlugin";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 
-const UserCard = props => {
+const UserCardMobile = props => {
   const useStyles = makeStyles({
     avatar: {
       width: 100,
-      height: 100
+      height: 100,
+      postition: "absolut",
+      left: 100
     },
     button: {
       textAlign: "center",
@@ -31,8 +33,8 @@ const UserCard = props => {
       margin: "1rem 0"
     },
     card: {
-      width: 525,
-      height: 300,
+      height: 525,
+      width: 300,
       position: "relative",
       marginLeft: "auto",
       marginRight: "auto"
@@ -42,7 +44,8 @@ const UserCard = props => {
     },
     location: {
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      justifyContent: "center"
     },
     locationIcon: {
       marginRight: "2px"
@@ -60,8 +63,8 @@ const UserCard = props => {
       flexGrow: 1
     },
     paper: {
-      width: 525,
-      height: 300,
+      height: 525,
+      width: 300,
       marginBottom: 22,
       position: "relative",
       position: "absolute"
@@ -112,27 +115,21 @@ const UserCard = props => {
           </Grid>
         </Paper>
         <Paper className={classes.paper} id="front">
+          <Box m={2}>
+            <Avatar id="img" className={classes.avatar} src={props.card.img} />
+          </Box>
           <Box className={classes.wrapper}>
             <Grid container direction="row">
-              <Grid container item xs={3} direction="column">
+              <Grid item xs={12}>
                 <Grid item>
-                  <Avatar
-                    id="img"
-                    className={classes.avatar}
-                    src={props.card.img}
-                  />
-                </Grid>
-              </Grid>
-              <Grid item xs={9}>
-                <Grid item>
-                  <Box textAlign="left">
+                  <Box textAlign="center">
                     <Typography className="apply-font" variant="h1">
                       <span className={classes.name}>{props.card.name}</span>
                     </Typography>
                     <Typography className="apply-font" variant="h2">
                       {props.card.occupation}
                     </Typography>
-                    <Box className={classes.contactInfo} textAlign="left">
+                    <Box className={classes.contactInfo} textAlign="center">
                       <Typography className="apply-font" variant="h3">
                         {props.card.email}
                       </Typography>
@@ -141,7 +138,7 @@ const UserCard = props => {
                         {props.card.phoneNumber}
                       </Typography>
                     </Box>
-                    <Box className={classes.contactInfo} textAlign="left">
+                    <Box className={classes.contactInfo} textAlign="center">
                       <Typography className="apply-font" variant="h4">
                         <span className={classes.location}>
                           <RoomIcon
@@ -155,18 +152,18 @@ const UserCard = props => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container spacing={2} direction="row">
+              <Grid container spacing={3} direction="row">
                 {props.links &&
                   Object.keys(props.links).map((key, index) =>
                     props.links[key] != "" ? (
                       <Grid item key={index}>
                         {key == "portfolioSite" ? (
                           <a className={classes.icons} href={props.links[key]}>
-                            <i className={"far fa-2x fa-user-circle"} />
+                            <i className={"far fa-3x fa-user-circle"} />
                           </a>
                         ) : (
                           <a className={classes.icons} href={props.links[key]}>
-                            <i className={"fab fa-2x fa-" + key} />
+                            <i className={"fab fa-3x fa-" + key} />
                           </a>
                         )}
                       </Grid>
@@ -184,4 +181,4 @@ const UserCard = props => {
   );
 };
 
-export default UserCard;
+export default UserCardMobile;
