@@ -10,7 +10,6 @@ const styles = theme => ({
     root: {
         [theme.breakpoints.down('sm')]: {
             width: "100%",
-            margin: "0 auto"
         },
         [theme.breakpoints.up('md')]: {
             width: "80%",
@@ -21,6 +20,12 @@ const styles = theme => ({
             margin: "0 auto"
         },
     },
+    gridStyle: {
+        [theme.breakpoints.up('sm')]: {
+            textAlign: "right"
+        },
+
+    }
 });
 
 class CardJobs extends Component {
@@ -39,10 +44,10 @@ class CardJobs extends Component {
                 <Box className={classes.root}  >
                     <Paper style={{ backgroundColor: "#fafafa", }} >
                         <Grid container style={{ padding: "22px" }} >
-                            <Grid item md={6}><h4 >{this.props.jobs.title}</h4></Grid>
-                            <Grid item md={6} ><p style={{ textAlign: "right" }}><ReactTimeAgo date={this.props.jobs.created_at} /></p></Grid>
-                            <Grid item md={6} ><p style={{ color: "grey", margin: "0 0" }}>{this.props.jobs.company} <span><strong>{this.props.jobs.type}</strong></span> </p></Grid>
-                            <Grid item md={6} ><p style={{ textAlign: "right", color: "grey", margin: "0 0" }}>{this.props.jobs.location}</p></Grid>
+                            <Grid item xs={12} sm={6} md={6} ><h4 style={{ margin: "0 0" }} >{this.props.jobs.title}</h4></Grid>
+                            <Grid item xs={12} sm={6} md={6} ><p className={classes.gridStyle} style={{ margin: "11px 0" }}><ReactTimeAgo date={this.props.jobs.created_at} /></p></Grid>
+                            <Grid item xs={12} sm={6} md={6} ><h5 style={{ color: "grey", margin: "11px 0" }}>{this.props.jobs.company}</h5></Grid>
+                            <Grid item xs={12} sm={6} md={6}><h5 className={classes.gridStyle} style={{ color: "grey", margin: "11px 0" }}>{this.props.jobs.location}</h5></Grid>
                         </Grid>
                     </Paper>
                 </Box>
