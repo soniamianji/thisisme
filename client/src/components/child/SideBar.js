@@ -282,24 +282,22 @@ class SideBar extends Component {
               />
             </form>
           </Box>
-          <Grid item alignContent="space-between">
-            <Box>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={this.saveCardChanges}
-              >
-                Save Changes
-              </Button>
-              <Button
-                onClick={this.props.drawerHandler}
-                variant="contained"
-                color="secondary"
-              >
-                Close
-              </Button>
-            </Box>
-          </Grid>
+          <Box mr={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.saveCardChanges}
+            >
+              Save Changes
+            </Button>
+          </Box>
+          <Button
+            onClick={this.props.drawerHandler}
+            variant="contained"
+            color="secondary"
+          >
+            Close
+          </Button>
         </Grid>
       </StyledDrawer>
     );
