@@ -1,4 +1,4 @@
-const githubBaseUrl = "https://jobs.github.com/positions.json"
+const githubBaseUrl = "https://github-jobs-proxy.appspot.com/positions"
 const description = "?description=";
 const location = "&location=";
 

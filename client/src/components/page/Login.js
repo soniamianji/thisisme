@@ -21,11 +21,11 @@ class Login extends Component {
       isLogged: Auth.isUserAuthenticated()
     }
   }
-  // componentDidMount() {
-  //   if (Auth.isUserAuthenticated()) {
-  //     this.props.history.push("/profile");
-  //   }
-  // }
+  componentDidMount() {
+    if (Auth.isUserAuthenticated()) {
+      this.props.history.push("/profile");
+    }
+  }
 
   responseGoogle = async response => {
     if (response.code) {
@@ -55,7 +55,7 @@ class Login extends Component {
       <div style={{ textAlign: "center" }}>
         <Box style={{ width: 400 }} mx="auto" mt="44px">
           <Box style={{ padding: 11 }}>
-            <Typography variant="h5" component="h6">
+            <Typography variant="h5" component="h6" style={{ color: "white" }}>
               Sign in to continue
             </Typography>
           </Box>
@@ -90,7 +90,7 @@ class Login extends Component {
             </Box>
           </StyledPaper>
         </Box>
-      </div >
+      </div>
     );
   }
 }

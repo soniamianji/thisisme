@@ -97,7 +97,7 @@ const UserCard = props => {
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid item xs={9}>
-                <Grid item direction="column">
+                <Grid item >
                   <Box textAlign="left">
                     <Typography className="apply-font" variant="h2">
                       {props.card.comment}
@@ -124,7 +124,7 @@ const UserCard = props => {
                 </Grid>
               </Grid>
               <Grid item xs={9}>
-                <Grid item direction="column">
+                <Grid item>
                   <Box textAlign="left">
                     <Typography className="apply-font" variant="h1">
                       <span className={classes.name}>{props.card.name}</span>
@@ -165,10 +165,10 @@ const UserCard = props => {
                             <i className={"far fa-2x fa-user-circle"} />
                           </a>
                         ) : (
-                          <a className={classes.icons} href={props.links[key]}>
-                            <i className={"fab fa-2x fa-" + key} />
-                          </a>
-                        )}
+                            <a className={classes.icons} href={props.links[key]}>
+                              <i className={"fab fa-2x fa-" + key} />
+                            </a>
+                          )}
                       </Grid>
                     ) : null
                   )}

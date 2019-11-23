@@ -1,17 +1,13 @@
 const sendRequest = require("./sendRequests");
 
-module.exports.searchCards = async function(name, occupation, location) {
+module.exports.searchCards = async function (name) {
   let response;
 
   try {
     response = await sendRequest.sendRequest(
       "GET",
       "/cardSearch?name=" +
-        name +
-        "&occupation=" +
-        occupation +
-        "&location=" +
-        location
+      name
     );
   } catch (errors) {
     errors = [errors];

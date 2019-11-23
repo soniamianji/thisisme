@@ -12,7 +12,6 @@ import { fetchUserCard } from "../../actions/authActions";
 import FontPicker from "font-picker-react";
 import { TwitterPicker } from "react-color";
 import styled from "styled-components";
-
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

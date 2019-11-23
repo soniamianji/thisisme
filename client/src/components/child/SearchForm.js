@@ -3,16 +3,55 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { cardSearchResults, searchMsg } from "../../actions/searchActions";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
+import { TimelineLite } from "gsap/all";
+import "gsap/CSSPlugin";
+
+
+const styles = theme => ({
+  root: {
+    "& label.Mui-focused": {
+      color: "white"
+    },
+    "& label": {
+      color: "white"
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "white"
+    },
+    "& .MuiInput-underline:before": {
+      borderBottomColor: "white"
+    },
+    "& .MuiInput-input": {
+      color: "white",
+      backgroundColro: "transparent"
+    },
+  },
+  divWidth: {
+    [theme.breakpoints.down('sm')]: {
+      width: "80%",
+      margin: "0 auto"
+    },
+    [theme.breakpoints.up('md')]: {
+      width: "60%",
+      margin: "0 auto"
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: "50%",
+      margin: "0 auto"
+    },
+  }
+})
+
 class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      occupation: "",
-      _errors: "",
-      location: ""
+      searchWords: "",
     };
   }
   changeHandler = e => {
@@ -20,73 +59,46 @@ class SearchForm extends Component {
   };
   submitHandler = e => {
     e.preventDefault();
+    var tl = new TimelineLite({ paused: true });
+    tl.to("#formAnimation", 0.5, { marginTop: 0 }).play();
     this.props.cardSearchResults(
-      this.state.name,
-      this.state.occupation,
-      this.state.location
+      this.state.searchWords
     );
     this.setState({
-      name: "",
-      occupation: "",
-      location: ""
+      searchWords: ""
     });
   };
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <h1 style={{ textAlign: "center" }}>SearchResult</h1>
-        <div style={{ width: "80%", marginRight: "auto", marginLeft: "auto" }}>
-          <form onSubmit={this.submitHandler}>
-            <Grid container spacing={2}>
+      <div style={{ marginTop: "10%" }} id="formAnimation">
+        <h1 style={{ textAlign: "center", color: "white" }}>Find peeps!</h1>
+        <div className={classes.divWidth} style={{ marginRight: "auto", marginLeft: "auto" }} >
+          <form onSubmit={this.submitHandler} >
+            <Grid container spacing={2} >
               <Grid item xs={12}>
                 <TextField
                   fullWidth
+                  autoComplete="off"
                   autoFocus
-                  name="name"
-                  label="Full Name"
-                  value={this.state.name}
+                  name="searchWords"
+                  label="Seacrh by Name Title or Location"
+                  value={this.state.searchWords}
                   onChange={this.changeHandler}
-                  error={this.state._errors !== ""}
-                  helperText={
-                    this.state._errors === "" ? "" : this.state._errors
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  name="occupation"
-                  label="Occupation"
-                  fullWidth
-                  value={this.state.occupation}
-                  onChange={this.changeHandler}
-                  error={this.state._errors !== ""}
-                  helperText={
-                    this.state._errors === "" ? "" : this.state._errors
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  color="secondary"
-                  name="location"
-                  label="Country"
-                  id="location"
-                  fullWidth
-                  value={this.state.location}
-                  onChange={this.changeHandler}
-                />
+                  classes={this.props.classes}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment>
+                        <IconButton type="submit">
+                          <SearchIcon style={{ color: "white" }} fontSize="large" />
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                >
+                </TextField>
               </Grid>
             </Grid>
-            <Button
-              style={{ marginTop: 22 }}
-              type="submit"
-              fullWidth
-              size="large"
-              variant="contained"
-              color="secondary"
-            >
-              Search
-            </Button>
             <Grid container justify="flex-end" />{" "}
           </form>
         </div>
@@ -97,6 +109,8 @@ class SearchForm extends Component {
 
 SearchForm.propTypes = {
   cardSearchResults: PropTypes.func.isRequired,
-  searchMsg: PropTypes.func.isRequired
+  searchMsg: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+
 };
-export default connect(null, { searchMsg, cardSearchResults })(SearchForm);
+export default connect(null, { searchMsg, cardSearchResults })(withStyles(styles)(SearchForm));

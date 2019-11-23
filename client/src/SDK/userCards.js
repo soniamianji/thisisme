@@ -87,7 +87,7 @@ module.exports.updateCard = async function (id, cardData, callback) {
       break;
 
     case 400:
-      errors = response.errors;
+      errors = ["something is wrong"];
       break;
 
     case 500:

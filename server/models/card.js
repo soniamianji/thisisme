@@ -44,5 +44,5 @@ const CardSchema = new mongoose.Schema({
   }
 
 });
-
+CardSchema.index({ name: "text", occupation: "text", city: "text", country: "text" });
 module.exports = mongoose.model("Card", CardSchema);

@@ -55,8 +55,8 @@ router.post("/", (req, res) => {
                   const id_token = jwt.sign(
                     {
                       id: newUser.id,
-                      email: userData.data.email,
-                      name: userData.data.name
+                      email: newUser.email,
+                      name: newUser.name
                     },
                     secretTokenKey
                   );
