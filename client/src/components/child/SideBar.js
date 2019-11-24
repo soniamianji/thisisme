@@ -47,26 +47,23 @@ class SideBar extends Component {
 
     const input = e.target
     const isValid = input.checkValidity()
-    console.log(this.state._errors)
+    console.log(isValid);
     this.setState({ [input.name]: input.value })
-
-    // this.setState({
-    //   [e.target.name]: e.target.value
-    // });
-    // console.log(this.state_errors)
-    // const input = e.target
-    // const isValid = input.checkValidity()
-    // console.log("input" + isValid)
-    // if (!isValid) {
-    //   this.setState({
-    //     _errors: "invalid",
-    //   });
-    // } else {
-    //   this.setState({
-    //     _errors: "",
-    //   });
-    // }
-
+    if (!isValid) {
+      this.setState(prevState => ({
+        _errors: {                   // object that we want to update
+          ...prevState._errors,    // keep all other key-value pairs
+          [input.name]: input.validationMessage       // update the value of specific key
+        }
+      }))
+    } if (isValid) {
+      this.setState(prevState => ({
+        _errors: {                   // object that we want to update
+          ...prevState._errors,    // keep all other key-value pairs
+          [input.name]: ""       // update the value of specific key
+        }
+      }))
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -108,7 +105,6 @@ class SideBar extends Component {
     e.preventDefault();
     const form = e.target
     const isValid = form.checkValidity();
-    console.log(isValid);
     const formData = new FormData(form)
     const validationMessages = Array.from(formData.keys()).reduce((acc, key) => {
       acc[key] = form.elements[key].validationMessage
@@ -117,7 +113,6 @@ class SideBar extends Component {
     this.setState({
       _errors: validationMessages
     })
-    console.log(validationMessages);
 
 
     // if (isValid) {
@@ -129,6 +124,7 @@ class SideBar extends Component {
     //   console.log(data)
     // }
     if (isValid) {
+
       const data = {
         name: this.state.name,
         email: this.state.email,
@@ -273,7 +269,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://github.com/.*"
                 }}
-                error={this.state._errors.github !== ""}
+                error={this.state._errors.github && this.state._errors.github !== ""}
 
                 helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
               />
@@ -289,7 +285,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://linkedin.com/.*"
                 }}
-                error={this.state._errors.linkedin !== ""}
+                error={this.state._errors.linkedin && this.state._errors.linkedin !== ""}
                 helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
 
               />
@@ -305,7 +301,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://behance.com.*"
                 }}
-                error={this.state._errors.behance !== ""}
+                error={this.state._errors.behance && this.state._errors.behance !== ""}
                 helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
 
               />
@@ -321,7 +317,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://facebook.com.*"
                 }}
-                error={this.state._errors.facebook !== ""}
+                error={this.state._errors.facebook && this.state._errors.facebook !== ""}
                 helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
 
               />
@@ -337,7 +333,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://youtube.com.*"
                 }}
-                error={this.state._errors.youtube !== ""}
+                error={this.state._errors.youtube && this.state._errors.youtube !== ""}
                 helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
 
               />
@@ -353,7 +349,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://twitter.com.*"
                 }}
-                error={this.state._errors.twitter !== ""}
+                error={this.state._errors.twitter && this.state._errors.twitter !== ""}
                 helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
 
               />
@@ -369,7 +365,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://instagram.com.*"
                 }}
-                error={this.state._errors.instagram !== ""}
+                error={this.state._errors.instagram && this.state._errors.instagram !== ""}
                 helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
 
               />
@@ -385,7 +381,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://.*"
                 }}
-                error={this.state._errors.portfolioSite !== ""}
+                error={this.state._errors.portfolioSite && this.state._errors.portfolioSite !== ""}
                 helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
 
               />
