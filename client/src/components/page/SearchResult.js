@@ -27,7 +27,7 @@ class SearchResult extends Component {
           {this.props.cards &&
             this.props.cards.map((card, index) => (
               <Grid item sm={12} lg={6} key={index} style={{ margin: "22px auto" }}>
-                <UserCard card={card} links={card.links}
+                <UserCard card={card} links={card.links} i={index}
                 />
               </Grid>
             ))}

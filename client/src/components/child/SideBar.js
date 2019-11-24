@@ -16,6 +16,8 @@ import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import MuiPhoneNumber from "material-ui-phone-number";
+import CountryInput from "./CountryInput"
 
 const StyledDrawer = styled(Drawer)`
   width: 400,
@@ -43,12 +45,11 @@ class SideBar extends Component {
     };
   }
 
-  changeFieldValue = e => {
-
+  changeFieldValue = (e, value) => {
     const input = e.target
+    this.setState({ [input.name]: input.value });
     const isValid = input.checkValidity()
-    console.log(isValid);
-    this.setState({ [input.name]: input.value })
+
     if (!isValid) {
       this.setState(prevState => ({
         _errors: {                   // object that we want to update
@@ -66,6 +67,14 @@ class SideBar extends Component {
     }
   };
 
+  handlePhoneChange = (value) => {
+    if (value) {
+      console.log(value)
+      this.setState({
+        phoneNumber: value
+      })
+    }
+  }
   componentDidUpdate(prevProps) {
     if (this.props.card != prevProps.card) {
       //set your state now!
@@ -164,6 +173,12 @@ class SideBar extends Component {
 
 
   };
+  countryfromChild = (value) => {
+    this.setState({
+      country: value.country
+    })
+    console.log(this.state.country)
+  }
 
   render() {
     return (
@@ -212,7 +227,7 @@ class SideBar extends Component {
               <TextField
                 onChange={this.changeFieldValue}
                 name="occupation"
-                fullWidth="true"
+                fullWidth
                 label="Job Title"
                 margin="normal"
                 required
@@ -222,30 +237,26 @@ class SideBar extends Component {
               <TextField
                 onChange={this.changeFieldValue}
                 name="city"
-                fullWidth="true"
+                fullWidth
                 label="City"
                 margin="normal"
                 value={this.state.city}
               />
-              <TextField
-                onChange={this.changeFieldValue}
-                value={this.state.country}
-                name="country"
-                fullWidth="true"
-                label="Country"
+              <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
+
+              <MuiPhoneNumber
+                name="phone"
                 margin="normal"
-              />
-              <TextField
-                onChange={this.changeFieldValue}
-                value={this.state.phoneNumber}
-                name="phoneNumber"
-                fullWidth="true"
+                fullWidth
                 label="Phone Number"
-                margin="normal"
+                name="phoneNumber"
+                defaultCountry={"us"}
+                value={this.state.phoneNumber}
+                onChange={this.handlePhoneChange}
               />
 
               <TextField
-                fullWidth="true"
+                fullWidth
                 multiline={true}
                 rows={3}
                 name="comment"
@@ -260,7 +271,7 @@ class SideBar extends Component {
               <TextField
                 onChange={this.changeFieldValue}
                 name="github"
-                fullWidth="true"
+                fullWidth
                 id="githubLink"
                 label="Github"
                 margin="normal"
@@ -274,7 +285,7 @@ class SideBar extends Component {
                 helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 name="linkedin"
                 id="linkedinLink"
@@ -290,7 +301,7 @@ class SideBar extends Component {
 
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 name="behance"
                 id="behanceLink"
@@ -306,7 +317,7 @@ class SideBar extends Component {
 
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 name="facebook"
                 id="facebookLink"
@@ -319,10 +330,9 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.facebook && this.state._errors.facebook !== ""}
                 helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
-
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 id="youtubeLink"
                 label="Youtube"
@@ -335,10 +345,9 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.youtube && this.state._errors.youtube !== ""}
                 helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
-
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 name="twitter"
                 id="addLinkTextField"
@@ -351,10 +360,9 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.twitter && this.state._errors.twitter !== ""}
                 helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
-
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 onChange={this.changeFieldValue}
                 name="instagram"
                 id="instagramLink"
@@ -367,10 +375,9 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.instagram && this.state._errors.instagram !== ""}
                 helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
-
               />
               <TextField
-                fullWidth="true"
+                fullWidth
                 name="portfolioSite"
                 onChange={this.changeFieldValue}
                 id="websiteLink"
@@ -383,7 +390,6 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.portfolioSite && this.state._errors.portfolioSite !== ""}
                 helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
-
               />
 
             </Box>

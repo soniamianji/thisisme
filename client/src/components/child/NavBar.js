@@ -76,7 +76,7 @@ class NavBar extends Component {
   `;
     return (
       <div style={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{ backgroundColor: "#272727" }} elevation="0" >
+        <AppBar position="static" style={{ backgroundColor: "#272727" }} elevation={0} >
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleClick}>
               <MenuIcon />

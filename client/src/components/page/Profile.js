@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Grid, Box } from "@material-ui/core";
+import { Button, Box } from "@material-ui/core";
 import clsx from "clsx";
 import CardJobs from "../child/CardJobs";
 import {
@@ -19,7 +19,6 @@ import {
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
 
-const drawerWidth = 400;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -164,7 +163,6 @@ const Profile = props => {
 UserCard.propTypes = {
   usercard: PropTypes.object,
   account: PropTypes.object,
-  fetchUserCard: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

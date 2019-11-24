@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
@@ -155,17 +155,17 @@ const UserCardMobile = props => {
               <Grid container spacing={3} direction="row">
                 {props.links &&
                   Object.keys(props.links).map((key, index) =>
-                    props.links[key] != "" ? (
+                    props.links[key] !== "" ? (
                       <Grid item key={index}>
-                        {key == "portfolioSite" ? (
+                        {key === "portfolioSite" ? (
                           <a className={classes.icons} href={props.links[key]}>
                             <i className={"far fa-3x fa-user-circle"} />
                           </a>
                         ) : (
-                          <a className={classes.icons} href={props.links[key]}>
-                            <i className={"fab fa-3x fa-" + key} />
-                          </a>
-                        )}
+                            <a className={classes.icons} href={props.links[key]}>
+                              <i className={"fab fa-3x fa-" + key} />
+                            </a>
+                          )}
                       </Grid>
                     ) : null
                   )}

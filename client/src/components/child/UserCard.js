@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
@@ -69,15 +69,16 @@ const UserCard = props => {
   });
 
   const classes = useStyles();
+
   var tl = new TimelineLite({ paused: true });
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
-    TweenLite.set("#card", { transformStyle: "preserve-3d" });
-    TweenLite.set("#back", { rotationX: -180 });
-    TweenLite.set(["#front", "#back"], { backfaceVisibility: "hidden" });
+    TweenLite.set(`.card${props.i}`, { transformStyle: "preserve-3d" });
+    TweenLite.set(`.back${props.i}`, { rotationX: -180 });
+    TweenLite.set([`.front${props.i}`, `.back${props.i}`], { backfaceVisibility: "hidden" });
 
-    tl.to("#front", 0.5, { rotationX: 180 }).to(
-      "#back",
+    tl.to(`.front${props.i}`, 0.5, { rotationX: 180 }).to(
+      `.back${props.i}`,
       0.5,
       { rotationX: 0 },
       0
@@ -91,8 +92,8 @@ const UserCard = props => {
 
   return (
     <div className={classes.cardWrapper}>
-      <div id="card" className={classes.card}>
-        <Paper id="back" className={classes.paper}>
+      <div className={`card${props.i} ` + classes.card} >
+        <Paper className={`back${props.i} ` + classes.paper} >
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid item xs={9}>
@@ -110,7 +111,7 @@ const UserCard = props => {
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
-        <Paper className={classes.paper} id="front">
+        <Paper className={`front${props.i} ` + classes.paper}>
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid container item xs={3} direction="column">

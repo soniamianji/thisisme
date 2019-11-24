@@ -10,7 +10,7 @@ module.exports.searchCards = async function (name) {
       name
     );
   } catch (errors) {
-    errors = [errors];
+    console.log(errors)
     return;
   }
 
@@ -29,6 +29,7 @@ module.exports.searchCards = async function (name) {
     default:
       errors = ["unknown status code"];
   }
+  console.log(errors)
 
   return cards;
 };

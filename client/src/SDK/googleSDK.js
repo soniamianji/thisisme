@@ -63,7 +63,7 @@ const googleAuthentication = async function (authCode) {
     default:
       errors = ["unknown response code"];
   }
-
+  console.log(errors)
   return account;
 };
 

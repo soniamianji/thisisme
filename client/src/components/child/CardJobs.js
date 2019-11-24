@@ -29,10 +29,7 @@ const styles = theme => ({
 });
 
 class CardJobs extends Component {
-    constructor(props) {
-        super(props);
-        //onClick={this.goToJob(this.props.company_url)}
-    }
+
     componentWillMount() {
     }
     render() {

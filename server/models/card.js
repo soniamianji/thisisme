@@ -19,7 +19,7 @@ const CardSchema = new mongoose.Schema({
   },
   city: String,
   country: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   links: {
     linkedin: String,
     github: String,
