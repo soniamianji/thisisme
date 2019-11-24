@@ -31,7 +31,6 @@ class Login extends Component {
     if (response.code) {
       const authCode = response.code;
       this.props.googleLogin(authCode, () => {
-        console.log(Auth.isUserAuthenticated());
         this.props.history.push("/profile");
       });
     } else {

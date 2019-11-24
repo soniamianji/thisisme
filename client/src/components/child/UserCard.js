@@ -70,7 +70,6 @@ const UserCard = props => {
 
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
-  console.log(props.links);
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
     TweenLite.set("#card", { transformStyle: "preserve-3d" });
@@ -165,10 +164,10 @@ const UserCard = props => {
                             <i className={"far fa-2x fa-user-circle"} />
                           </a>
                         ) : (
-                          <a className={classes.icons} href={props.links[key]}>
-                            <i className={"fab fa-2x fa-" + key} />
-                          </a>
-                        )}
+                            <a className={classes.icons} href={props.links[key]}>
+                              <i className={"fab fa-2x fa-" + key} />
+                            </a>
+                          )}
                       </Grid>
                     ) : null
                   )}

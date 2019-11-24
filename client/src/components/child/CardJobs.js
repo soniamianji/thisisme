@@ -34,7 +34,6 @@ class CardJobs extends Component {
         //onClick={this.goToJob(this.props.company_url)}
     }
     componentWillMount() {
-        console.log(this.props.jobs)
     }
     render() {
         const { classes } = this.props;

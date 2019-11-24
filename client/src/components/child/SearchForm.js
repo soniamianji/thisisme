@@ -28,7 +28,7 @@ const styles = theme => ({
     },
     "& .MuiInput-input": {
       color: "white",
-      backgroundColro: "transparent"
+      backgroundColor: "transparent"
     },
   },
   divWidth: {

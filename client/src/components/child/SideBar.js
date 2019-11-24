@@ -39,12 +39,34 @@ class SideBar extends Component {
       behance: "",
       twitter: "",
       portfolioSite: "",
-      _errors: ""
+      _errors: {}
     };
   }
 
   changeFieldValue = e => {
-    this.setState({ [e.target.name]: e.target.value });
+
+    const input = e.target
+    const isValid = input.checkValidity()
+    console.log(this.state._errors)
+    this.setState({ [input.name]: input.value })
+
+    // this.setState({
+    //   [e.target.name]: e.target.value
+    // });
+    // console.log(this.state_errors)
+    // const input = e.target
+    // const isValid = input.checkValidity()
+    // console.log("input" + isValid)
+    // if (!isValid) {
+    //   this.setState({
+    //     _errors: "invalid",
+    //   });
+    // } else {
+    //   this.setState({
+    //     _errors: "",
+    //   });
+    // }
+
   };
 
   componentDidUpdate(prevProps) {
@@ -84,9 +106,29 @@ class SideBar extends Component {
 
   saveCardChanges = (e) => {
     e.preventDefault();
-    if (!this.state.linkedin) {
-      this.setState({ _errors: "This field does not have a valid url." });
-    } else {
+    const form = e.target
+    const isValid = form.checkValidity();
+    console.log(isValid);
+    const formData = new FormData(form)
+    const validationMessages = Array.from(formData.keys()).reduce((acc, key) => {
+      acc[key] = form.elements[key].validationMessage
+      return acc
+    }, {})
+    this.setState({
+      _errors: validationMessages
+    })
+    console.log(validationMessages);
+
+
+    // if (isValid) {
+    //   // here you do what you need to do if is valid
+    //   const data = Array.from(formData.keys()).reduce((acc, key) => {
+    //     acc[key] = formData.get(key)
+    //     return acc
+    //   }, {})
+    //   console.log(data)
+    // }
+    if (isValid) {
       const data = {
         name: this.state.name,
         email: this.state.email,
@@ -123,6 +165,8 @@ class SideBar extends Component {
       });
 
     }
+
+
   };
 
   render() {
@@ -147,7 +191,7 @@ class SideBar extends Component {
               </Typography>
             </Box>
           </Grid>
-          <form onSubmit={this.saveCardChanges}>
+          <form onSubmit={this.saveCardChanges} noValidate >
             <Box m={1} textAlign="left">
 
               <label>Font</label>
@@ -227,10 +271,11 @@ class SideBar extends Component {
                 value={this.state.github}
                 placeholder="https://github.com/"
                 inputProps={{
-                  pattern: "https://github.com.*"
+                  pattern: "https://github.com/.*"
                 }}
-              // error={this.state._errors !== ""}
-              // helperText={this.state._errors === "" ? "" : this.state._errors}
+                error={this.state._errors.github !== ""}
+
+                helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
               />
               <TextField
                 fullWidth="true"
@@ -242,8 +287,11 @@ class SideBar extends Component {
                 value={this.state.linkedin}
                 placeholder="https://linkedin.com/"
                 inputProps={{
-                  pattern: "https://linkedin.com.*"
+                  pattern: "https://linkedin.com/.*"
                 }}
+                error={this.state._errors.linkedin !== ""}
+                helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
+
               />
               <TextField
                 fullWidth="true"
@@ -257,6 +305,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://behance.com.*"
                 }}
+                error={this.state._errors.behance !== ""}
+                helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
+
               />
               <TextField
                 fullWidth="true"
@@ -270,6 +321,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://facebook.com.*"
                 }}
+                error={this.state._errors.facebook !== ""}
+                helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
+
               />
               <TextField
                 fullWidth="true"
@@ -283,6 +337,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://youtube.com.*"
                 }}
+                error={this.state._errors.youtube !== ""}
+                helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
+
               />
               <TextField
                 fullWidth="true"
@@ -296,6 +353,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://twitter.com.*"
                 }}
+                error={this.state._errors.twitter !== ""}
+                helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
+
               />
               <TextField
                 fullWidth="true"
@@ -309,6 +369,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://instagram.com.*"
                 }}
+                error={this.state._errors.instagram !== ""}
+                helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
+
               />
               <TextField
                 fullWidth="true"
@@ -322,6 +385,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://.*"
                 }}
+                error={this.state._errors.portfolioSite !== ""}
+                helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
+
               />
 
             </Box>
