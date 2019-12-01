@@ -16,7 +16,7 @@ const styles = theme => ({
             margin: "0 auto"
         },
         [theme.breakpoints.up('lg')]: {
-            width: "65%",
+            width: "80%",
             margin: "0 auto"
         },
     },

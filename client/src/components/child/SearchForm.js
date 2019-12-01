@@ -20,6 +20,9 @@ const styles = theme => ({
     "& label": {
       color: "white"
     },
+    "& .MuiInput-underline.MuiInput-root.MuiInputBase-root:hover": {
+      color: "white !important"
+    },
     "& .MuiInput-underline:after": {
       borderBottomColor: "white"
     },
@@ -64,6 +67,7 @@ class SearchForm extends Component {
     this.props.cardSearchResults(
       this.state.searchWords
     );
+    this.props.searchWord(this.state.searchWords);
     this.setState({
       searchWords: ""
     });
@@ -99,7 +103,7 @@ class SearchForm extends Component {
                 </TextField>
               </Grid>
             </Grid>
-            <Grid container justify="flex-end" />{" "}
+
           </form>
         </div>
       </div>

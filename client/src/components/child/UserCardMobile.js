@@ -16,14 +16,14 @@ import "@fortawesome/fontawesome-free/js/all.js";
 const UserCardMobile = props => {
   const useStyles = makeStyles({
     avatar: {
-      width: 100,
-      height: 100,
+      width: 150,
+      height: 150,
       postition: "absolut",
-      left: 100
+      left: "22%"
     },
     button: {
       textAlign: "center",
-      backgroundColor: props.cardColor,
+      backgroundColor: props.card.color,
       padding: "0.25rem",
       position: "absolute",
       width: "100%",
@@ -51,13 +51,13 @@ const UserCardMobile = props => {
       marginRight: "2px"
     },
     icons: {
-      color: props.cardColor
+      color: props.card.color
     },
     wrapper: {
-      padding: "1.5rem"
+      padding: "0.5rem"
     },
     cardColor: {
-      backgroundColor: props.cardColor,
+      backgroundColor: props.card.color,
       padding: "1rem",
       display: "flex",
       flexGrow: 1
@@ -73,15 +73,14 @@ const UserCardMobile = props => {
 
   const classes = useStyles();
   var tl = new TimelineLite({ paused: true });
-  console.log(props.links);
   const flip = () => {
     TweenLite.set(".cardWrapper", { perspective: 800 });
-    TweenLite.set("#card", { transformStyle: "preserve-3d" });
-    TweenLite.set("#back", { rotationX: -180 });
-    TweenLite.set(["#front", "#back"], { backfaceVisibility: "hidden" });
+    TweenLite.set(`.card${props.i}`, { transformStyle: "preserve-3d" });
+    TweenLite.set(`.back${props.i}`, { rotationX: -180 });
+    TweenLite.set([`.front${props.i}`, `.back${props.i}`], { backfaceVisibility: "hidden" });
 
-    tl.to("#front", 0.5, { rotationX: 180 }).to(
-      "#back",
+    tl.to(`.front${props.i}`, 0.5, { rotationX: 180 }).to(
+      `.back${props.i}`,
       0.5,
       { rotationX: 0 },
       0
@@ -92,11 +91,10 @@ const UserCardMobile = props => {
   const flipBack = () => {
     tl.reverse();
   };
-
   return (
     <div className={classes.cardWrapper}>
-      <div id="card" className={classes.card}>
-        <Paper id="back" className={classes.paper}>
+      <div className={`card${props.i} ` + classes.card} >
+        <Paper className={`back${props.i} ` + classes.paper} >
           <Box className={classes.wrapper}>
             <Grid container direction="row">
               <Grid item xs={9}>
@@ -114,7 +112,7 @@ const UserCardMobile = props => {
             <ExpandMoreIcon color="secondary" />
           </Grid>
         </Paper>
-        <Paper className={classes.paper} id="front">
+        <Paper className={`front${props.i} ` + classes.paper}>
           <Box m={2}>
             <Avatar id="img" className={classes.avatar} src={props.card.img} />
           </Box>
@@ -152,7 +150,7 @@ const UserCardMobile = props => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container spacing={3} direction="row">
+              <Grid container spacing={3} style={{ paddingLeft: "12px" }} direction="row">
                 {props.links &&
                   Object.keys(props.links).map((key, index) =>
                     props.links[key] !== "" ? (

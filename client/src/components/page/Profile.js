@@ -8,16 +8,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Box } from "@material-ui/core";
+import { Button, Box, Grid } from "@material-ui/core";
 import clsx from "clsx";
 import CardJobs from "../child/CardJobs";
 import {
-  JobSearchResults,
+  JobSearchFromArbetsformedlingen,
   searchMsg,
-  clearSearchResult
+  clearSearchResult,
+  JobSearchResults
 } from "../../actions/searchActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
+import CardJobsAF from "../child/CardJobsAF";
 
 
 const useStyles = makeStyles(theme => ({
@@ -49,7 +51,8 @@ const Profile = props => {
   const [state, setState] = useState({
     open: false,
     activeFontFamily: props.usercard.fontFamily,
-    cardColor: props.usercard.color
+    cardColor: props.usercard.color,
+    isLoading: false
   });
 
   //lifecycle hook
@@ -57,12 +60,16 @@ const Profile = props => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
     if (props.usercard.occupation != undefined) {
-      props.JobSearchResults(props.usercard.occupation, props.usercard.country);
+
+      props.JobSearchFromArbetsformedlingen(props.usercard.occupation, props.usercard.city + " " + props.usercard.country)
+      props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
+
     }
+
     return () => {
       props.clearSearchResult();
     };
-  }, [props.account.id, props.usercard.occupation, props.usercard.country]);
+  }, [props.account.id, props.usercard.occupation, props.usercard.city, props.usercard.country]);
 
   const classes = useStyles();
 
@@ -113,7 +120,7 @@ const Profile = props => {
       >
         <Container>
           <Box display="flex" flexDirection="row-reverse">
-            <Button onClick={drawerHandler}>Edit Card</Button>
+            <Button onClick={drawerHandler} style={{ color: "white" }}>Edit Card</Button>
           </Box>
           <Media
             queries={{
@@ -142,17 +149,16 @@ const Profile = props => {
           </Media>
 
           <Box style={{ marginTop: "44px" }}>
-            {props.jobs != "" ? (
-              props.jobs.map((job, index) => (
-                <div key={index}>
+
+            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
+              {props.jobs &&
+                props.jobs.map((job, index) => (
                   <CardJobs jobs={job} />
-                </div>
-              ))
-            ) : (
-                <div style={{ textAlign: "center" }}>
-                  <CircularProgress style={{ color: "white" }} size={40} />
-                </div>
-              )}
+                ))}
+              {props.jobsFromAF && props.jobsFromAF.map((job, index) => (
+                <CardJobsAF job={job} />
+              ))}
+            </Grid>
           </Box>
         </Container>
       </div>
@@ -170,12 +176,14 @@ const mapStateToProps = state => ({
   links: state.usercard.links,
   account: state.account,
   jobs: state.jobs,
+  jobsFromAF: state.jobsFromAF.hits,
   msg: state.msg
 });
 
 export default connect(mapStateToProps, {
   fetchUserCard,
-  JobSearchResults,
+  JobSearchFromArbetsformedlingen,
   searchMsg,
-  clearSearchResult
+  clearSearchResult,
+  JobSearchResults
 })(Profile);

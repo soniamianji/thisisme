@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { JobSearchResults, searchMsg } from "../../actions/searchActions";
+import { JobSearchResults, searchMsg, JobSearchFromArbetsformedlingen } from "../../actions/searchActions";
 import { withStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -26,12 +26,16 @@ const styles = theme => ({
         "& .MuiInput-underline:before": {
             borderBottomColor: "white"
         },
+        "& .MuiInput-underline:hover": {
+            borderBottomColor: "white"
+        },
         "& .MuiInput-input": {
             color: "white",
             backgroundColro: "transparent"
         },
 
     },
+
     divWidth: {
         [theme.breakpoints.down('sm')]: {
             width: "80%",
@@ -45,7 +49,13 @@ const styles = theme => ({
             width: "50%",
             margin: "0 auto"
         },
-    }
+    },
+    // error: {
+    //     "&.MuiFormHelperText-root.Mui-error": {
+    //         color: "red",
+    //     }
+    // }
+
 })
 
 class JobHuntForm extends Component {
@@ -53,16 +63,26 @@ class JobHuntForm extends Component {
         super(props);
         this.state = {
             description: "",
-            location: ""
+            location: "",
+            error: ""
         }
     }
     submitHandler = (e) => {
         e.preventDefault();
+        if (this.state.description.trim() === "" && this.state.location.trim() === "") {
+            this.setState({
+                error: "Please enter a search term. "
+            })
+            return;
+        }
         let isLoading = true;
         this.props.loading(isLoading);
+
         var tl = new TimelineLite({ paused: true });
         tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
         this.props.JobSearchResults(this.state.description, this.state.location);
+        this.props.JobSearchFromArbetsformedlingen(this.state.description, this.state.location)
+
         this.setState({
             description: '',
             location: ''
@@ -70,7 +90,7 @@ class JobHuntForm extends Component {
     }
 
     changeHandler = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({ [e.target.name]: e.target.value, error: "" });
     }
     render() {
         const { classes } = this.props;
@@ -88,7 +108,11 @@ class JobHuntForm extends Component {
                                     value={this.state.description}
                                     onChange={this.changeHandler}
                                     classes={this.props.classes}
+
                                     autoComplete="off"
+                                    error={this.state.error !== ""}
+                                    helperText={this.state.error === "" ? "" : this.state.error}
+
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -102,6 +126,8 @@ class JobHuntForm extends Component {
                                     value={this.state.location}
                                     onChange={this.changeHandler}
                                     classes={this.props.classes}
+                                    error={this.state.error !== ""}
+                                    helperText={this.state.error === "" ? "" : this.state.error}
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment>
@@ -128,4 +154,4 @@ JobHuntForm.propTypes = {
     classes: PropTypes.object.isRequired,
 
 };
-export default connect(null, { searchMsg, JobSearchResults })(withStyles(styles)(JobHuntForm));
+export default connect(null, { searchMsg, JobSearchResults, JobSearchFromArbetsformedlingen })(withStyles(styles)(JobHuntForm));

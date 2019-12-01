@@ -29,6 +29,8 @@ class SideBar extends Component {
     super(props);
 
     this.state = {
+      font: "",
+      color: "",
       occupation: "",
       city: "",
       country: "",
@@ -155,6 +157,7 @@ class SideBar extends Component {
         fontFamily: this.props.activeFontFamily,
         color: this.props.cardColor
       };
+      console.log(data.fontFamily)
       const accountId = this.props.account;
 
       //call action to update card
@@ -190,21 +193,17 @@ class SideBar extends Component {
           paper: "drawerPaper"
         }}
       >
-        <Grid container>
+        <Grid container style={{ paddingRight: "25px" }}>
           <Grid item xs={12}>
             <Box textAlign="left">
               <Typography variant="h1">Edit Card</Typography>
               <Typography paragraph>
-                Change the typeface, design color, background color and add
-                Links in the sidebar. To change the content (e.g. mail address)
-                of your card by clicking directly on it and typing in the input
-                field.
+                Complete your profile for better results.
               </Typography>
             </Box>
           </Grid>
           <form onSubmit={this.saveCardChanges} noValidate >
             <Box m={1} textAlign="left">
-
               <label>Font</label>
               <FontPicker
                 apiKey="AIzaSyD4-cMeFhw8_m93qT0Bd1xIY128Mj8P_Zc"
@@ -230,10 +229,13 @@ class SideBar extends Component {
                 fullWidth
                 label="Job Title"
                 margin="normal"
+                id="textFieldOccupation"
                 required
                 value={this.state.occupation}
 
               />
+              <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
+
               <TextField
                 onChange={this.changeFieldValue}
                 name="city"
@@ -241,8 +243,8 @@ class SideBar extends Component {
                 label="City"
                 margin="normal"
                 value={this.state.city}
+                id="textFieldCity"
               />
-              <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
 
               <MuiPhoneNumber
                 name="phone"
@@ -256,13 +258,15 @@ class SideBar extends Component {
               />
 
               <TextField
+                label="Description"
                 fullWidth
-                multiline={true}
-                rows={3}
+                multiline
+                rowsMax="3"
+                id="textFieldDesc"
                 name="comment"
                 value={this.state.comment}
                 onChange={this.changeFieldValue}
-                label="Description"
+                margin="normal"
               />
             </Box>
             <Box m={1}>
@@ -272,6 +276,7 @@ class SideBar extends Component {
                 onChange={this.changeFieldValue}
                 name="github"
                 fullWidth
+                multiline
                 id="githubLink"
                 label="Github"
                 margin="normal"
@@ -281,12 +286,12 @@ class SideBar extends Component {
                   pattern: "https://github.com/.*"
                 }}
                 error={this.state._errors.github && this.state._errors.github !== ""}
-
                 helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
               />
               <TextField
                 fullWidth
                 onChange={this.changeFieldValue}
+                multiline
                 name="linkedin"
                 id="linkedinLink"
                 label="LinkedIn"
@@ -298,7 +303,6 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.linkedin && this.state._errors.linkedin !== ""}
                 helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
-
               />
               <TextField
                 fullWidth
@@ -314,7 +318,7 @@ class SideBar extends Component {
                 }}
                 error={this.state._errors.behance && this.state._errors.behance !== ""}
                 helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
-
+                multiline
               />
               <TextField
                 fullWidth
@@ -323,6 +327,7 @@ class SideBar extends Component {
                 id="facebookLink"
                 label="Facebook"
                 margin="normal"
+                multiline
                 value={this.state.facebook}
                 placeholder="https://facebook.com/"
                 inputProps={{
@@ -338,6 +343,7 @@ class SideBar extends Component {
                 label="Youtube"
                 margin="normal"
                 name="youtube"
+                multiline
                 value={this.state.youtube}
                 placeholder="https://youtube.com/"
                 inputProps={{
@@ -353,6 +359,7 @@ class SideBar extends Component {
                 id="addLinkTextField"
                 label="Twitter"
                 margin="normal"
+                multiline
                 value={this.state.twitter}
                 placeholder="https://twitter.com/"
                 inputProps={{
@@ -368,6 +375,7 @@ class SideBar extends Component {
                 id="instagramLink"
                 label="Instagram"
                 margin="normal"
+                multiline
                 value={this.state.instagram}
                 placeholder="https://instagram.com/"
                 inputProps={{
@@ -383,6 +391,7 @@ class SideBar extends Component {
                 id="websiteLink"
                 label="Website"
                 margin="normal"
+                multiline
                 value={this.state.portfolioSite}
                 placeholder="https://example.com/"
                 inputProps={{

@@ -21,7 +21,7 @@ const UserCard = props => {
     },
     button: {
       textAlign: "center",
-      backgroundColor: props.cardColor,
+      backgroundColor: props.card.color,
       padding: "0.25rem",
       position: "absolute",
       width: "100%",
@@ -48,13 +48,13 @@ const UserCard = props => {
       marginRight: "2px"
     },
     icons: {
-      color: props.cardColor
+      color: props.card.color
     },
     wrapper: {
       padding: "1.5rem"
     },
     cardColor: {
-      backgroundColor: props.cardColor,
+      backgroundColor: props.card.color,
       padding: "1rem",
       display: "flex",
       flexGrow: 1
