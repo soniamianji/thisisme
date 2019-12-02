@@ -10,16 +10,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Box, Grid } from "@material-ui/core";
 import clsx from "clsx";
-import CardJobs from "../child/CardJobs";
 import {
-  JobSearchFromArbetsformedlingen,
   searchMsg,
   clearSearchResult,
   JobSearchResults
 } from "../../actions/searchActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
-import CardJobsAF from "../child/CardJobsAF";
+import JobCard from "../child/JobCard";
 
 
 const useStyles = makeStyles(theme => ({
@@ -60,8 +58,6 @@ const Profile = props => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
     if (props.usercard.occupation != undefined) {
-
-      props.JobSearchFromArbetsformedlingen(props.usercard.occupation, props.usercard.city + " " + props.usercard.country)
       props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
 
     }
@@ -151,12 +147,9 @@ const Profile = props => {
           <Box style={{ marginTop: "44px" }}>
 
             <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
-              {props.jobs &&
-                props.jobs.map((job, index) => (
-                  <CardJobs jobs={job} />
-                ))}
+
               {props.jobsFromAF && props.jobsFromAF.map((job, index) => (
-                <CardJobsAF job={job} />
+                <JobCard job={job} />
               ))}
             </Grid>
           </Box>
@@ -182,7 +175,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   fetchUserCard,
-  JobSearchFromArbetsformedlingen,
   searchMsg,
   clearSearchResult,
   JobSearchResults

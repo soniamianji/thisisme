@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { JobSearchResults, searchMsg, JobSearchFromArbetsformedlingen } from "../../actions/searchActions";
+import { JobSearchResults, searchMsg } from "../../actions/searchActions";
 import { withStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -50,12 +50,6 @@ const styles = theme => ({
             margin: "0 auto"
         },
     },
-    // error: {
-    //     "&.MuiFormHelperText-root.Mui-error": {
-    //         color: "red",
-    //     }
-    // }
-
 })
 
 class JobHuntForm extends Component {
@@ -81,8 +75,6 @@ class JobHuntForm extends Component {
         var tl = new TimelineLite({ paused: true });
         tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
         this.props.JobSearchResults(this.state.description, this.state.location);
-        this.props.JobSearchFromArbetsformedlingen(this.state.description, this.state.location)
-
         this.setState({
             description: '',
             location: ''
@@ -108,11 +100,9 @@ class JobHuntForm extends Component {
                                     value={this.state.description}
                                     onChange={this.changeHandler}
                                     classes={this.props.classes}
-
                                     autoComplete="off"
                                     error={this.state.error !== ""}
                                     helperText={this.state.error === "" ? "" : this.state.error}
-
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -154,4 +144,4 @@ JobHuntForm.propTypes = {
     classes: PropTypes.object.isRequired,
 
 };
-export default connect(null, { searchMsg, JobSearchResults, JobSearchFromArbetsformedlingen })(withStyles(styles)(JobHuntForm));
+export default connect(null, { searchMsg, JobSearchResults })(withStyles(styles)(JobHuntForm));

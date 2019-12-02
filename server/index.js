@@ -24,6 +24,9 @@ app.use("/googleRoute", googleRoute);
 const cardSearch = require("./routes/cardSearch");
 app.use("/cardSearch", cardSearch);
 
+const jobSearch = require("./routes/jobSearch");
+app.use("/jobSearch", jobSearch);
+
 const port = 5000;
 
 app.listen(port, () => console.log(`server is running on port ${port}`));

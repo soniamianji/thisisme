@@ -5,9 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearSearchResult } from "../../actions/searchActions"
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CardJobs from '../child/CardJobs';
 import Box from "@material-ui/core/Box";
-import CardJobsAF from "../child/CardJobsAF"
+import JobCard from "../child/JobCard"
 
 
 class JobHunt extends Component {
@@ -54,13 +53,10 @@ class JobHunt extends Component {
 
                 {this.state.isLoading ? (<div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div>) :
                     (<Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
-                        {this.props.jobs &&
-                            this.props.jobs.map((job, index) => (
-                                <CardJobs jobs={job} />
-                            ))}
-                        {this.props.jobsFromAF && this.props.jobsFromAF.map((job, index) => (
-                            <CardJobsAF job={job} />
+                        {this.props.jobs && this.props.jobs.map((job, index) => (
+                            <JobCard job={job} />
                         ))}
+
                     </Grid>
                     )
                 }
@@ -73,13 +69,11 @@ class JobHunt extends Component {
 JobHunt.propTypes = {
     jobs: PropTypes.array,
     msg: PropTypes.object,
-    jobsFromAF: PropTypes.array,
     classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
-    jobs: state.jobs,
+    jobs: state.jobs.data,
     msg: state.msg,
-    jobsFromAF: state.jobsFromAF.hits
 });
 export default connect(mapStateToProps, { clearSearchResult })(JobHunt);
 

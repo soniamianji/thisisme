@@ -43,7 +43,7 @@ const styles = theme => ({
 
 
 
-class CardJobsAF extends Component {
+class JobCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,26 +59,26 @@ class CardJobsAF extends Component {
         return (
             <Grid item sm={12} style={{ marginBottom: "9px" }}>
                 <Box className={classes.root}>
-                    <Link style={{ textDecoration: "none" }} to={`/jobs/${this.props.job.id}`}>
+                    <Link style={{ textDecoration: "none" }} to={`/jobs/${this.props.job.id}/${this.props.job.source}`}>
                         <Paper style={{ backgroundColor: "#fafafa", }} >
                             <Grid container style={{ padding: "22px" }} >
                                 <Grid item xs={12} sm={6} md={6} >
-                                    <h4 style={{ margin: "0 0" }} >{this.props.job.headline}</h4>
-                                    <p style={{ margin: "0 0", fontSize: "14px" }}>{this.props.job.employer.name}</p>
+                                    <h4 style={{ margin: "0 0" }} >{this.props.job.title}</h4>
+                                    <p style={{ margin: "0 0", fontSize: "14px" }}>{this.props.job.employer}</p>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} >
-                                    <p className={classes.gridStyle} style={{ margin: "0 0" }}>Apply latest: <strong>{moment(this.props.job.application_deadline).format('LL')}</strong></p>
-                                    <p className={classes.gridStyle} style={{ margin: "0 0", fontSize: "14px" }}><ReactTimeAgo date={this.props.job.publication_date} /></p>
+                                    {this.props.job.application_deadline ? <p className={classes.gridStyle} style={{ margin: "0 0" }}>Apply latest: <strong>{moment(this.props.job.application_deadline).format('LL')}</strong></p> : ""}
+                                    <p className={classes.gridStyle} style={{ margin: "0 0", fontSize: "14px" }}>{moment(this.props.job.publication_date).startOf('day').fromNow()}</p>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} >
-                                    <p style={{ color: "grey", marginTop: "15px", marginBottom: "0" }}>{this.props.job.occupation_group.label}</p>
-                                    <p style={{ marginTop: "0", fontSize: "14px" }}>{this.props.job.working_hours_type.label}</p>
+                                    <p style={{ color: "grey", marginTop: "15px", marginBottom: "0" }}>{this.props.job.source}</p>
+                                    <p style={{ marginTop: "0", fontSize: "14px" }}>{this.props.job.working_hours_type}</p>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6}>
                                     <p className={classes.gridStyle} style={{
                                         color: "grey", marginTop: "15px", marginBottom: "0"
-                                    }}>{this.props.job.workplace_address.municipality}</p>
-                                    <p className={classes.gridStyle} style={{ marginTop: "0", fontSize: "14px" }}>{this.props.job.workplace_address.country}</p>
+                                    }}>{this.props.job.city}</p>
+                                    <p className={classes.gridStyle} style={{ marginTop: "0", fontSize: "14px" }}>{this.props.job.country}</p>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -89,6 +89,6 @@ class CardJobsAF extends Component {
         )
     }
 }
-export default (withStyles(styles)(CardJobsAF))
+export default (withStyles(styles)(JobCard))
 
 

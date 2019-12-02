@@ -11,7 +11,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 import NavBar from "./components/child/NavBar";
 import JobHunt from "./components/page/JobHunt";
-import SingleJobAF from "./components/page/SingleJobAF";
+import SingleJob from "./components/page/SingleJob";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -43,7 +43,7 @@ function App() {
             <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/jobhunt" component={JobHunt} />
-            <PrivateRoute path="/jobs/:id" component={SingleJobAF} />
+            <PrivateRoute path="/jobs/:id/:source" component={SingleJob} />
 
           </ThemeProvider>
         </div>

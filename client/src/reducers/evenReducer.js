@@ -5,8 +5,7 @@ import {
   JOB_SEARCH_RESULTS_ASYNC,
   USER_CARD_ASYNC,
   CLEAR_SEARCH_RESULT,
-  CLEAR_USER,
-  JOB_SEARCH_FROM_ARBETS_ASYNC
+  CLEAR_USER
 } from "../actions/types";
 import Auth from "../modules/Auth";
 
@@ -15,7 +14,6 @@ const initialState = {
   usercard: {},
   cards: [],
   jobs: [],
-  jobsFromAF: [],
   msg: {}
 };
 
@@ -53,8 +51,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         msg: {},
         cards: [],
-        jobs: [],
-        jobsFromAF: []
+        jobs: []
       };
     case CLEAR_USER:
       return {
@@ -75,11 +72,7 @@ function rootReducer(state = initialState, action) {
         msg: {},
         jobs: action.jobs
       };
-    case JOB_SEARCH_FROM_ARBETS_ASYNC:
-      return {
-        ...state,
-        jobsFromAF: action.jobs
-      };
+
     default:
       return state;
   }
