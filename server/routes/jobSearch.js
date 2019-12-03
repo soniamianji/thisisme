@@ -62,7 +62,7 @@ router.get("/", (req, res) => {
                 }
             }
 
-            return fetch("https://github-jobs-proxy.appspot.com/positions?description=" + title + "&location=" + location, {
+            return fetch("https://jobs.github.com/positions?description=" + title + "&location=" + location + ".json", {
                 method: 'GET',
                 headers: {
                     Accept: "application/json"
@@ -93,8 +93,8 @@ router.get("/", (req, res) => {
                 var alldata = AFJobs.concat(GHjobs);
                 res.status(200).json({ data: alldata });
             }
-            ).catch(error => res.status(500).json({ error: "error with github" }))
-        }).catch(error => res.status(500).json({ error: "error with af" }))
+            ).catch(error => res.status(500).json(error))
+        }).catch(error => res.status(500).json(error))
 
     } else if (req.query.id) {
         const jobId = req.query.id;
@@ -154,7 +154,7 @@ router.get("/", (req, res) => {
                     source_url: jobs.url
                 }
                 res.status(200).json(jobObj)
-            })
+            }).catch(error => res.status(500).json(error))
 
         }
     }

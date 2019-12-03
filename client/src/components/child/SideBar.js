@@ -259,6 +259,7 @@ class SideBar extends Component {
 
               <TextField
                 label="Description"
+                InputLabelProps={{ shrink: true }}
                 fullWidth
                 multiline
                 rowsMax="3"

@@ -9,9 +9,35 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import { TimelineLite } from "gsap/all";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import "gsap/CSSPlugin";
 
+const theme = createMuiTheme({
+  // For Underline Hover Color
+  overrides: {
+    MuiInput: {
+      underline: {
+        color: "white",
+        borderBottom: "white",
+        '&:after': {
+          borderBottom: "2px solid white",
+        },
+        '&:focused::after': {
+          borderBottom: "2px solid white",
+        },
+        '&:before': {
+          borderBottom: "1px solid white",
+        },
+        '&:hover:not($disabled):not($error):not($focused):before': {
+          borderBottom: '1px solid white'
+        },
 
+      }
+    },
+
+
+  }
+});
 const styles = theme => ({
   root: {
     "& label.Mui-focused": {
@@ -19,19 +45,6 @@ const styles = theme => ({
     },
     "& label": {
       color: "white"
-    },
-    "& .MuiInput-underline.MuiInput-root.MuiInputBase-root:hover": {
-      color: "white !important"
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "white"
-    },
-    "& .MuiInput-underline:before": {
-      borderBottomColor: "white"
-    },
-    "& .MuiInput-input": {
-      color: "white",
-      backgroundColor: "transparent"
     },
   },
   divWidth: {
@@ -81,26 +94,28 @@ class SearchForm extends Component {
           <form onSubmit={this.submitHandler} >
             <Grid container spacing={2} >
               <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  autoComplete="off"
-                  autoFocus
-                  name="searchWords"
-                  label="Seacrh by Name Title or Location"
-                  value={this.state.searchWords}
-                  onChange={this.changeHandler}
-                  classes={this.props.classes}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment>
-                        <IconButton type="submit">
-                          <SearchIcon style={{ color: "white" }} fontSize="large" />
-                        </IconButton>
-                      </InputAdornment>
-                    )
-                  }}
-                >
-                </TextField>
+                <MuiThemeProvider theme={theme}>
+                  <TextField
+                    fullWidth
+                    autoComplete="off"
+                    autoFocus
+                    name="searchWords"
+                    label="Seacrh by Name Title or Location"
+                    value={this.state.searchWords}
+                    onChange={this.changeHandler}
+                    classes={this.props.classes}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment>
+                          <IconButton type="submit">
+                            <SearchIcon style={{ color: "white" }} fontSize="large" />
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }}
+                  >
+                  </TextField>
+                </MuiThemeProvider>
               </Grid>
             </Grid>
 

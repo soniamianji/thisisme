@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Box, Grid } from "@material-ui/core";
+import { Button, Box, Grid, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import {
   searchMsg,
@@ -141,8 +141,12 @@ const Profile = props => {
             )}
           </Media>
 
-          <Box style={{ marginTop: "44px" }}>
-            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
+          <Box style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
+            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
+
+              <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display2" gutterBottom>
+                {props.jobs !== "" ? "Don't miss any opportunities " + `${props.account.name}` + " ! Apply Now!" : "We can not locate any jobs near you!"}
+              </Typography>
               {props.jobs && props.jobs.map((job, index) => (
                 <JobCard job={job} />
               ))}

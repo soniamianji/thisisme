@@ -10,7 +10,33 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import { TimelineLite } from "gsap/all";
 import "gsap/CSSPlugin";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+
+const theme = createMuiTheme({
+    // For Underline Hover Color
+    overrides: {
+        MuiInput: {
+            underline: {
+                color: "white",
+                borderBottom: "white",
+                '&:after': {
+                    borderBottom: "2px solid white",
+                },
+                '&:focused::after': {
+                    borderBottom: "2px solid white",
+                },
+                '&:before': {
+                    borderBottom: "1px solid white",
+                },
+                '&:hover:not($disabled):not($error):not($focused):before': {
+                    borderBottom: '1px solid white'
+                },
+
+            },
+        }
+    }
+});
 const styles = theme => ({
     root: {
         "& label.Mui-focused": {
@@ -19,21 +45,6 @@ const styles = theme => ({
         "& label": {
             color: "white"
         },
-
-        "& .MuiInput-underline:after": {
-            borderBottomColor: "white"
-        },
-        "& .MuiInput-underline:before": {
-            borderBottomColor: "white"
-        },
-        "& .MuiInput-underline:hover": {
-            borderBottomColor: "white"
-        },
-        "& .MuiInput-input": {
-            color: "white",
-            backgroundColro: "transparent"
-        },
-
     },
 
     divWidth: {
@@ -93,41 +104,44 @@ class JobHuntForm extends Component {
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField
-                                    name="description"
-                                    label="Description"
-                                    fullWidth
-                                    value={this.state.description}
-                                    onChange={this.changeHandler}
-                                    classes={this.props.classes}
-                                    autoComplete="off"
-                                    error={this.state.error !== ""}
-                                    helperText={this.state.error === "" ? "" : this.state.error}
-                                />
+                                <MuiThemeProvider theme={theme}>
+                                    <TextField
+                                        name="description"
+                                        label="Description"
+                                        fullWidth
+                                        value={this.state.description}
+                                        onChange={this.changeHandler}
+                                        classes={this.props.classes}
+                                        autoComplete="off"
+                                        error={this.state.error !== ""}
+                                        helperText={this.state.error === "" ? "" : this.state.error}
+                                    />
+                                </MuiThemeProvider>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <TextField
-                                    color="secondary"
-                                    name="location"
-                                    label="Location"
-                                    id="location"
-                                    fullWidth
-                                    autoComplete="off"
-                                    value={this.state.location}
-                                    onChange={this.changeHandler}
-                                    classes={this.props.classes}
-                                    error={this.state.error !== ""}
-                                    helperText={this.state.error === "" ? "" : this.state.error}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment>
-                                                <IconButton type="submit">
-                                                    <SearchIcon style={{ color: "white" }} fontSize="large" />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
+                                <MuiThemeProvider theme={theme}>
+                                    <TextField
+                                        name="location"
+                                        label="Location"
+                                        id="location"
+                                        fullWidth
+                                        autoComplete="off"
+                                        value={this.state.location}
+                                        onChange={this.changeHandler}
+                                        classes={this.props.classes}
+                                        error={this.state.error !== ""}
+                                        helperText={this.state.error === "" ? "" : this.state.error}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment>
+                                                    <IconButton type="submit">
+                                                        <SearchIcon style={{ color: "white" }} fontSize="large" />
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                    />
+                                </MuiThemeProvider>
                             </Grid>
                         </Grid>
                         <Grid container justify="flex-end" />{" "}
