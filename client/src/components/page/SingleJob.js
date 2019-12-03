@@ -38,7 +38,7 @@ const styles = theme => ({
 
     },
     avatar: {
-        width: "100px", height: "40px", borderRadius: "0",
+        width: "100px", height: "100px", borderRadius: "0",
         "& img.MuiAvatar-img": {
             objectFit: "contain"
         }
@@ -165,9 +165,7 @@ class SingleJob extends Component {
                                     Employers Information
                         </Typography>
                                 <p>{this.state.job.employer}</p>
-                                <avatar id="img"
-                                    className={classes.avatar} src={this.state.job.company_Logo}>
-                                </avatar>
+                                <img className={classes.avatar} src={this.state.job.company_Logo}></img>
 
 
 
