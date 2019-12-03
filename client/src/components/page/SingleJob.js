@@ -8,6 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import moment from 'moment';
 import { jobSearchById } from "../../SDK/jobSearch"
 
+
 const styles = theme => ({
     root: {
         [theme.breakpoints.down('sm')]: {
@@ -74,6 +75,7 @@ class SingleJob extends Component {
         const source = this.props.match.params.source;
         console.log(jobId, source);
         jobSearchById(jobId, source, (err, fetchedJob) => {
+            console.log(fetchedJob);
             if (err.length === 0) {
                 fetchedJob.then(fetchedJob => {
                     this.setState({
@@ -152,7 +154,11 @@ class SingleJob extends Component {
 
                         <Grid container style={{ padding: "22px" }}>
                             <Grid item xs={12} >
-                                {this.state.source === "github" ? <div dangerouslySetInnerHTML={{ __html: this.state.job.description }} /> : <p style={{ lineHeight: "1.5rem" }}>{this.state.job.description}</p>}
+                                {this.state.source === "github" ? <div dangerouslySetInnerHTML={{ __html: this.state.job.description }} /> : <article style={{
+                                    whiteSpace: "pre-line",
+                                    wordWrap: "break-word"
+                                }}>{this.state.job.description}</article>}
+
                             </Grid>
                             <Grid item xs={12} md={6} >
                                 <Typography variant="h3" style={{ marginTop: "22px " }}>

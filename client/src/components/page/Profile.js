@@ -57,11 +57,8 @@ const Profile = props => {
   useEffect(() => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
-    if (props.usercard.occupation != undefined) {
-      props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
-
-    }
-
+    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
+    console.log(props.jobs)
     return () => {
       props.clearSearchResult();
     };
@@ -145,10 +142,8 @@ const Profile = props => {
           </Media>
 
           <Box style={{ marginTop: "44px" }}>
-
             <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1" }}>
-
-              {props.jobsFromAF && props.jobsFromAF.map((job, index) => (
+              {props.jobs && props.jobs.map((job, index) => (
                 <JobCard job={job} />
               ))}
             </Grid>
@@ -168,8 +163,7 @@ const mapStateToProps = state => ({
   usercard: state.usercard,
   links: state.usercard.links,
   account: state.account,
-  jobs: state.jobs,
-  jobsFromAF: state.jobsFromAF.hits,
+  jobs: state.jobs.data,
   msg: state.msg
 });
 

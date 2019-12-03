@@ -63,12 +63,12 @@ class JobCard extends Component {
                         <Paper style={{ backgroundColor: "#fafafa", }} >
                             <Grid container style={{ padding: "22px" }} >
                                 <Grid item xs={12} sm={6} md={6} >
-                                    <h4 style={{ margin: "0 0" }} >{this.props.job.title}</h4>
+                                    <h3 style={{ margin: "0 0" }} >{this.props.job.title}</h3>
                                     <p style={{ margin: "0 0", fontSize: "14px" }}>{this.props.job.employer}</p>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} >
-                                    {this.props.job.application_deadline ? <p className={classes.gridStyle} style={{ margin: "0 0" }}>Apply latest: <strong>{moment(this.props.job.application_deadline).format('LL')}</strong></p> : ""}
-                                    <p className={classes.gridStyle} style={{ margin: "0 0", fontSize: "14px" }}>{moment(this.props.job.publication_date).startOf('day').fromNow()}</p>
+                                    {this.props.job.applicationDeadline ? <p className={classes.gridStyle} style={{ margin: "0 0" }}>Apply latest: <strong>{moment(this.props.job.applicationeDadline).format('LL')}</strong></p> : ""}
+                                    <p className={classes.gridStyle} style={{ margin: "0 0", fontSize: "14px" }}>published {moment(this.props.job.publication_date).startOf('day').fromNow()}</p>
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6} >
                                     <p style={{ color: "grey", marginTop: "15px", marginBottom: "0" }}>{this.props.job.source}</p>
