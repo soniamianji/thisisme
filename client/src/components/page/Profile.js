@@ -50,14 +50,19 @@ const Profile = props => {
     open: false,
     activeFontFamily: props.usercard.fontFamily,
     cardColor: props.usercard.color,
-    isLoading: false
+    isLoading: true
   });
 
   //lifecycle hook
   useEffect(() => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
-    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
+    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country, () => {
+      setState({
+        isLoading: false
+      })
+    });
+
     console.log(props.jobs)
     return () => {
       props.clearSearchResult();
@@ -142,15 +147,17 @@ const Profile = props => {
           </Media>
 
           <Box style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
-            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
+            {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
+              <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
+                <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display2" gutterBottom>
+                  {props.jobs ? "Don't miss any opportunities " + `${props.account.name}` + " ! Apply Now!" : "We can not locate any jobs near you! :("}
+                </Typography>
+                {props.jobs && props.jobs.map((job, index) => (
+                  <JobCard job={job} />
+                ))}
+              </Grid>
+            }
 
-              <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display2" gutterBottom>
-                {props.jobs !== "" ? "Don't miss any opportunities " + `${props.account.name}` + " ! Apply Now!" : "We can not locate any jobs near you!"}
-              </Typography>
-              {props.jobs && props.jobs.map((job, index) => (
-                <JobCard job={job} />
-              ))}
-            </Grid>
           </Box>
         </Container>
       </div>

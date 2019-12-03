@@ -43,15 +43,18 @@ function JobSearchResultsAsync(jobs) {
     }
 }
 
-function JobSearchResults(desc, loc) {
+function JobSearchResults(desc, loc, cb) {
     return dispatch => {
-        jobSearch(desc, loc).then(jobs => jobs.length === 0 ? dispatch(
-            searchMsg({
-                msg: "There are no jobs with those search terms."
-            })
-        )
-            :
-            dispatch(JobSearchResultsAsync(jobs))
+        jobSearch(desc, loc).then(jobs => {
+            cb();
+            jobs.data.length === 0 ? dispatch(
+                searchMsg({
+                    msg: "There are no jobs with those search terms."
+                })
+            )
+                :
+                dispatch(JobSearchResultsAsync(jobs))
+        }
         )
     }
 }
