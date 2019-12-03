@@ -47,7 +47,7 @@ function JobSearchResults(desc, loc, cb) {
     return dispatch => {
         jobSearch(desc, loc).then(jobs => {
             cb();
-            jobs.data.length === 0 ? dispatch(
+            jobs.length === 0 ? dispatch(
                 searchMsg({
                     msg: "There are no jobs with those search terms."
                 })

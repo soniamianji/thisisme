@@ -149,7 +149,6 @@ class SingleJob extends Component {
                                 marginTop: "22px",
                                 width: "100%"
                             }}>Apply here</Button> : ""}
-
                         </Grid>
 
                         <Grid container style={{ padding: "22px" }}>
@@ -163,17 +162,15 @@ class SingleJob extends Component {
                             <Grid item xs={12} md={6} >
                                 <Typography variant="h3" style={{ marginTop: "22px " }}>
                                     Employers Information
-                        </Typography>
+                                </Typography>
                                 <p>{this.state.job.employer}</p>
                                 <img className={classes.avatar} src={this.state.job.company_Logo}></img>
-
-
 
                             </Grid>
                             <Grid item className={classes.gridStyle} xs={12} md={6} >
                                 <Typography variant="h3" style={{ marginTop: "22px " }} >
                                     Workplace address
-                        </Typography>
+                                </Typography>
                                 <p style={{ marginTop: "11px" }}>{this.state.job.city} {this.state.job.country}</p>
                             </Grid>
                             <Grid item xs={12} md={6}>

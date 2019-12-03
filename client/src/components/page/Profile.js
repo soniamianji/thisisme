@@ -50,7 +50,7 @@ const Profile = props => {
     open: false,
     activeFontFamily: props.usercard.fontFamily,
     cardColor: props.usercard.color,
-    isLoading: true
+    isLoading: true,
   });
 
   //lifecycle hook
@@ -59,11 +59,12 @@ const Profile = props => {
     props.fetchUserCard(userId);
     props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country, () => {
       setState({
-        isLoading: false
+        isLoading: false,
+        activeFontFamily: state.activeFontFamily,
+        open: state.open,
+        cardColor: state.cardColor
       })
     });
-
-    console.log(props.jobs)
     return () => {
       props.clearSearchResult();
     };
@@ -91,7 +92,7 @@ const Profile = props => {
 
   const changeActiveFont = font => {
     setState({
-      activeFontFamily: font.family,
+      activeFontFamily: state.activeFontFamily,
       open: state.open,
       cardColor: state.cardColor
     });
@@ -148,10 +149,12 @@ const Profile = props => {
 
           <Box style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
             {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
+
+
               <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
-                <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display2" gutterBottom>
-                  {props.jobs ? "Don't miss any opportunities " + `${props.account.name}` + " ! Apply Now!" : "We can not locate any jobs near you! :("}
-                </Typography>
+                <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display-2" gutterBottom>
+                  Don't miss any opportunities  {props.account.name}! Apply Now!
+                 </Typography>
                 {props.jobs && props.jobs.map((job, index) => (
                   <JobCard job={job} />
                 ))}
