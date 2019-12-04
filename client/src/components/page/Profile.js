@@ -141,7 +141,7 @@ const Profile = props => {
 
 
               <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
-                <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="display-2" gutterBottom>
+                <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="h2" gutterBottom>
                   Don't miss any opportunities  {props.account.name}! Apply Now!
                  </Typography>
                 {props.jobs && props.jobs.map((job, index) => (

@@ -45,9 +45,9 @@ class SideBar extends Component {
   }
 
   changeFieldValue = (e, value) => {
-    const input = e.target
-    this.setState({ [input.name]: input.value });
+    const input = e.target;
     const isValid = input.checkValidity()
+    this.setState({ [input.name]: input.value });
     console.log(isValid)
     if (!isValid) {
       this.setState(prevState => ({
@@ -68,7 +68,6 @@ class SideBar extends Component {
 
   handlePhoneChange = (value) => {
     if (value) {
-      console.log(value)
       this.setState({
         phoneNumber: value
       })
@@ -146,7 +145,7 @@ class SideBar extends Component {
         fontFamily: this.props.activeFontFamily,
         color: this.props.cardColor
       };
-      console.log(this.props.activeFontFamily)
+      console.log(this.state.activeFontFamily)
       const accountId = this.props.account;
 
       //call action to update card
@@ -190,14 +189,16 @@ class SideBar extends Component {
               </Typography>
             </Box>
           </Grid>
-          <form onSubmit={this.saveCardChanges} noValidate >
+          <form onSubmit={this.saveCardChanges} noValidate>
             <Box m={1} textAlign="left">
               <label>Font</label>
+
               <FontPicker
                 apiKey="AIzaSyD4-cMeFhw8_m93qT0Bd1xIY128Mj8P_Zc"
-                activeFontFamily={this.props.activeFontFamily}
+                activeFontFamily={this.state.activeFontFamily}
                 onChange={nextFont => this.props.changeActiveFont(nextFont)}
               />
+
             </Box>
 
             <Box m={1} textAlign="left">
@@ -222,10 +223,7 @@ class SideBar extends Component {
                 value={this.state.occupation}
 
               />
-
               <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
-
-
               <TextField
                 onChange={this.changeFieldValue}
                 name="city"
@@ -235,12 +233,10 @@ class SideBar extends Component {
                 value={this.state.city}
                 id="textFieldCity"
               />
-
               <MuiPhoneNumber
                 margin="normal"
                 fullWidth
                 label="Phone Number"
-                name="phoneNumber"
                 defaultCountry={"us"}
                 value={this.state.phoneNumber}
                 onChange={this.handlePhoneChange}
@@ -261,11 +257,10 @@ class SideBar extends Component {
             </Box>
             <Box m={1}>
               <h3>Links</h3>
-              {<TextField
+              <TextField
                 onChange={this.changeFieldValue}
                 name="github"
                 fullWidth
-                multiline
                 id="githubLink"
                 label="Github"
                 margin="normal"
@@ -274,23 +269,26 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://github.com/.*"
                 }}
-                error={this.state._errors.github && this.state._errors.github !== ""}
+                error={Boolean(this.state._errors.github && this.state._errors.github !== "")}
                 helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
-              />}
+
+              />
               <TextField
                 fullWidth
                 onChange={this.changeFieldValue}
-                multiline
+
                 name="linkedin"
                 id="linkedinLink"
                 label="LinkedIn"
                 margin="normal"
                 value={this.state.linkedin}
+
                 placeholder="https://linkedin.com/"
                 inputProps={{
-                  pattern: "https://linkedin.com/.*"
+                  pattern: "https://linkedin.com/.*",
+
                 }}
-                error={this.state._errors.linkedin && this.state._errors.linkedin !== ""}
+                error={Boolean(this.state._errors.linkedin && this.state._errors.linkedin !== "")}
                 helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
               />
               <TextField
@@ -303,9 +301,9 @@ class SideBar extends Component {
                 value={this.state.behance}
                 placeholder="https://behance.com/"
                 inputProps={{
-                  pattern: "https://behance.com.*"
+                  pattern: "https://behance.com/.*"
                 }}
-                error={this.state._errors.behance && this.state._errors.behance !== ""}
+                error={Boolean(this.state._errors.behance && this.state._errors.behance !== "")}
                 helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
                 multiline
               />
@@ -316,13 +314,12 @@ class SideBar extends Component {
                 id="facebookLink"
                 label="Facebook"
                 margin="normal"
-                multiline
                 value={this.state.facebook}
                 placeholder="https://facebook.com/"
                 inputProps={{
                   pattern: "https://facebook.com.*"
                 }}
-                error={this.state._errors.facebook && this.state._errors.facebook !== ""}
+                error={Boolean(this.state._errors.facebook && this.state._errors.facebook !== "")}
                 helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
               />
               <TextField
@@ -332,13 +329,12 @@ class SideBar extends Component {
                 label="Youtube"
                 margin="normal"
                 name="youtube"
-                multiline
                 value={this.state.youtube}
                 placeholder="https://youtube.com/"
                 inputProps={{
                   pattern: "https://youtube.com.*"
                 }}
-                error={this.state._errors.youtube && this.state._errors.youtube !== ""}
+                error={Boolean(this.state._errors.youtube && this.state._errors.youtube !== "")}
                 helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
               />
               <TextField
@@ -348,13 +344,12 @@ class SideBar extends Component {
                 id="addLinkTextField"
                 label="Twitter"
                 margin="normal"
-                multiline
                 value={this.state.twitter}
                 placeholder="https://twitter.com/"
                 inputProps={{
                   pattern: "https://twitter.com.*"
                 }}
-                error={this.state._errors.twitter && this.state._errors.twitter !== ""}
+                error={Boolean(this.state._errors.twitter && this.state._errors.twitter !== "")}
                 helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
               />
               <TextField
@@ -364,13 +359,12 @@ class SideBar extends Component {
                 id="instagramLink"
                 label="Instagram"
                 margin="normal"
-                multiline
                 value={this.state.instagram}
                 placeholder="https://instagram.com/"
                 inputProps={{
                   pattern: "https://instagram.com.*"
                 }}
-                error={this.state._errors.instagram && this.state._errors.instagram !== ""}
+                error={Boolean(this.state._errors.instagram && this.state._errors.instagram !== "")}
                 helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
               />
               <TextField
@@ -380,13 +374,12 @@ class SideBar extends Component {
                 id="websiteLink"
                 label="Website"
                 margin="normal"
-                multiline
                 value={this.state.portfolioSite}
                 placeholder="https://example.com/"
                 inputProps={{
                   pattern: "https://.*"
                 }}
-                error={this.state._errors.portfolioSite && this.state._errors.portfolioSite !== ""}
+                error={Boolean(this.state._errors.portfolioSite && this.state._errors.portfolioSite !== "")}
                 helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
               />
 
