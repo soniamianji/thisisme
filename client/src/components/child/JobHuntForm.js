@@ -84,7 +84,7 @@ class JobHuntForm extends Component {
         this.props.loading(isLoading);
         var tl = new TimelineLite({ paused: true });
         tl.to("#formAnimation", 0.5, { marginTop: 0 }).play()
-        this.props.JobSearchResults(this.state.description, this.state.location);
+        this.props.JobSearchResults(this.state.description, this.state.location, () => { });
         this.setState({
             description: '',
             location: ''

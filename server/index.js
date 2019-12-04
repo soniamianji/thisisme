@@ -5,8 +5,6 @@ const app = express();
 const config = require("./confiq/index.json");
 
 
-
-
 // connect to the database and load models
 require("./models").connect(config.dbUri);
 

@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchUserCard } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Box, Grid, Typography } from "@material-ui/core";
+import { Button, Box, Paper, Grid, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { searchMsg, clearSearchResult, JobSearchResults } from "../../actions/searchActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -53,11 +53,13 @@ const Profile = props => {
   useEffect(() => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
-    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
+    props.JobSearchResults(props.usercard.occupation, props.usercard.city, () => {
+      setState({ isLoading: false })
+    });
     return () => {
       props.clearSearchResult();
     };
-  }, [props.account.id, props.usercard.occupation, props.usercard.city, props.usercard.country]);
+  }, [props.account.id, props.usercard.occupation, props.usercard.city]);
 
   const classes = useStyles();
 
@@ -136,7 +138,7 @@ const Profile = props => {
             )}
           </Media>
 
-          <Box style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
+          <Paper style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
             {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
 
 
@@ -150,7 +152,7 @@ const Profile = props => {
               </Grid>
             }
 
-          </Box>
+          </Paper>
         </Container>
       </div>
     </div>

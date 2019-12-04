@@ -11,7 +11,6 @@ import UserCardMobile from "../child/UserCardMobile";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
-
   root: {
     [theme.breakpoints.down('sm')]: {
       justifyContent: "center",
@@ -23,7 +22,6 @@ const styles = theme => ({
       margin: "0 auto",
       width: "82%"
     },
-
   }
 })
 
@@ -39,7 +37,6 @@ class SearchResult extends Component {
     this.props.clearSearchResult();
   }
   getSearchWord = (value) => {
-    console.log(value)
     this.setState({ searchWord: value })
   }
 

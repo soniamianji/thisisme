@@ -46,6 +46,7 @@ function JobSearchResultsAsync(jobs) {
 function JobSearchResults(desc, loc, cb) {
     return dispatch => {
         jobSearch(desc, loc).then(jobs => {
+            cb();
             dispatch(JobSearchResultsAsync(jobs))
         }
         )
