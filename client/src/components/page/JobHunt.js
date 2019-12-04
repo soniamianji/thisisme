@@ -7,7 +7,6 @@ import { clearSearchResult } from "../../actions/searchActions"
 import JobCard from "../child/JobCard"
 
 
-
 class JobHunt extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +14,6 @@ class JobHunt extends Component {
             isLoading: false
         }
     }
-
 
     componentWillUnmount() {
         this.props.clearSearchResult()
@@ -35,13 +33,9 @@ class JobHunt extends Component {
                 isLoading: false
             })
         }
-
-
     }
 
-
     render() {
-
         return (
             <div >
                 <JobHuntForm loading={this.loading} />
@@ -53,8 +47,6 @@ class JobHunt extends Component {
                         {this.props.jobs && this.props.jobs.map((job, index) => (
                             <JobCard job={job} />
                         ))}
-
-
                     </Grid>
                     )
                 }
