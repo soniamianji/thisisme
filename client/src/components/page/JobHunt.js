@@ -69,6 +69,7 @@ JobHunt.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
+
     jobs: state.jobs.data,
     msg: state.msg,
 });

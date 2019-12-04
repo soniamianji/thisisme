@@ -53,14 +53,7 @@ const Profile = props => {
   useEffect(() => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
-    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country, () => {
-      setState({
-        isLoading: false,
-        activeFontFamily: state.activeFontFamily,
-        open: state.open,
-        cardColor: state.cardColor
-      })
-    });
+    props.JobSearchResults(props.usercard.occupation, props.usercard.city + " " + props.usercard.country);
     return () => {
       props.clearSearchResult();
     };

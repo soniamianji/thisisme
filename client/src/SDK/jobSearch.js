@@ -1,12 +1,16 @@
 const sendRequest = require("./sendRequests");
 
-const jobSearch = async function (title, location, callback) {
+const jobSearch = async function (title, location) {
     let response;
+    let body = {
+        title: title,
+        location: location
+    }
 
     try {
         response = await sendRequest.sendRequest(
-            "GET",
-            "/jobSearch?title=" + title + "&location=" + location
+            "POST",
+            "/jobSearch", body
         );
     } catch (errors) {
         console.log(errors)

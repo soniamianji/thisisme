@@ -24,79 +24,112 @@ let jobObj = {
     apply_here: ""
 }
 
-
-//get jobs both from github and arbetsformedlingen
-router.get("/", (req, res) => {
-    if (req.query.title || req.query.location) {
-        const title = req.query.title;
-        const location = req.query.location;
-        let AFJobs = [];
-        let GHjobs = [];
-        fetch("https://jobsearch.api.jobtechdev.se/search?q=" + title + "?" + location, {
-            method: 'GET',
-            headers: {
-                Accept: "application/json",
-                "api-key": `${afApiKey}`
-            }
-        }).then(res => res.json()).then(function (jobs) {
-            if (jobs.hits.length > 0) {
-                for (var i = 0; i < jobs.hits.length; i++) {
-                    jobObj = {
-                        id: jobs.hits[i].id,
-                        title: jobs.hits[i].headline,
-                        employer: jobs.hits[i].employer.name,
-                        applicationDeadline: jobs.hits[i].application_deadline,
-                        publicationDate: jobs.hits[i].publication_date,
-                        description: jobs.hits[i].description.text,
-                        working_hours_type: jobs.hits[i].working_hours_type.label,
-                        city: jobs.hits[i].workplace_address.municipality,
-                        country: jobs.hits[i].workplace_address.country,
-                        employment_Type: jobs.hits[i].employment_type.label,
-                        webpage_url: jobs.hits[i].employer.url,
-                        company_Logo: jobs.hits[i].logo_url,
-                        source: "arbetsFörmedlingen",
-                        source_url: jobs.hits[i].webpage_url,
-                        apply_here: jobs.hits[i].application_details.url
+router.post("/", (req, res) => {
+    const title = req.body.title;
+    const location = req.body.location;
+    let AFJobs = [];
+    let GHjobs = [];
+    let minucipalityConceptId = ""
+    let countryConceptId = ""
+    //first get the taxanomy for the location
+    fetch("https://jobsearch.api.jobtechdev.se/taxonomy/search?q=" + encodeURIComponent(location), {
+        method: 'GET',
+        headers: {
+            Accept: "application/json",
+            "api-key": `${afApiKey}`
+        }
+    }).then(res => res.json()).then(
+        function (taxonomy) {
+            console.log(taxonomy);
+            if (taxonomy.result.length !== 0) {
+                console.log("first if");
+                for (var b = 0; b < taxonomy.result.length; b++) {
+                    console.log("in the loop");
+                    if (taxonomy.result[b].type === "municipality") {
+                        minucipalityConceptId = taxonomy.result[b].conceptId;
                     }
-                    AFJobs.push(jobObj);
+                    if (taxonomy.result[b].type === "country") {
+                        countryConceptId = taxonomy.result[b].conceptId;
+                    }
                 }
             }
-
-            return fetch("https://jobs.github.com/positions?description=" + title + "&location=" + location + ".json", {
+            console.log(minucipalityConceptId);
+            console.log(countryConceptId);
+            //pass the conceptid of the locations to the search params get the result
+            return fetch("https://jobsearch.api.jobtechdev.se/search?municipality=" + minucipalityConceptId + "&q=" + title, {
                 method: 'GET',
                 headers: {
-                    Accept: "application/json"
+                    Accept: "application/json",
+                    "api-key": `${afApiKey}`
                 }
             }).then(res => res.json()).then(function (jobs) {
-                if (jobs.length > 0) {
-                    for (var i = 0; i < jobs.length; i++) {
+
+                console.log("here")
+                if (jobs.hits.length > 0) {
+                    for (var i = 0; i < jobs.hits.length; i++) {
                         jobObj = {
-                            id: jobs[i].id,
-                            title: jobs[i].title,
-                            employer: jobs[i].company,
-                            applicationDeadline: "",
-                            publicationDate: jobs[i].created_at,
-                            description: jobs[i].description,
-                            working_hours_type: jobs[i].type,
-                            city: jobs[i].location.split(",")[0],
-                            country: jobs[i].location.split(",")[1],
-                            employment_Type: jobs[i].type,
-                            webpage_url: jobs[i].company_url,
-                            company_Logo: jobs[i].company_logo,
-                            apply_here: jobs[i].how_to_apply,
-                            source: "github",
-                            source_url: jobs[i].url
+                            id: jobs.hits[i].id,
+                            title: jobs.hits[i].headline,
+                            employer: jobs.hits[i].employer.name,
+                            applicationDeadline: jobs.hits[i].application_deadline,
+                            publicationDate: jobs.hits[i].publication_date,
+                            description: jobs.hits[i].description.text,
+                            working_hours_type: jobs.hits[i].working_hours_type.label,
+                            city: jobs.hits[i].workplace_address.municipality,
+                            country: jobs.hits[i].workplace_address.country,
+                            employment_Type: jobs.hits[i].employment_type.label,
+                            webpage_url: jobs.hits[i].employer.url,
+                            company_Logo: jobs.hits[i].logo_url,
+                            source: "arbetsFörmedlingen",
+                            source_url: jobs.hits[i].webpage_url,
+                            apply_here: jobs.hits[i].application_details.url
                         }
-                        GHjobs.push(jobObj);
+                        console.log(jobs.hits[i].workplace_address.municipality)
+                        AFJobs.push(jobObj);
                     }
                 }
-                var alldata = AFJobs.concat(GHjobs);
-                res.status(200).json({ data: alldata });
-            }
-            ).catch(error => res.status(500).json(error))
-        }).catch(error => res.status(500).json(error))
 
-    } else if (req.query.id) {
+                return fetch("https://jobs.github.com/positions?description=" + title + "&location=" + encodeURIComponent(location) + ".json", {
+                    method: 'GET',
+                    headers: {
+                        Accept: "application/json"
+                    }
+                }).then(res => res.json()).then(function (jobs) {
+                    if (jobs.length > 0) {
+                        for (var i = 0; i < jobs.length; i++) {
+                            jobObj = {
+                                id: jobs[i].id,
+                                title: jobs[i].title,
+                                employer: jobs[i].company,
+                                applicationDeadline: "",
+                                publicationDate: jobs[i].created_at,
+                                description: jobs[i].description,
+                                working_hours_type: jobs[i].type,
+                                city: jobs[i].location.split(",")[0],
+                                country: jobs[i].location.split(",")[1],
+                                employment_Type: jobs[i].type,
+                                webpage_url: jobs[i].company_url,
+                                company_Logo: jobs[i].company_logo,
+                                apply_here: jobs[i].how_to_apply,
+                                source: "github",
+                                source_url: jobs[i].url
+                            }
+                            GHjobs.push(jobObj);
+                        }
+                    }
+                    var alldata = AFJobs.concat(GHjobs);
+                    res.status(200).json({ data: alldata });
+                }
+                ).catch(error => res.status(500).json(error))
+            }).catch(error => res.status(500).json(error))
+
+        }
+    ).catch(error => res.status(500).json(error))
+
+})
+//get jobs both from github and arbetsformedlingen
+router.get("/", (req, res) => {
+    if (req.query.id) {
         const jobId = req.query.id;
         const source = req.query.source;
         if (source === "arbetsFörmedlingen") {

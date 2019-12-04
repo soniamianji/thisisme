@@ -4,6 +4,9 @@ const cors = require("cors");
 const app = express();
 const config = require("./confiq/index.json");
 
+
+
+
 // connect to the database and load models
 require("./models").connect(config.dbUri);
 
@@ -26,6 +29,20 @@ app.use("/cardSearch", cardSearch);
 
 const jobSearch = require("./routes/jobSearch");
 app.use("/jobSearch", jobSearch);
+
+const fetch = require('node-fetch');
+const { afApiKey } = require("./confiq/conf")
+
+const myUrl = "malmö";
+
+fetch("https://jobsearch.api.jobtechdev.se/search?municipality=oYPt_yRA_Smm&q=web", {
+    method: 'GET',
+    headers: {
+        Accept: "application/json",
+        "api-key": `${afApiKey}`
+    }
+}).then(res => res.json()).then(text => console.log(text));
+
 
 const port = 5000;
 
