@@ -48,7 +48,7 @@ class SideBar extends Component {
     const input = e.target
     this.setState({ [input.name]: input.value });
     const isValid = input.checkValidity()
-
+    console.log(isValid)
     if (!isValid) {
       this.setState(prevState => ({
         _errors: {                   // object that we want to update
@@ -121,25 +121,9 @@ class SideBar extends Component {
     this.setState({
       _errors: validationMessages
     })
+    console.log(validationMessages)
 
-
-    // if (isValid) {
-    //   // here you do what you need to do if is valid
-    //   const data = Array.from(formData.keys()).reduce((acc, key) => {
-    //     acc[key] = formData.get(key)
-    //     return acc
-    //   }, {})
-    //   console.log(data)
-    // }
     if (isValid) {
-
-
-      //   // here you do what you need to do if is valid
-      // const data = Array.from(formData.keys()).reduce((acc, key) => {
-      //   acc[key] = formData.get(key)
-      //   return acc
-      // }, {})
-      // console.log(data)
 
       const data = {
         name: this.state.name,
@@ -238,7 +222,9 @@ class SideBar extends Component {
                 value={this.state.occupation}
 
               />
+
               <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
+
 
               <TextField
                 onChange={this.changeFieldValue}
@@ -275,7 +261,7 @@ class SideBar extends Component {
             </Box>
             <Box m={1}>
               <h3>Links</h3>
-              <TextField
+              {<TextField
                 onChange={this.changeFieldValue}
                 name="github"
                 fullWidth
@@ -288,9 +274,9 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://github.com/.*"
                 }}
-                error={this.state._errors.github && (this.state._errors.github !== "")}
+                error={this.state._errors.github && this.state._errors.github !== ""}
                 helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
-              />
+              />}
               <TextField
                 fullWidth
                 onChange={this.changeFieldValue}
@@ -304,7 +290,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://linkedin.com/.*"
                 }}
-                error={this.state._errors.linkedin && (this.state._errors.linkedin !== "")}
+                error={this.state._errors.linkedin && this.state._errors.linkedin !== ""}
                 helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
               />
               <TextField
@@ -319,7 +305,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://behance.com.*"
                 }}
-                error={this.state._errors.behance && (this.state._errors.behance !== "")}
+                error={this.state._errors.behance && this.state._errors.behance !== ""}
                 helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
                 multiline
               />
@@ -336,7 +322,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://facebook.com.*"
                 }}
-                error={this.state._errors.facebook && (this.state._errors.facebook !== "")}
+                error={this.state._errors.facebook && this.state._errors.facebook !== ""}
                 helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
               />
               <TextField
@@ -352,7 +338,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://youtube.com.*"
                 }}
-                error={this.state._errors.youtube && (this.state._errors.youtube !== "")}
+                error={this.state._errors.youtube && this.state._errors.youtube !== ""}
                 helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
               />
               <TextField
@@ -368,7 +354,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://twitter.com.*"
                 }}
-                error={this.state._errors.twitter && (this.state._errors.twitter !== "")}
+                error={this.state._errors.twitter && this.state._errors.twitter !== ""}
                 helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
               />
               <TextField
@@ -384,7 +370,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://instagram.com.*"
                 }}
-                error={this.state._errors.instagram && (this.state._errors.instagram !== "")}
+                error={this.state._errors.instagram && this.state._errors.instagram !== ""}
                 helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
               />
               <TextField
@@ -400,7 +386,7 @@ class SideBar extends Component {
                 inputProps={{
                   pattern: "https://.*"
                 }}
-                error={this.state._errors.portfolioSite && (this.state._errors.portfolioSite !== "")}
+                error={this.state._errors.portfolioSite && this.state._errors.portfolioSite !== ""}
                 helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
               />
 

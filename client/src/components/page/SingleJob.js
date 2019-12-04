@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { arbetsBaseUrl } from "../../constantNames/api"
 import { Grid, Box, Paper, Typography, Button } from "@material-ui/core";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
