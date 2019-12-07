@@ -44,8 +44,6 @@ const Profile = props => {
   // state
   const [state, setState] = useState({
     open: false,
-    activeFontFamily: props.usercard.fontFamily,
-    cardColor: props.usercard.color,
     isLoading: true,
   });
 
@@ -54,7 +52,7 @@ const Profile = props => {
     const userId = props.account.id;
     props.fetchUserCard(userId);
     props.JobSearchResults(props.usercard.occupation, props.usercard.city, () => {
-      setState({ isLoading: false })
+      setState({ isLoading: false, open: false })
     });
     return () => {
       props.clearSearchResult();
@@ -65,29 +63,12 @@ const Profile = props => {
 
   // functions
   const drawerHandler = () => {
+    console.log("called")
     setState({
-      open: !state.open,
-      activeFontFamily: state.activeFontFamily,
-      cardColor: state.cardColor,
-      body: state.body
+      open: !state.open
     });
   };
 
-  const changeCardColor = color => {
-    setState({
-      cardColor: color.hex,
-      open: state.open,
-      activeFontFamily: state.activeFontFamily
-    });
-  };
-
-  const changeActiveFont = font => {
-    setState({
-      activeFontFamily: state.activeFontFamily,
-      open: state.open,
-      cardColor: state.cardColor
-    });
-  };
 
   return (
     <div className={classes.root}>
@@ -98,10 +79,6 @@ const Profile = props => {
         account={props.account.id}
         drawerHandler={drawerHandler}
         open={state.open}
-        activeFontFamily={state.activeFontFamily}
-        cardColor={state.cardColor}
-        changeCardColor={changeCardColor}
-        changeActiveFont={changeActiveFont}
       />
       <div
         className={clsx(classes.content, {
@@ -122,14 +99,12 @@ const Profile = props => {
               <div>
                 {matches.small && (
                   <UserCardMobile
-                    cardColor={state.cardColor}
                     links={props.links}
                     card={props.usercard}
                   />
                 )}
                 {matches.medium && (
                   <UserCard
-                    cardColor={state.cardColor}
                     links={props.links}
                     card={props.usercard}
                   />
@@ -140,14 +115,12 @@ const Profile = props => {
 
           <Paper style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
             {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
-
-
               <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
                 <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="h2" gutterBottom>
                   Don't miss any opportunities  {props.account.name}! Apply Now!
                  </Typography>
                 {props.jobs && props.jobs.map((job, index) => (
-                  <JobCard job={job} />
+                  <JobCard job={job} key={index} />
                 ))}
               </Grid>
             }
