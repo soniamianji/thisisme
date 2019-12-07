@@ -87,7 +87,7 @@ module.exports.updateCard = async function (id, cardData, callback) {
       break;
 
     case 400:
-      errors = ["something is wrong"];
+      errors = ["something is wrong with the client request"];
       break;
 
     case 500:
@@ -120,6 +120,7 @@ module.exports.deleteCard = async function (id, callback) {
 
     case 400:
       errors = response.errors;
+      break;
 
     case 500:
       errors = ["backendError"];

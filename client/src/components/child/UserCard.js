@@ -158,9 +158,9 @@ const UserCard = props => {
               <Grid container spacing={2} direction="row">
                 {props.links &&
                   Object.keys(props.links).map((key, index) =>
-                    props.links[key] != "" ? (
+                    props.links[key] !== "" ? (
                       <Grid item key={index}>
-                        {key == "portfolioSite" ? (
+                        {key === "portfolioSite" ? (
                           <a className={classes.icons} href={props.links[key]}>
                             <i className={"far fa-2x fa-user-circle"} />
                           </a>

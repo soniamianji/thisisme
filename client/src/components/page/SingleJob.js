@@ -99,10 +99,6 @@ class SingleJob extends Component {
         margin: 44px auto;
       `;
 
-        const StyledButton = styled(Button)`
-        color: white;
-        backgroundColor: black
-        `;
         const { classes } = this.props;
         return (
             <Box>
@@ -163,7 +159,7 @@ class SingleJob extends Component {
                                     Employers Information
                                 </Typography>
                                 <p>{this.state.job.employer}</p>
-                                <img className={classes.avatar} src={this.state.job.company_Logo}></img>
+                                <img className={classes.avatar} src={this.state.job.company_Logo} alt="companyLogo"></img>
 
                             </Grid>
                             <Grid item className={classes.gridStyle} xs={12} md={6} >

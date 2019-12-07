@@ -32,7 +32,6 @@ const jobSearch = async function (title, location, callback) {
         default:
             errors = ["unknown status code"];
     }
-    console.log(errors)
 
     return jobs;
 };

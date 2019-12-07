@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import ReactTimeAgo from 'react-time-ago';
 import { withStyles } from "@material-ui/core/styles";
 import moment from 'moment';
 import { Link } from "react-router-dom";
-
-
 
 
 const styles = theme => ({

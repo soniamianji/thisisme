@@ -36,7 +36,7 @@ const CardSchema = new mongoose.Schema({
   last_modified: Date,
   fontFamily: {
     type: String,
-    default: "Open sans"
+    default: "Karla"
   },
   color: {
     type: String,

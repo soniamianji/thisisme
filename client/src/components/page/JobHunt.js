@@ -45,7 +45,7 @@ class JobHunt extends Component {
                             {this.props.msg.msg}
                         </Typography>
                         {this.props.jobs && this.props.jobs.map((job, index) => (
-                            <JobCard job={job} />
+                            <JobCard job={job} key={index} />
                         ))}
                     </Grid>
                     )
