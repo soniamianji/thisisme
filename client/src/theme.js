@@ -2,11 +2,11 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
 
 const theme = createMuiTheme({
-  // palette: {
-  //   primary: {
-  //     main: red[500]
-  //   }
-  // },
+  palette: {
+    primary: {
+      main: "#282c34"
+    }
+  },
   typography: {
     h1: {
       fontSize: "2rem",

@@ -14,6 +14,7 @@ import { searchMsg, clearSearchResult, JobSearchResults } from "../../actions/se
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
 import JobCard from "../child/JobCard";
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const useStyles = makeStyles(theme => ({
@@ -86,8 +87,8 @@ const Profile = props => {
         })}
       >
         <Container>
-          <Box display="flex" flexDirection="row-reverse">
-            <Button onClick={drawerHandler} style={{ color: "white" }}>Edit Card</Button>
+          <Box display="flex" flexDirection="row-reverse" style={{ width: "50%", margin: "0 auto" }}>
+            <Button onClick={drawerHandler} style={{ color: "gray", marginRight: "41px" }}><EditIcon></EditIcon>Edit Card</Button>
           </Box>
           <Media
             queries={{

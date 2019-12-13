@@ -143,13 +143,14 @@ const UserCard = props => {
                     </Box>
                     <Box className={classes.contactInfo} textAlign="left">
                       <Typography className="apply-font" variant="h4">
-                        <span className={classes.location}>
-                          <RoomIcon
-                            className={classes.locationIcon}
-                            color="primary"
-                          />
-                          {props.card.city},{props.card.country}
-                        </span>
+
+                        {props.country !== "" ? <span className={classes.location}> <RoomIcon
+                          className={classes.locationIcon}
+                          color="primary"
+                        />
+                          {props.card.city}, {props.card.country}  </span> : ""}
+
+
                       </Typography>
                     </Box>
                   </Box>

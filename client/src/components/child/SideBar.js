@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
 import MuiPhoneNumber from "material-ui-phone-number";
-import CountryInput from "./CountryInput"
+import CountryInput from "./CountryInput";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const StyledDrawer = styled(Drawer)`
   width: 400,
@@ -163,6 +164,7 @@ class SideBar extends Component {
   render() {
     return (
       <StyledDrawer open={this.props.open} variant="persistent" anchor="left" classes={{ paper: "drawerPaper" }}>
+        <HighlightOffIcon color="secondary" style={{ position: "fixed", marginLeft: "332px", cursor: "pointer" }} onClick={this.props.drawerHandler}></HighlightOffIcon>
         <Grid container style={{ paddingRight: "25px" }}>
           <Grid item xs={12}>
             <Box textAlign="left">
@@ -339,9 +341,11 @@ class SideBar extends Component {
               />
 
             </Box>
-            <Button
-              variant="contained" color="primary" type="submit">Save Changes</Button>
-            <Button onClick={this.props.drawerHandler} variant="contained" color="secondary"> Close</Button>
+            <Grid container>
+              <Grid item xs={12}>
+                <Button variant="contained" color="#282c34" style={{ marginTop: 22, backgroundColor: "#282c34", color: "white" }} fullWidth type="submit">Save Changes</Button>
+              </Grid>
+            </Grid>
           </form>
         </Grid>
       </StyledDrawer>
