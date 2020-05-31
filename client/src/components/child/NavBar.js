@@ -89,7 +89,7 @@ class NavBar extends Component {
             >
               <MenuItem onClick={this.handleClose}><Link to="/profile" style={{ textDecoration: "none", color: "black" }}>Profile</Link></MenuItem>
               <MenuItem onClick={this.handleClose}><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
-              <MenuItem onClick={this.handleClose}><Link to="/jobhunt" style={{ textDecoration: "none", color: "black" }}>Find Jobs!</Link></MenuItem>
+              <MenuItem onClick={this.handleClose}><Link to="/searchusers" style={{ textDecoration: "none", color: "black" }}>Find Users!</Link></MenuItem>
             </Menu>
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (

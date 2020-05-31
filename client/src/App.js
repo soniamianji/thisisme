@@ -39,10 +39,10 @@ function App() {
         <div className="App" >
           <ThemeProvider theme={theme}>
             <NavBar />
-            <GlobalRoute exact path="/" component={SearchResult} />
+            <GlobalRoute exact path="/" component={JobHunt} />
             <GlobalRoute path="/login" component={Login} />
             <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/jobhunt" component={JobHunt} />
+            <PrivateRoute path="/searchusers" component={SearchResult} />
             <PrivateRoute path="/jobs/:id/:source" component={SingleJob} />
 
           </ThemeProvider>
