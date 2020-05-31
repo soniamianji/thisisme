@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
 import MuiPhoneNumber from "material-ui-phone-number";
-import CountryInput from "./CountryInput";
+import LocationForm from "./CountryInput";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const StyledDrawer = styled(Drawer)`
@@ -118,7 +118,6 @@ class SideBar extends Component {
         },
       };
       const accountId = this.props.account;
-
       //call action to update card
       updateCard(accountId, data, err => {
         if (err.length === 0) {
@@ -140,7 +139,7 @@ class SideBar extends Component {
   countryfromChild = (value) => {
     this.setState(prevState => ({
       ...prevState,
-      country: value.country
+      country: value
     }))
   };
 
@@ -198,21 +197,13 @@ class SideBar extends Component {
                 required
                 value={this.state.occupation}
               />
-              <CountryInput value={this.state.country} countryfromChild={this.countryfromChild} />
-              <TextField
-                onChange={this.changeFieldValue}
-                name="city"
-                fullWidth
-                label="City"
-                margin="normal"
-                value={this.state.city}
-                id="textFieldCity"
-              />
+              <LocationForm value={this.state.country} countryfromChild={this.countryfromChild} />
+
               <MuiPhoneNumber
                 margin="normal"
                 fullWidth
                 label="Phone Number"
-                defaultCountry={"us"}
+                defaultCountry={"se"}
                 value={this.state.phoneNumber}
                 onChange={this.handlePhoneChange}
               />
@@ -249,7 +240,6 @@ class SideBar extends Component {
               <TextField
                 fullWidth
                 onChange={this.changeFieldValue}
-
                 name="linkedin"
                 id="linkedinLink"
                 label="LinkedIn"
