@@ -28,7 +28,6 @@ router.post("/", (req, res) => {
       return oauth2.userinfo.get();
     })
     .then(userData => {
-      console.log(userData.data);
       const googleid = userData.data.id;
       //check if user has already logged in with their googleAccount
       Card.findOne({ googleId: googleid }, (err, user) => {
@@ -38,7 +37,7 @@ router.post("/", (req, res) => {
             name: userData.data.name.toLowerCase(),
             email: userData.data.email,
             googleId: userData.data.id,
-            img: userData.data.picture
+            img: userData.data.picture,
           };
           const newUserCard = new Card(userInfo);
           newUserCard.save(err => {
@@ -56,7 +55,8 @@ router.post("/", (req, res) => {
                     {
                       id: newUser.id,
                       email: newUser.email,
-                      name: newUser.name
+                      name: newUser.name,
+                      isNewUser: true
                     },
                     secretTokenKey
                   );
@@ -72,11 +72,14 @@ router.post("/", (req, res) => {
           });
         } else if (user) {
           const access_token = jwt.sign({ id: user.id }, secretTokenKey);
+          user.isNewUser = false;
+          user.save(err => { return res.status(500).end() })
           const id_token = jwt.sign(
             {
               email: user.email,
               name: user.name,
               id: user.id,
+              isNewUser: false
             },
             secretTokenKey
           );

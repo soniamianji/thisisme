@@ -17,6 +17,7 @@ const CardSchema = new mongoose.Schema({
   occupation: {
     type: String
   },
+  isNewUser: { type: Boolean, default: true },
   city: String,
   country: String,
   phoneNumber: String,

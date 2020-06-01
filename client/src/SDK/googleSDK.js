@@ -35,10 +35,10 @@ const googleAuthentication = async function (authCode) {
       body = await response.json();
       account.accessToken = body.access_token;
       let decoded = jwt.decode(body.id_token);
-      console.log(decoded);
       account.email = decoded.email;
       account.name = decoded.name;
       account.id = decoded.id;
+      account.isNewUser = decoded.isNewUser
       Auth.authenticateUser(JSON.stringify(account));
       break;
 
@@ -49,6 +49,7 @@ const googleAuthentication = async function (authCode) {
       account.email = decodedToken.email;
       account.name = decodedToken.name;
       account.id = decodedToken.id;
+      account.isNewUser = decodedToken.isNewUser
       Auth.authenticateUser(JSON.stringify(account));
 
       break;
