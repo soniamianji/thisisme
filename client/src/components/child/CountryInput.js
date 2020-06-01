@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import PlacesAutocomplete from "react-places-autocomplete";
 
 function LocationForm(props) {
-    const [address, setAdress] = useState(props.value);
+
+    const [address, setAdress] = useState();
     const handleChange = address => {
         setAdress(address);
     };
@@ -12,7 +13,12 @@ function LocationForm(props) {
         setAdress(address);
         props.countryfromChild(address)
     };
-
+    let { value } = props;
+    useEffect(() => {
+        if (value) {
+            setAdress(value)
+        }
+    }, [value])
     return (
         <Fragment>
             <div className="profile__userInfo">
@@ -31,7 +37,6 @@ function LocationForm(props) {
                             <div>
                                 <TextField
                                     label="Location"
-                                    value={address}
                                     id="location"
                                     fullWidth
                                     {...getInputProps({

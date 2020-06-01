@@ -15,6 +15,7 @@ export default function SideBarForm(props) {
                         triangle="hide"
                         width="100%"
                         color={props.color}
+                        colors={['#833d3b', '#a96d71', '#ba928d', '#303823', '#2d2222', '#685489', '#ff9b83']}
                         onChangeComplete={color => props.changeCardColor(color)}
                     />
                 </Box>
@@ -29,6 +30,7 @@ export default function SideBarForm(props) {
                     id="textFieldOccupation"
                     required
                     value={props.occupation}
+                    error={Boolean(props._errors.occupation && props._errors.occupation !== "")}
                 />
                 <LocationForm value={props.country} countryfromChild={props.countryfromChild} />
 

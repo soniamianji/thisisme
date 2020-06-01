@@ -18,9 +18,10 @@ class SideBar extends Component {
     super(props);
     this.state = {
       color: "",
-      occupation: "",
+      occupation: '',
       country: "",
       phoneNumber: "",
+      comment: '',
       github: "",
       facebook: "",
       linkedin: "",
@@ -31,6 +32,7 @@ class SideBar extends Component {
       portfolioSite: "",
       _errors: {}
     };
+
   }
 
   changeFieldValue = (e) => {
@@ -55,31 +57,14 @@ class SideBar extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.card !== prevProps.card) {
-      if (this.props.links) {
-        this.setState({
-          twitter: this.props.links.twitter ? this.props.links.twitter : "",
-          github: this.props.links.github ? this.props.links.github : "",
-          facebook: this.props.links.facebook ? this.props.links.facebook : "",
-          linkedin: this.props.links.linkedin ? this.props.links.linkedin : "",
-          youtube: this.props.links.youtube ? this.props.links.youtube : "",
-          instagram: this.props.links.instagram ? this.props.links.instagram : "",
-          behance: this.props.links.behance ? this.props.links.behance : "",
-          portfolioSite: this.props.links.portfolioSite ? this.props.links.portfolioSite : ""
-        });
-      }
-
-      this.setState({
-        comment: this.props.card.comment ? this.props.card.comment : "",
-        occupation: this.props.card.occupation ? this.props.card.occupation : "",
-        country: this.props.card.country ? this.props.card.country : "",
-        phoneNumber: this.props.card.phoneNumber ? this.props.card.phoneNumber : "",
-        name: this.props.card.name,
-        email: this.props.card.email,
-        color: this.props.card.color,
-      });
+    if (this.props.usercard !== prevProps.usercard) {
+      this.setState(this.props.usercard)
+    }
+    if (this.props.links !== prevProps.links) {
+      this.setState(this.props.links)
     }
   }
+
 
   saveCardChanges = (e) => {
     e.preventDefault();
@@ -93,6 +78,7 @@ class SideBar extends Component {
     this.setState({
       _errors: validationMessages
     })
+
     if (isValid) {
       const data = {
         name: this.state.name,
@@ -112,23 +98,10 @@ class SideBar extends Component {
           portfolioSite: this.state.portfolioSite
         },
       };
+
       const accountId = this.props.account;
       //call action to update card
       updateCard(accountId, data, err => {
-        if (err.length === 0) {
-          this.props.drawerHandler();
-          this.props.fetchUserCard(accountId);
-          this.props.JobSearchResults(this.state.occupation, this.state.country, () => {
-
-          });
-        } else {
-          console.log(err);
-        }
-      });
-    } else if (this.state.country !== "") {
-      const accountId = this.props.account;
-      //call action to update card
-      updateCard(accountId, { country: this.state.country }, err => {
         if (err.length === 0) {
           this.props.drawerHandler();
           this.props.fetchUserCard(accountId);
@@ -174,7 +147,7 @@ class SideBar extends Component {
 
   render() {
     return (
-      <StyledDrawer open={this.props.open} variant="persistent" anchor="left" classes={{ paper: "drawerPaper" }}>
+      <StyledDrawer open={this.props.open} variant="temporary" anchor="left" docked={false} classes={{ paper: "drawerPaper" }}>
         <HighlightOffIcon color="secondary" style={{ position: "fixed", marginLeft: "332px", cursor: "pointer" }} onClick={this.props.drawerHandler}></HighlightOffIcon>
         <Grid container style={{ paddingRight: "25px" }}>
           <Grid item xs={12}>
@@ -190,7 +163,7 @@ class SideBar extends Component {
             color={this.state.color}
             changeCardColor={this.changeCardColor}
             changeFieldValue={this.changeFieldValue}
-            occupation={this.props.occupation}
+            occupation={this.state.occupation}
             country={this.state.country}
             countryfromChild={this.countryfromChild}
             phoneNumber={this.state.phoneNumber}
@@ -212,4 +185,9 @@ class SideBar extends Component {
   }
 }
 
-export default connect(null, { fetchUserCard, JobSearchResults })(SideBar);
+const mapStateToProps = state => ({
+  usercard: state.usercard,
+  links: state.usercard.links,
+
+});
+export default connect(mapStateToProps, { fetchUserCard, JobSearchResults })(SideBar);
