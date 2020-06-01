@@ -15,10 +15,6 @@ class JobHunt extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.props.clearSearchResult()
-    }
-
     loading = (bool) => {
         if (bool) {
             this.setState({
