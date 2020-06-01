@@ -21,6 +21,9 @@ const initialState = {
 if (Auth.isUserAuthenticated()) {
   initialState.account = Auth.getToken();
 }
+if (localStorage.getItem("jobs") !== null) {
+  initialState.jobs = JSON.parse(localStorage.getItem("jobs"))
+}
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -71,6 +74,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         msg: {},
         jobs: action.jobs
+
       };
 
     default:

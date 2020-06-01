@@ -48,6 +48,8 @@ function JobSearchResults(desc, loc, cb) {
         jobSearch(desc, loc).then(jobs => {
             cb();
             dispatch(JobSearchResultsAsync(jobs))
+            localStorage.setItem("jobs", JSON.stringify(jobs))
+
         }
         )
     }
