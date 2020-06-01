@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { Drawer, Grid, Box, Typography, Button, TextField } from "@material-ui/core";
+import { Drawer, Grid, Box, Typography } from "@material-ui/core";
 import { fetchUserCard } from "../../actions/authActions";
 import { JobSearchResults } from "../../actions/searchActions"
-import { TwitterPicker } from "react-color";
 import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
-import MuiPhoneNumber from "material-ui-phone-number";
-import LocationForm from "./CountryInput";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import SideBarForm from "../child/SideBarForm";
 
 const StyledDrawer = styled(Drawer)`
   width: 400,
@@ -120,8 +118,23 @@ class SideBar extends Component {
         if (err.length === 0) {
           this.props.drawerHandler();
           this.props.fetchUserCard(accountId);
-          // this.props.JobSearchResults(this.state.occupation, this.state.country, () => { })
+          this.props.JobSearchResults(this.state.occupation, this.state.country, () => {
 
+          });
+        } else {
+          console.log(err);
+        }
+      });
+    } else if (this.state.country !== "") {
+      const accountId = this.props.account;
+      //call action to update card
+      updateCard(accountId, { country: this.state.country }, err => {
+        if (err.length === 0) {
+          this.props.drawerHandler();
+          this.props.fetchUserCard(accountId);
+          this.props.JobSearchResults(this.state.occupation, this.state.country, () => {
+
+          });
         } else {
           console.log(err);
         }
@@ -173,169 +186,26 @@ class SideBar extends Component {
             </Box>
           </Grid>
 
-          <form onSubmit={this.saveCardChanges} noValidate>
-            <Box m={1} textAlign="left">
-              <label>Card Color</label>
-              <Box mt={1}>
-                <TwitterPicker
-                  triangle="hide"
-                  width="100%"
-                  color={this.state.color}
-                  onChangeComplete={color => this.changeCardColor(color)}
-                />
-              </Box>
-            </Box>
-            <Box m={1}>
-              <TextField
-                onChange={this.changeFieldValue}
-                name="occupation"
-                fullWidth
-                label="Job Title"
-                margin="normal"
-                id="textFieldOccupation"
-                required
-                value={this.state.occupation}
-              />
-              <LocationForm value={this.state.country} countryfromChild={this.countryfromChild} />
+          <SideBarForm saveCardChanges={this.saveCardChanges}
+            color={this.state.color}
+            changeCardColor={this.changeCardColor}
+            changeFieldValue={this.changeFieldValue}
+            occupation={this.props.occupation}
+            country={this.state.country}
+            countryfromChild={this.countryfromChild}
+            phoneNumber={this.state.phoneNumber}
+            handlePhoneChange={this.handlePhoneChange}
+            comment={this.state.comment}
+            github={this.state.github}
+            _errors={this.state._errors}
+            linkedin={this.state.linkedin}
+            behance={this.state.behance}
+            facebook={this.state.facebook}
+            youtube={this.state.youtube}
+            twitter={this.state.twitter}
+            instagram={this.state.instagram}
+          />
 
-              <MuiPhoneNumber
-                margin="normal"
-                fullWidth
-                label="Phone Number"
-                defaultCountry={"se"}
-                value={this.state.phoneNumber}
-                onChange={this.handlePhoneChange}
-              />
-
-              <TextField
-                label="Description"
-                InputLabelProps={{ shrink: true }}
-                fullWidth
-                multiline
-                rowsMax="3"
-                id="textFieldDesc"
-                name="comment"
-                value={this.state.comment}
-                onChange={this.changeFieldValue}
-                margin="normal"
-              />
-            </Box>
-            <Box m={1}>
-              <h3>Links</h3>
-              <TextField
-                onChange={this.changeFieldValue}
-                name="github"
-                fullWidth
-                id="githubLink"
-                label="Github"
-                margin="normal"
-                value={this.state.github}
-                placeholder="https://github.com/"
-                inputProps={{ pattern: "https://github.com/.*" }}
-                error={Boolean(this.state._errors.github && this.state._errors.github !== "")}
-                helperText={this.state._errors.github === "" ? "" : this.state._errors.github}
-
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                name="linkedin"
-                id="linkedinLink"
-                label="LinkedIn"
-                margin="normal"
-                value={this.state.linkedin}
-                placeholder="https://linkedin.com/"
-                inputProps={{ pattern: "https://linkedin.com/.*", }}
-                error={Boolean(this.state._errors.linkedin && this.state._errors.linkedin !== "")}
-                helperText={this.state._errors.linkedin === "" ? "" : this.state._errors.linkedin}
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                name="behance"
-                id="behanceLink"
-                label="Behance"
-                margin="normal"
-                value={this.state.behance}
-                placeholder="https://behance.com/"
-                inputProps={{ pattern: "https://behance.com/.*" }}
-                error={Boolean(this.state._errors.behance && this.state._errors.behance !== "")}
-                helperText={this.state._errors.behance === "" ? "" : this.state._errors.behance}
-                multiline
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                name="facebook"
-                id="facebookLink"
-                label="Facebook"
-                margin="normal"
-                value={this.state.facebook}
-                placeholder="https://facebook.com/"
-                inputProps={{ pattern: "https://facebook.com.*" }}
-                error={Boolean(this.state._errors.facebook && this.state._errors.facebook !== "")}
-                helperText={this.state._errors.facebook === "" ? "" : this.state._errors.facebook}
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                id="youtubeLink"
-                label="Youtube"
-                margin="normal"
-                name="youtube"
-                value={this.state.youtube}
-                placeholder="https://youtube.com/"
-                inputProps={{ pattern: "https://youtube.com.*" }}
-                error={Boolean(this.state._errors.youtube && this.state._errors.youtube !== "")}
-                helperText={this.state._errors.youtube === "" ? "" : this.state._errors.youtube}
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                name="twitter"
-                id="addLinkTextField"
-                label="Twitter"
-                margin="normal"
-                value={this.state.twitter}
-                placeholder="https://twitter.com/"
-                inputProps={{ pattern: "https://twitter.com.*" }}
-                error={Boolean(this.state._errors.twitter && this.state._errors.twitter !== "")}
-                helperText={this.state._errors.twitter === "" ? "" : this.state._errors.twitter}
-              />
-              <TextField
-                fullWidth
-                onChange={this.changeFieldValue}
-                name="instagram"
-                id="instagramLink"
-                label="Instagram"
-                margin="normal"
-                value={this.state.instagram}
-                placeholder="https://instagram.com/"
-                inputProps={{ pattern: "https://instagram.com.*" }}
-                error={Boolean(this.state._errors.instagram && this.state._errors.instagram !== "")}
-                helperText={this.state._errors.instagram === "" ? "" : this.state._errors.instagram}
-              />
-              <TextField
-                fullWidth
-                name="portfolioSite"
-                onChange={this.changeFieldValue}
-                id="websiteLink"
-                label="Website"
-                margin="normal"
-                value={this.state.portfolioSite}
-                placeholder="https://example.com/"
-                inputProps={{ pattern: "https://.*" }}
-                error={Boolean(this.state._errors.portfolioSite && this.state._errors.portfolioSite !== "")}
-                helperText={this.state._errors.portfolioSite === "" ? "" : this.state._errors.portfolioSite}
-              />
-
-            </Box>
-            <Grid container>
-              <Grid item xs={12}>
-                <Button variant="contained" color="#282c34" style={{ marginTop: 22, backgroundColor: "#282c34", color: "white" }} fullWidth type="submit">Save Changes</Button>
-              </Grid>
-            </Grid>
-          </form>
         </Grid>
       </StyledDrawer>
     );
