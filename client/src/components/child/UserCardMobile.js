@@ -66,7 +66,6 @@ const UserCardMobile = props => {
       height: 525,
       width: 300,
       marginBottom: 22,
-      position: "relative",
       position: "absolute"
     }
   });
@@ -171,7 +170,7 @@ const UserCardMobile = props => {
             </Grid>
           </Box>
           <Grid item xs={12} className={classes.button} onClick={flip}>
-            <ExpandMoreIcon color="secondary" />
+            <ExpandMoreIcon style={{ color: "white" }} />
           </Grid>
         </Paper>
       </div>
