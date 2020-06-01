@@ -26,13 +26,13 @@ let jobObj = {
 
 router.post("/", (req, res) => {
     const title = req.body.title;
-    const location = req.body.location.split(",");
+    const location = req.body.location;
     let AFJobs = [];
     let GHjobs = [];
     let minucipalityConceptId = ""
     let countryConceptId = ""
     //first get the taxanomy for the location
-    fetch("https://jobsearch.api.jobtechdev.se/taxonomy/search?q=" + encodeURIComponent(location[0]), {
+    fetch("https://jobsearch.api.jobtechdev.se/taxonomy/search?q=" + encodeURIComponent(location.split(",")[0]), {
         method: 'GET',
         headers: {
             Accept: "application/json",
