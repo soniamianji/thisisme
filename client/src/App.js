@@ -12,6 +12,7 @@ import theme from "./theme";
 import NavBar from "./components/child/NavBar";
 import JobHunt from "./components/page/JobHunt";
 import SingleJob from "./components/page/SingleJob";
+import IntroForm from "./components/page/IntroForm";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -44,6 +45,7 @@ function App() {
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/searchusers" component={SearchResult} />
             <PrivateRoute path="/jobs/:id/:source" component={SingleJob} />
+            <PrivateRoute path="/introForm/" component={IntroForm} />
 
           </ThemeProvider>
         </div>
