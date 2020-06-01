@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useDispatch } from "react";
 import UserCardMobile from "../child/UserCardMobile";
 import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
@@ -15,18 +15,19 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
 import JobCard from "../child/JobCard";
 import EditIcon from '@material-ui/icons/Edit';
+import { withRouter } from "react-router";
 
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // backgroundColor: "#272727",
-    // height: "100vh",
-    // display: "flex",
-    // alignItems: "center"
+    paddingRight: "0",
+    paddingLeft: "0"
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    paddingRight: "0",
+    paddingLeft: "0",
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -48,17 +49,20 @@ const Profile = props => {
     isLoading: true,
   });
 
+  const { fetchUserCard, JobSearchResults } = props
   //lifecycle hook
   useEffect(() => {
     const userId = props.account.id;
-    props.fetchUserCard(userId);
-    props.JobSearchResults(props.usercard.occupation, props.usercard.country, () => {
+    fetchUserCard(userId)
+    // dispatch(fetchUserCard(userId));
+    JobSearchResults(props.usercard.occupation, props.usercard.country, () => {
       setState({ isLoading: false, open: false })
-    });
+    })
+
     return () => {
-      props.clearSearchResult();
+      clearSearchResult()
     };
-  }, [props.account.id, props.usercard.occupation, props.usercard.country]);
+  }, [fetchUserCard, JobSearchResults, props.account.id, props.usercard.occupation, props.usercard.country]);
 
   const classes = useStyles();
 
@@ -112,28 +116,25 @@ const Profile = props => {
               </div>
             )}
           </Media>
-
-          <Paper style={{ marginTop: "44px", backgroundColor: "#424242", padding: "44px" }}>
-            {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
-              <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
-                {props.jobs && props.jobs.length !== 0 ? <Fragment><Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="h2" gutterBottom>
-                  Don't miss any opportunities  {props.account.name}! Apply Now!
-              </Typography>
-                  {props.jobs && props.jobs.map((job, index) => (
-
-                    <JobCard job={job} key={index} />
-                  ))}
-                </Fragment> : <Typography style={{ color: "white", marginBottom: 44, }} component="h2" variant="h2" gutterBottom>
-                    Sorry no jobs were found based on your location! Currently we mostly support jobs based in Sweden. But stay tuned! we are actively working on improving our services!
-            </Typography>}
-
-              </Grid>
-            }
-
-          </Paper>
         </Container>
+        <Paper style={{ marginTop: "44px", backgroundColor: `${props.usercard.color}`, padding: "44px", width: "100%", height: "auto" }}>
+          {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
+            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
+              {props.jobs && props.jobs.length !== 0 ? <Fragment><Typography style={{ color: "white", marginBottom: 44, }} component="h3" variant="p" gutterBottom>
+                Don't miss any opportunities  {props.account.name}! Apply Now!
+              </Typography>
+                {props.jobs && props.jobs.map((job, index) => (
+                  <JobCard job={job} key={index} />
+                ))}
+              </Fragment> : <Typography style={{ color: "white", marginBottom: 44, }} component="h2" gutterBottom>
+                  Sorry no jobs were found based on your location and the occupation, perhaps try adjusting your occupation to more commonly used version!
+                  Currently we mostly support jobs based in Sweden. But stay tuned! we are actively working on improving our services!
+            </Typography>}
+            </Grid>
+          }
+        </Paper>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -155,4 +156,4 @@ export default connect(mapStateToProps, {
   searchMsg,
   clearSearchResult,
   JobSearchResults
-})(Profile);
+})(withRouter(Profile));
