@@ -31,10 +31,10 @@ class Login extends Component {
     if (response.code) {
       const authCode = response.code;
       this.props.googleLogin(authCode, () => {
-        this.props.history.push("/profile");
+
+        this.props.history.push(`/introform`);
+
       });
-    } else {
-      console.log(response);
     }
   };
 
@@ -97,4 +97,5 @@ class Login extends Component {
 Login.propTypes = {
   googleLogin: PropTypes.func.isRequired
 };
+
 export default connect(null, { googleLogin })(withRouter(Login));
