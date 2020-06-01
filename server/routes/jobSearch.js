@@ -26,13 +26,13 @@ let jobObj = {
 
 router.post("/", (req, res) => {
     const title = req.body.title;
-    const location = req.body.location;
+    const location = req.body.location.split(",");
     let AFJobs = [];
     let GHjobs = [];
     let minucipalityConceptId = ""
     let countryConceptId = ""
     //first get the taxanomy for the location
-    fetch("https://jobsearch.api.jobtechdev.se/taxonomy/search?q=" + encodeURIComponent(location), {
+    fetch("https://jobsearch.api.jobtechdev.se/taxonomy/search?q=" + encodeURIComponent(location[0]), {
         method: 'GET',
         headers: {
             Accept: "application/json",
@@ -40,11 +40,9 @@ router.post("/", (req, res) => {
         }
     }).then(res => res.json()).then(
         function (taxonomy) {
-            console.log(taxonomy);
+
             if (taxonomy.result.length !== 0) {
-                console.log("first if");
                 for (var b = 0; b < taxonomy.result.length; b++) {
-                    console.log("in the loop");
                     if (taxonomy.result[b].type === "municipality") {
                         minucipalityConceptId = taxonomy.result[b].conceptId;
                     }
@@ -53,8 +51,8 @@ router.post("/", (req, res) => {
                     }
                 }
             }
-            console.log(minucipalityConceptId);
-            console.log(countryConceptId);
+            //console.log(minucipalityConceptId);
+            //console.log(countryConceptId);
             //pass the conceptid of the locations to the search params get the result
             return fetch("https://jobsearch.api.jobtechdev.se/search?municipality=" + minucipalityConceptId + "&q=" + title, {
                 method: 'GET',
@@ -64,7 +62,6 @@ router.post("/", (req, res) => {
                 }
             }).then(res => res.json()).then(function (jobs) {
 
-                console.log("here")
                 if (jobs.hits.length > 0) {
                     for (var i = 0; i < jobs.hits.length; i++) {
                         jobObj = {
@@ -84,7 +81,7 @@ router.post("/", (req, res) => {
                             source_url: jobs.hits[i].webpage_url,
                             apply_here: jobs.hits[i].application_details.url
                         }
-                        console.log(jobs.hits[i].workplace_address.municipality)
+                        //  console.log(jobs.hits[i].workplace_address.municipality)
                         AFJobs.push(jobObj);
                     }
                 }
@@ -161,7 +158,6 @@ router.get("/", (req, res) => {
             }
             ).catch(error => res.status(500).json(error))
         } else if (source === "github") {
-            console.log("its github")
             const jobId = req.query.id;
             fetch("https://jobs.github.com/positions/" + jobId + ".json", {
                 method: 'GET',
