@@ -46,21 +46,21 @@ const styles = theme => ({
     "& label": {
       color: "white"
     },
-  },
-  divWidth: {
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
-      width: "80%",
+      width: "90%",
       margin: "0 auto"
     },
     [theme.breakpoints.up('md')]: {
-      width: "60%",
+      width: "70%",
       margin: "0 auto"
     },
     [theme.breakpoints.up('lg')]: {
-      width: "50%",
+      width: "70%",
       margin: "0 auto"
     },
-  }
+  },
+
 })
 
 class SearchForm extends Component {
@@ -90,7 +90,7 @@ class SearchForm extends Component {
     return (
       <div style={{ marginTop: "10%" }} id="formAnimation">
         <h1 style={{ textAlign: "center", color: "white" }}>Find peeps!</h1>
-        <div className={classes.divWidth} style={{ marginRight: "auto", marginLeft: "auto" }} >
+        <div className={classes.root} style={{ marginRight: "auto", marginLeft: "auto" }} >
           <form onSubmit={this.submitHandler} >
             <Grid container spacing={2} >
               <Grid item xs={12}>

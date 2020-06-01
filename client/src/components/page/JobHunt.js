@@ -54,7 +54,7 @@ class JobHunt extends Component {
 JobHunt.propTypes = {
     jobs: PropTypes.array,
     msg: PropTypes.object,
-    classes: PropTypes.object.isRequired,
+
 };
 const mapStateToProps = state => ({
 

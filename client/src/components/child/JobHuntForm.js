@@ -45,22 +45,23 @@ const styles = theme => ({
         "& label": {
             color: "white"
         },
-    },
-
-    divWidth: {
+        textAlign: "center",
         [theme.breakpoints.down('sm')]: {
-            width: "80%",
+            width: "90%",
             margin: "0 auto"
         },
         [theme.breakpoints.up('md')]: {
-            width: "60%",
+            width: "70%",
             margin: "0 auto"
         },
         [theme.breakpoints.up('lg')]: {
-            width: "50%",
+            width: "70%",
             margin: "0 auto"
         },
+
     },
+
+
 })
 
 class JobHuntForm extends Component {
@@ -99,7 +100,7 @@ class JobHuntForm extends Component {
         return (
             <div style={{ marginTop: "10%" }} id="formAnimation">
                 <h1 style={{ textAlign: "center", color: "white" }}>Find Jobs!</h1>
-                <div className={classes.divWidth} style={{ margin: "0 auto" }}>
+                <div className={classes.root} style={{ margin: "0 auto" }}>
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
