@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Drawer, Grid, Box, Typography, Button, TextField } from "@material-ui/core";
 import { fetchUserCard } from "../../actions/authActions";
+import { JobSearchResults } from "../../actions/searchActions"
 import { TwitterPicker } from "react-color";
 import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
@@ -20,7 +21,6 @@ class SideBar extends Component {
     this.state = {
       color: "",
       occupation: "",
-      city: "",
       country: "",
       phoneNumber: "",
       github: "",
@@ -39,7 +39,6 @@ class SideBar extends Component {
     const input = e.target;
     const isValid = input.checkValidity()
     this.setState({ [input.name]: input.value });
-    console.log(isValid)
     if (!isValid) {
       this.setState(prevState => ({
         _errors: {
@@ -75,7 +74,6 @@ class SideBar extends Component {
       this.setState({
         comment: this.props.card.comment ? this.props.card.comment : "",
         occupation: this.props.card.occupation ? this.props.card.occupation : "",
-        city: this.props.card.city ? this.props.card.city : "",
         country: this.props.card.country ? this.props.card.country : "",
         phoneNumber: this.props.card.phoneNumber ? this.props.card.phoneNumber : "",
         name: this.props.card.name,
@@ -101,7 +99,6 @@ class SideBar extends Component {
       const data = {
         name: this.state.name,
         email: this.state.email,
-        city: this.state.city,
         country: this.state.country,
         phoneNumber: this.state.phoneNumber,
         comment: this.state.comment,
@@ -123,6 +120,8 @@ class SideBar extends Component {
         if (err.length === 0) {
           this.props.drawerHandler();
           this.props.fetchUserCard(accountId);
+          // this.props.JobSearchResults(this.state.occupation, this.state.country, () => { })
+
         } else {
           console.log(err);
         }
@@ -343,4 +342,4 @@ class SideBar extends Component {
   }
 }
 
-export default connect(null, { fetchUserCard })(SideBar);
+export default connect(null, { fetchUserCard, JobSearchResults })(SideBar);

@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import PlacesAutocomplete from "react-places-autocomplete";
 
 function LocationForm(props) {
-    const [address, setAdress] = useState();
+    const [address, setAdress] = useState(props.value);
     const handleChange = address => {
         setAdress(address);
     };
@@ -13,13 +13,12 @@ function LocationForm(props) {
         props.countryfromChild(address)
     };
 
-
     return (
         <Fragment>
             <div className="profile__userInfo">
 
                 <PlacesAutocomplete
-                    value={address ? address : props.value}
+                    value={address}
                     onChange={handleChange}
                     onSelect={handleSelect}
                 >
@@ -32,6 +31,7 @@ function LocationForm(props) {
                             <div>
                                 <TextField
                                     label="Location"
+                                    value={address}
                                     id="location"
                                     fullWidth
                                     {...getInputProps({
@@ -49,7 +49,7 @@ function LocationForm(props) {
                                         // inline style for demonstration purpose
                                         const style = suggestion.active
                                             ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                            : { backgroundColor: 'rgb(66, 66, 66)', cursor: 'pointer' };
+                                            : { backgroundColor: 'white', cursor: 'pointer' };
                                         return (
                                             <div
                                                 {...getSuggestionItemProps(suggestion, {

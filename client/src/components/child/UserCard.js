@@ -148,7 +148,7 @@ const UserCard = props => {
                           className={classes.locationIcon}
                           color="primary"
                         />
-                          {props.card.city}, {props.card.country}  </span> : ""}
+                          {props.card.country}  </span> : ""}
 
 
                       </Typography>
