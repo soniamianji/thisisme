@@ -12,7 +12,7 @@ import { withRouter } from "react-router";
 import React, { Component } from "react";
 import { Typography } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { clearUser } from "../../actions/authActions"
 import styled from "styled-components";
 
@@ -74,26 +74,18 @@ class NavBar extends Component {
     text-transform: none;
     padding: 11px;
   `;
+
     return (
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ backgroundColor: "#272727" }} elevation={0} >
+
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleClick}>
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="simple-menu"
-              anchorEl={this.state.anchorEl}
-              open={this.state.open}
-              onClose={this.handleClose}
-            >
-              <MenuItem onClick={this.handleClose}><Link to="/profile" style={{ textDecoration: "none", color: "black" }}>Profile</Link></MenuItem>
-              <MenuItem onClick={this.handleClose}><Link to="/" style={{ textDecoration: "none", color: "black" }}>Find peeps!</Link></MenuItem>
-              <MenuItem onClick={this.handleClose}><Link to="/searchusers" style={{ textDecoration: "none", color: "black" }}>Find Users!</Link></MenuItem>
-            </Menu>
+            <Button color="inherit" ><NavLink exact to="/" activeClassName="active" style={{ textDecoration: "none", color: "white", marginRight: '0.5rem' }} >Jobs<span></span></NavLink></Button>
+            <Button color="inherit" ><NavLink to="/searchusers" activeClassName="active" style={{ textDecoration: "none", color: "white", marginRight: '0.5rem' }}> Users<span></span></NavLink></Button>
+
             <Typography style={{ flexGrow: 1 }}></Typography>
             {Auth.isUserAuthenticated() ? (
-              <Button color="inherit" ><Link to="/profile" style={{ textDecoration: "none", color: "white" }}>{this.state.name}</Link></Button>
+              <Button color="inherit" ><NavLink to="/profile" activeClassName="active" style={{ textDecoration: "none", color: "white" }} >{this.state.name}<span></span></NavLink></Button>
             ) : (
                 ""
               )}
@@ -123,8 +115,8 @@ class NavBar extends Component {
                 </Button>
               )}
           </Toolbar>
-        </AppBar>
-      </div>
+        </AppBar >
+      </div >
     );
   }
 }
