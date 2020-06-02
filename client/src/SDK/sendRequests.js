@@ -1,4 +1,4 @@
-const rootPath = "http://localhost:5000";
+const rootPath = "http://161.35.197.217:5000";
 
 async function sendRequest(
   method,
