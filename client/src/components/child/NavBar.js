@@ -46,7 +46,7 @@ class NavBar extends Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (this.props.account && previousProps.account !== this.props.account) {
+    if (previousProps.account !== this.props.account) {
       this.setState({
         name: this.props.account.name
       });
