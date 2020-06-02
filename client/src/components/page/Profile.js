@@ -124,9 +124,8 @@ const Profile = props => {
                 {props.jobs && props.jobs.map((job, index) => (
                   <JobCard job={job} key={index} />
                 ))}
-              </Fragment> : <Typography style={{ color: "white", marginBottom: 44, }} component="h2" gutterBottom>
-                  Sorry no jobs were found based on your location and the occupation, perhaps try adjusting your occupation to more commonly used version!
-                  Currently we mostly support jobs based in Sweden. But stay tuned! we are actively working on improving our services!
+              </Fragment> : <Typography style={{ color: "white", marginBottom: 44, maxWidth: "400px", textAlign: "center" }} component="h2" gutterBottom>
+                  Sorry no jobs were found based on your location. Currently we mostly support jobs based in Sweden. But stay tuned! we are actively working on improving our services!
             </Typography>}
             </Grid>
           }
