@@ -107,7 +107,7 @@ const UserCard = props => {
             </Grid>
           </Box>
           <Grid item xs={12} className={classes.button} onClick={flipBack}>
-            <ExpandMoreIcon color="secondary" />
+            <ExpandMoreIcon style={{ color: "white" }} />
           </Grid>
         </Paper>
         <Paper className={`front${props.i} ` + classes.paper}>

@@ -86,8 +86,11 @@ class SingleJob extends Component {
     }
 
     applyHere = () => {
-        window.open(this.state.job.webpage_url ? this.state.job.webpage_url : this.state.job.apply_here
-            , "_blank")
+        if (this.state.job.webpage_url || this.state.job.apply_here) {
+            window.open(this.state.job.webpage_url ? this.state.job.webpage_url : this.state.job.apply_here
+                , "_blank")
+        }
+
     }
 
 

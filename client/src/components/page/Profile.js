@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment, useDispatch } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import UserCardMobile from "../child/UserCardMobile";
 import UserCard from "../child/UserCard";
 import Container from "@material-ui/core/Container";
@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Box, Paper, Grid, Typography } from "@material-ui/core";
 import clsx from "clsx";
-import { searchMsg, clearSearchResult, JobSearchResults } from "../../actions/searchActions";
+import { searchMsg, clearSearchResult, profileJobSearch } from "../../actions/searchActions";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Media from "react-media";
 import JobCard from "../child/JobCard";
@@ -49,20 +49,18 @@ const Profile = props => {
     isLoading: true,
   });
 
-  const { fetchUserCard, JobSearchResults } = props
+  const { fetchUserCard, profileJobSearch } = props
   //lifecycle hook
   useEffect(() => {
     const userId = props.account.id;
     fetchUserCard(userId)
-    // dispatch(fetchUserCard(userId));
-    JobSearchResults(props.usercard.occupation, props.usercard.country, () => {
-      setState({ isLoading: false, open: false })
-    })
-
-    return () => {
-      clearSearchResult()
-    };
-  }, [fetchUserCard, JobSearchResults, props.account.id, props.usercard.occupation, props.usercard.country]);
+    if (props.jobs !== "") {
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: false,
+      }));
+    }
+  }, [fetchUserCard, profileJobSearch, props.account.id, props.usercard.occupation, props.usercard.country]);
 
   const classes = useStyles();
 
@@ -117,10 +115,10 @@ const Profile = props => {
             )}
           </Media>
         </Container>
-        <Paper style={{ marginTop: "44px", backgroundColor: `${props.usercard.color}`, padding: "44px", width: "100%", height: "auto" }}>
+        <Paper style={{ marginTop: "44px", backgroundColor: `${props.usercard.color}`, padding: "44px 0", width: "100%", height: "auto" }}>
           {state.isLoading ? <div style={{ textAlign: "center", padding: "10%" }}> <CircularProgress style={{ color: "white" }} size={80} /></div> :
-            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "75%", flexGrow: "1", justifyContent: "center" }}>
-              {props.jobs && props.jobs.length !== 0 ? <Fragment><Typography style={{ color: "white", marginBottom: 44, }} component="h3" variant="p" gutterBottom>
+            <Grid container style={{ marginTop: 22, marginLeft: "auto", marginRight: "auto", width: "90%", flexGrow: "1", justifyContent: "center" }}>
+              {props.jobs && props.jobs.length !== 0 ? <Fragment><Typography style={{ color: "white", marginBottom: 44, }} component="h3" gutterBottom>
                 Don't miss any opportunities  {props.account.name}! Apply Now!
               </Typography>
                 {props.jobs && props.jobs.map((job, index) => (
@@ -134,7 +132,7 @@ const Profile = props => {
           }
         </Paper>
       </div>
-    </div >
+    </div>
   );
 };
 
@@ -147,7 +145,7 @@ const mapStateToProps = state => ({
   usercard: state.usercard,
   links: state.usercard.links,
   account: state.account,
-  jobs: state.jobs.data,
+  jobs: state.profileJobs.data,
   msg: state.msg
 });
 
@@ -155,5 +153,5 @@ export default connect(mapStateToProps, {
   fetchUserCard,
   searchMsg,
   clearSearchResult,
-  JobSearchResults
+  profileJobSearch
 })(withRouter(Profile));

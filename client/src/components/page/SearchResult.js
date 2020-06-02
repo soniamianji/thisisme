@@ -13,7 +13,6 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   root: {
     [theme.breakpoints.down('sm')]: {
-      justifyContent: "center",
       margin: "22px auto",
 
     },
