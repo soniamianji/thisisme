@@ -94,13 +94,10 @@ class IntroForm extends Component {
 
             };
             const accountId = this.props.account.id;
-            console.log(accountId)
 
             //call action to update card
             updateCard(accountId, data, err => {
                 if (err.length === 0) {
-                    console.log("yay")
-                    // this.props.fetchUserCard(accountId);
                     this.setState({
                         displayLinkForm: true,
                     })
@@ -132,7 +129,6 @@ class IntroForm extends Component {
             color: color.hex,
         }));
         const accountId = this.props.account.id;
-        console.log(accountId)
         const colorData = { color: this.state.color }
         //call action to update card with the color change
         updateCard(accountId, colorData, err => {
@@ -177,7 +173,6 @@ class IntroForm extends Component {
             //call action to update card
             updateCard(accountId, data, err => {
                 if (err.length === 0) {
-                    console.log("yay")
                     this.props.fetchUserCard(accountId);
                     this.props.history.push("/profile")
                 } else {

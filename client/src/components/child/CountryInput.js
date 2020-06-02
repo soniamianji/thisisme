@@ -22,7 +22,6 @@ function LocationForm(props) {
     return (
         <Fragment>
             <div className="profile__userInfo">
-
                 <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -71,7 +70,7 @@ function LocationForm(props) {
                         )}
                 </PlacesAutocomplete>
             </div>
-        </Fragment >
+        </Fragment>
     );
 }
 
