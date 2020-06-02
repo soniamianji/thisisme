@@ -1,4 +1,4 @@
 {
-  "dbUri": "mongodb://sonia:goozoo@161.35.197.217/this-is-me",
+  "dbUri": "mongodb://sonia:goozoo@161.35.197.217:27017/this-is-me",
   "jwtSecret": "a secret phrase!!"
 }
