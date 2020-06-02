@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Drawer, Grid, Box, Typography } from "@material-ui/core";
 import { fetchUserCard } from "../../actions/authActions";
-import { JobSearchResults } from "../../actions/searchActions"
+import { profileJobSearch } from "../../actions/searchActions"
 import styled from "styled-components";
 import { updateCard } from "../../SDK/userCards";
 import { connect } from "react-redux";
@@ -105,7 +105,7 @@ class SideBar extends Component {
         if (err.length === 0) {
           this.props.drawerHandler();
           this.props.fetchUserCard(accountId);
-          this.props.JobSearchResults(this.state.occupation, this.state.country, () => {
+          this.props.profileJobSearch(this.state.occupation, this.state.country, () => {
 
           });
         } else {
@@ -148,7 +148,7 @@ class SideBar extends Component {
   render() {
     return (
       <StyledDrawer open={this.props.open} variant="temporary" anchor="left" docked={false} classes={{ paper: "drawerPaper" }}>
-        <HighlightOffIcon color="secondary" style={{ position: "fixed", marginLeft: "332px", cursor: "pointer" }} onClick={this.props.drawerHandler}></HighlightOffIcon>
+        <HighlightOffIcon style={{ position: "fixed", marginLeft: "332px", cursor: "pointer", color: "black" }} onClick={this.props.drawerHandler}></HighlightOffIcon>
         <Grid container style={{ paddingRight: "25px" }}>
           <Grid item xs={12}>
             <Box textAlign="left">
@@ -190,4 +190,4 @@ const mapStateToProps = state => ({
   links: state.usercard.links,
 
 });
-export default connect(mapStateToProps, { fetchUserCard, JobSearchResults })(SideBar);
+export default connect(mapStateToProps, { fetchUserCard, profileJobSearch })(SideBar);

@@ -2,7 +2,8 @@ import {
     CARD_SEARCH_RESULTS_ASYNC,
     SEARCH_MSG,
     JOB_SEARCH_RESULTS_ASYNC,
-    CLEAR_SEARCH_RESULT
+    CLEAR_SEARCH_RESULT,
+    PROFILE_JOB_SEARCH_RESULTS_ASYNC,
 } from "./types";
 import searchCards from "../SDK/searchCards";
 import { jobSearch } from "../SDK/jobSearch";
@@ -55,6 +56,23 @@ function JobSearchResults(desc, loc, cb) {
     }
 }
 
+function profileJobSearchAsync(jobs) {
+    return {
+        type: PROFILE_JOB_SEARCH_RESULTS_ASYNC,
+        jobs
+    }
+}
+
+function profileJobSearch(desc, loc, cb) {
+    return dispatch => {
+        jobSearch(desc, loc).then(jobs => {
+            cb();
+            dispatch(profileJobSearchAsync(jobs))
+            localStorage.setItem("profilejobs", JSON.stringify(jobs))
+        }
+        )
+    }
+}
 
 
 function clearSearchResult() {
@@ -70,5 +88,7 @@ export {
     JobSearchResults,
     JobSearchResultsAsync,
     clearSearchResult,
+    profileJobSearch,
+    profileJobSearchAsync
 
 }

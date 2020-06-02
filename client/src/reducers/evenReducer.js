@@ -5,7 +5,8 @@ import {
   JOB_SEARCH_RESULTS_ASYNC,
   USER_CARD_ASYNC,
   CLEAR_SEARCH_RESULT,
-  CLEAR_USER
+  CLEAR_USER,
+  PROFILE_JOB_SEARCH_RESULTS_ASYNC,
 } from "../actions/types";
 import Auth from "../modules/Auth";
 
@@ -14,6 +15,7 @@ const initialState = {
   usercard: {},
   cards: [],
   jobs: [],
+  profileJobs: [],
   msg: {}
 };
 
@@ -23,6 +25,9 @@ if (Auth.isUserAuthenticated()) {
 }
 if (localStorage.getItem("jobs") !== null) {
   initialState.jobs = JSON.parse(localStorage.getItem("jobs"))
+}
+if (localStorage.getItem("profilejobs") !== null) {
+  initialState.profileJobs = JSON.parse(localStorage.getItem("profilejobs"))
 }
 
 function rootReducer(state = initialState, action) {
@@ -74,6 +79,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         msg: {},
         jobs: action.jobs
+
+      };
+    case PROFILE_JOB_SEARCH_RESULTS_ASYNC:
+      return {
+        ...state,
+        msg: {},
+        profileJobs: action.jobs
 
       };
 
