@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 module.exports.connect = uri => {
+  mongoose.connect(uri, (err, res) => {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log('connected');
+    }
+  })
   mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
   // plug in the promise library:
   mongoose.Promise = global.Promise;
