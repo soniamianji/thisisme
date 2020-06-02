@@ -58,6 +58,8 @@ class NavBar extends Component {
       //then log her out
       Auth.deauthenticateUser();
       this.props.clearUser();
+      localStorage.removeItem("jobs");
+      localStorage.removeItem("profilejobs");
       this.setState({ name: "" });
       this.props.history.push("/login");
     } else {
