@@ -53,7 +53,8 @@ const Profile = props => {
   //lifecycle hook
   useEffect(() => {
     const userId = props.account.id;
-    fetchUserCard(userId)
+    fetchUserCard(userId);
+    profileJobSearch(props.usercard.occupation, props.usercard.country)
     if (props.jobs !== "") {
       setState((prevState) => ({
         ...prevState,
