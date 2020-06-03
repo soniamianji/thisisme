@@ -54,7 +54,12 @@ const Profile = props => {
   useEffect(() => {
     const userId = props.account.id;
     fetchUserCard(userId);
-    profileJobSearch(props.usercard.occupation, props.usercard.country)
+    profileJobSearch(props.usercard.occupation, props.usercard.country, () => {
+      setState((prevState) => ({
+        ...prevState,
+        isLoading: false,
+      }));
+    })
     if (props.jobs !== "") {
       setState((prevState) => ({
         ...prevState,
