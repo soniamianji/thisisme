@@ -17,7 +17,7 @@ module.exports.connect = uri => {
   //   console.error(`Mongoose connection error: ${err}`);
   //   process.exit(1);
   // });
-  mongoose.connect(uri, { useNewUrlParser: true })
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Mongodb connected"))
     .catch(err => console.log(err));
   //mongoose.Promise = global.Promise;
