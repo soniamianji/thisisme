@@ -88,10 +88,10 @@ class SearchForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div style={{ marginTop: "20%" }} id="formAnimation">
+      <div style={{ marginTop: "15%" }} id="formAnimation">
         <div style={{ display: "flex" }} ><img style={{ margin: "auto" }} src={require("../../img/thisismelogo.svg")}></img></div>
 
-        <p style={{ textAlign: "center", color: "white" }}>Got a project? Find your crew!</p>
+        <p style={{ textAlign: "center", color: "white", marginBottom: "2rem" }}>Got a project? Find your crew!</p>
         <div className={classes.root} style={{ marginRight: "auto", marginLeft: "auto" }} >
           <form onSubmit={this.submitHandler} >
             <Grid container spacing={2} >
