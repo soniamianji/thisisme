@@ -98,9 +98,10 @@ class JobHuntForm extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div style={{ marginTop: "10%" }} id="formAnimation">
-                <h1 style={{ textAlign: "center", color: "white" }}>Find Jobs!</h1>
-                <div className={classes.root} style={{ margin: "0 auto" }}>
+            <div style={{ marginTop: "20%", }} id="formAnimation">
+                <div style={{ display: "flex" }} ><img style={{ margin: "auto" }} src={require("../../img/thisismelogo.svg")}></img></div>
+                <p style={{ textAlign: "center", color: "white", marginBottom: "2rem" }}>Welcome to thisisme! Input details, output Jobs</p>
+                <div className={classes.root} style={{ margin: "0auto" }}>
                     <form onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
